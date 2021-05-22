@@ -1,0 +1,78 @@
+.te-leaders-heading {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 0;
+}
+
+.te-issue-num {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding-bottom: 0.5em;
+    margin: 0 0 4px 1px;
+    border-bottom: 3pt #000 solid;
+}
+
+.te-issue-num-red {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding-bottom: 0.5em;
+    margin: 0 0 20px 1px;
+    width: 100%;
+    border-bottom: 3pt #e3120b solid;
+}
+.te-issue-num::after {
+    content: " ›";
+}
+
+
+.te-short-title {
+    color: #e3120b;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    margin-bottom: -8px;
+}
+
+.te-title {
+    font-family: Georgia, Platino, serif;
+    font-size: 23px;
+    font-weight: bolder;
+}
+
+.te-sub-title {
+    font-family: Georgia, Platino, serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-left: 0;
+}
+
+.te-p {
+    font-family: Palatino,Georgia,serif;
+    font-weight: lighter;
+}
+
+.te-sec-title {
+    font-family: Palatino,Georgia,serif;
+    font-weight: bold;
+    padding-bottom: 0;
+    margin-bottom: -20px;
+}
+
+.te-end {
+    color: #e3120b;
+    font-size: 16px;
+}
+
+small {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.chart-caption {
+    text-align: center;
+    font-family: serif;
+    font-size: 13px;
+    color: grey;
+}
+    

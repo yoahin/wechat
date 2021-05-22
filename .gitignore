@@ -1,0 +1,18 @@
+# ignore img
+img*/
+
+# ignore test
+wechat/test*
+
+wechat/node_modules/
+*.json
+*.js
+
+# ignore notebook file
+*ipynb*
+
+# ignore pycache
+__pycache__/
+
+# ignore github libraries
+mstch/

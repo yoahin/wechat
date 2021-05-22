@@ -1,0 +1,44 @@
+.bbc {
+    padding: 1pt 0;
+}
+.bbc-bbc {
+    font-family: sans-serif;
+    font-size: 13pt;
+    text-transform: uppercase;
+    margin: 0 0 0.5em 0;
+}
+
+.bbc-bbc span {
+    display: inline-block;
+    margin: 0 0.5pt 0 0;
+    background-color: #3F3F42;
+    color: #FFFFFF;
+    padding: 0 0.5em;
+}
+
+.bbc-news {
+    font-family: sans-serif;
+    font-size: 20pt;
+    text-transform: uppercase;
+    background-color: #B80000;
+    color: #FFFFFF;
+    
+    padding: 0 0.3em;
+    margin: 0;
+    letter-spacing: 2pt;
+}
+
+.bbc-title {
+    line-height: 1.1;
+    border-bottom: 1pt  #3F3F42 solid;
+    padding-bottom: 1em;
+}
+
+.illus {
+    background-color: #3F3F42;
+    color: #FFFFFF;
+    font-size: 12pt;
+    font-family: sans-serif;
+    line-height: 1.5;
+    padding: 1em;
+}

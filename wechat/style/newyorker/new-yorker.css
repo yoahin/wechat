@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 2px;
+}
+
+.biblio {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 15px;
+}
+
+.column {
+    font-size: 16px;
+    font-variant: small-caps;
+    color: #db3334;
+    padding-right: 0.5em;
+}
+
+.sub-title {
+    font-style: italic;
+    font-size: 15pt;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.author {
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.timestamp {
+    font-family: sans-serif;
+    font-size: smaller;
+}
+
+.first-para::first-letter {
+    font-family: sans-serif;
+    float: left;
+    font-size: 310%;
+    line-height: 80%;
+    padding-top: 5px;
+}
+
+.cap {
+    font-family: sans-serif;
+    float: left;
+    font-size: 310%;
+    line-height: 80%;
+    padding-top: 5px;
+}
+
+.caption {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 10pt;
+    color: rgb(154, 157, 163);
+    text-align: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+.special {
+    background-color: black;
+    padding: 0.5em 0;
+    color: white;
+    margin: 0;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    text-align: center;
+    font-weight: lighter;
+    padding-top: 0.5em;
+    padding-bottom: 1em;
+}
+
+.h1-special {
+    text-transform: uppercase;
+    font-family: Optima-Regula, Palatino, Georgia, 'Times New Roman', Times, serif;
+    font-size: 15pt;
+    font-weight: normal;
+    text-align: center;
+    padding-bottom: 1.2em;
+}
+
+.h1-normal {
+    text-transform: uppercase;
+    font-family: Optima-Regula, Palatino, Georgia, 'Times New Roman', Times, serif;
+    font-size: 15pt;
+    font-weight: bold;
+    text-align: left;
+    padding-bottom: 0.4em;
+}
+/* for most images excluding cartoons */
+
+h2 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 10pt;
+    font-weight: lighter;
+    font-style: italic;
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+h4, h5 {
+    margin: 0.5em 0;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+h4 {
+    font-size: 9pt;
+}
+
+h5 {
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+
+.quotes {
+    font-size: 11pt; 
+    text-align: left; 
+    line-height: 1.4; 
+    padding-left: 1em;
+    padding-right: 1.5em;
+}
+
+.credit {
+    font-size: 10pt;
+    color: #666; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-style: normal;
+    text-align: center;
+}
+
+.ny-hr {
+    border: none;
+    color: #ccc;
+    height: 0.1px;
+}

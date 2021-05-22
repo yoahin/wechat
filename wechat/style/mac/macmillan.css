@@ -1,0 +1,161 @@
+* {
+    box-sizing: border-box;
+}
+.mc-dict-frame {
+    display: flex;
+    flex-direction: column;
+}
+
+.mc-dict-band {
+    display: flex;
+    ackground-color: #f8f8f8;
+    border-bottom: 1px solid #e2e2e2;
+    width: 100%;
+    height: auto;
+    padding: 0.2rem 0rem;
+    margin: 0.2rem 0rem;
+}
+
+.mc-dict-band svg {
+    height: 1.2rem;
+}
+
+.mc-dict-body {
+    height: 200px;
+    overflow-y: scroll;
+}
+
+.mc-headword {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin: 0.1rem 0rem;
+    font-family: serif;
+}
+
+.mc-headword-word {
+    display: inline-block;
+    font-size: 20pt;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    color: #d70a20;
+}
+
+.mc-headword-subt {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-size: 8pt;
+    text-transform: uppercase;
+    color: grey;
+}
+
+.mc-headword-lev {
+    color: #d70a20;
+    font-size: 12pt;
+}
+
+.mc-phonetics {
+    display: flex;
+    align-items: center;
+}
+
+.mc-phonetics svg {
+    height: 1.1rem;
+}
+
+.mc-pos {
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 11pt;
+    text-transform: uppercase;
+    color: grey;
+    margin-right: 0.5rem;
+}
+
+.mc-pron-resource {
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 11pt;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+}
+
+.mc-phon {
+    font-family: sans-serif;
+    font-size: 12pt;
+}
+
+
+.mc-wordform {
+    display: flex;
+    flex-direction: column;
+    border-top: 1.5pt solid rgb(171, 168, 164);
+    border-bottom: 1.5pt solid rgb(171, 168, 164);
+    margin: 0.5rem 0rem;
+    padding: 0rem;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+
+.mc-wordform-heading {
+    text-transform: uppercase;
+    border-bottom: 1.5pt solid rgb(171, 168, 164);
+    width: max-content;
+    padding: 0.3rem 0rem;
+}
+
+.mc-wordform-content {
+    margin: 0rem;
+    padding-bottom: 0.1rem;
+}
+
+.mc-wordform-gra {
+    font-weight: 400;
+    text-align: start;
+    padding-right: 1rem;
+}
+
+.mc-sense-body {
+    margin: 1rem 0rem;
+    font-family: sans-serif;
+}
+
+.mc-sense-specs {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.mc-sense-num {
+    background-color: #d70a20;
+    color: white;
+    font-weight: bold;
+    min-width: 1.5em;
+    height: 1.5em;
+    border-radius: 1em;
+    padding: .3em;
+    text-align: center;
+    line-height: 1em;
+    margin-right: .3em;
+}
+
+.mc-sense-content {
+    line-height: 1.2;
+}
+.mc-sense-pos {
+    display: inline-block;
+    text-transform: uppercase;
+    color: gray;
+    margin-rigt: 2rem;
+}
+
+.mc-sense-def {
+    font-weight: 600;
+}
+.mc-sense-examples {
+    margin-top: 1em;
+}
+.mc-sense-examples p {
+    font-style: italic;
+    margin: 0.5em 0em;
+}

@@ -1,0 +1,136 @@
+.prelude {
+    padding: 1em;
+    border-bottom: 1pt #d7d7d7 solid;
+    border-top: 1pt #d7d7d7 solid;
+}
+    
+.tel-col {
+    font-family: sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    color: #b30000;
+    padding: 0;
+    margin: 0;
+}
+
+.tel-title {
+    font-family: Charter,Palatino, Georgia, serif;
+    font-size: 25pt;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.tel-subtitle {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    line-height: 1.5;
+    padding: 0;
+    margin-top: 5pt;
+
+}
+
+.header-img {
+    width: 100%;
+}
+
+.byline {
+    line-height: 1;
+}
+
+.byline p {
+    font-family: sans-serif;
+    font-size: 12pt;
+    padding: 0;
+    margin: .325rem;
+    color: #595959;
+}
+
+.byline-time {
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.byline-author {
+    font-weight: 400;
+    text-transform: uppercase;    
+}
+
+.te-drop {
+    float: left;
+    clear: right;
+    font-family: serif;
+    font-size: 350%;
+    font-weight: 900;
+    line-height: 80%;
+    padding-top: 5px;
+    margin-right: 5px;
+}
+
+.tel-p {
+    font-family: Palatino, Georgia, serif;
+    line-height: 1.6;
+    font-size: 17pt;
+}
+
+.intro {
+    font-family: sans-serif;
+    font-size: 12pt;
+    font-weight:200;
+    line-height: normal;
+    width: 50%;
+}
+
+.intro-img {
+    background-image: url('https://wx2.sbimg.cn/2020/04/25/friendly-wu.jpg');
+    background-size: 100% 100%;
+    padding: 0.2em 0.5em 8em 0.5em;
+    margin: 0px;
+    line-height: normal;
+    border: unset;
+}
+
+.author {
+    font-family: sans-serif;
+    font-size: 12pt;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 0.5em;
+}
+
+.cap {
+    display: block;
+    float: left;
+    font-family: sans-serif;
+    font-size: 310%;
+    /* padding-top: 6px; */
+    line-height: 80%;
+    padding-top: 5px;
+    color:#AD5728;
+}
+
+.small-cap-style {
+    font-size: 16pt;
+    font-variant: small-caps;
+}
+
+.ending-author {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 13pt;
+    line-height: normal;
+    padding-top: 1em;
+    margin-top: 1.5em;
+    border-top: 0.5pt solid gray;
+}
+
+.ending-illustrator {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13pt;
+    line-height: normal;
+}

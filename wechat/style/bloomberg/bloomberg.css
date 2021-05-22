@@ -1,0 +1,117 @@
+.bloomberg-newsletter-sec {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial Black,Arial,Helvetica,sans-serif;
+    letter-spacing: -1px;
+    border-bottom: 1pt #000000 dotted;
+    padding-bottom: 5px;
+}
+.bloomberg-newsletter-para {
+    font-size: 13pt;
+    font-family: Helvetica,Arial,sans-serif;
+    line-height: 1.5;
+    margin: 1em auto;
+}
+
+.bloomberg-newsletter-hilight {
+    background-color: #CCCCCC;
+    border-bottom: 1pt #000000 solid;
+    text-decoration: none;
+}
+
+/* bloomberg artcles */
+h1 {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.quicktake {
+    font-size: 48px;
+    line-height: 1.2;
+    text-align: left;
+    padding-top: 2px;
+    font-weight: 400;
+    width: 100%;
+    font-family: Helvetica, Arial, sans-serif;
+    letter-spacing: 0.02em;
+}
+.subtitle p {
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.byline p {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.3;
+    padding: 0;
+    margin: 0;
+}
+
+
+.illus p {
+    font-size: 0.8rem;
+    line-height: 1;
+    text-align: center;
+    font-style: unset;
+    text-transform: unset;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 2px auto;
+}
+
+.hilight {
+    background-color: #18191a;
+    color: whitesmoke;
+    padding: 2px;
+    border-radius: unset;
+}
+
+.blg-p {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 530;
+    line-height: 1.6;
+}
+
+.blg-p-qt {
+    font-family: serif;
+    font-size: 1.4rem;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.heanding {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 550;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.methodology p {
+    line-height: 1.3;
+    margin-bottom: 5px;
+}
+
+.acknowlegement {
+    margin-top: 2.5em;
+}
+
+.acknowlegement p {
+    line-height: 1.3;
+    color: rgb(118, 118, 118);
+    font-size: 13px;
+}   
+
+.timestamp {
+    font-size: 14px;
+}

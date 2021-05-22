@@ -1,0 +1,13 @@
+
+.fa-section {
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: 13pt;
+    border: none;
+    padding: 0;
+    margin: 2px;
+}
+
+.fa-section-dec {
+    border-bottom: 1pt solid #b3d3f0;
+}
