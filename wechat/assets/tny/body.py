@@ -47,12 +47,14 @@ class GetBodyParas(HTMLParser):
             self.content[self.pnumber] = {'footer': []}
 
     def handle_data(self, data):
-        """divide paras into two groups:
+        """ 
+        divide paras into two groups:
             1. has_dropcap;
             2. normal_para
             appending to a list and joining its element later will avoid
             list index out of range error -- if first elemnet of a list 
-            happens to be in a nested tag"""
+            happens to be in a nested tag
+        """
         # paras with drop cap
         if self.dcounter:
             self.content[self.pnumber]['has_dropcap'].append(data) 
