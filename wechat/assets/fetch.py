@@ -7,9 +7,11 @@
 import os.path
 import os
 import argparse
+from urllib.request import urlopen
+
 
 # 3rd party (my own) module
-import tny
+import tny.header
 import te_parse
 
 ROOT_DIR = os.path.join(os.environ['USERPROFILE'], \
@@ -48,7 +50,7 @@ with open(target_file, 'w', encoding='utf-8') as f:
         html = url_obj.read().decode('UTF-8')
         url_obj.close()
 
-        header = tny.GetHeader()
+        header = tny.header.GetHeader()
         header.feed(html)
         print(header.GetContent())
         #f.write('this is a simple test')
