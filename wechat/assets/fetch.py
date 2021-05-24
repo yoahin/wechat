@@ -8,6 +8,10 @@ import os.path
 import os
 import argparse
 
+# 3rd party (my own) module
+import tny
+import te_parse
+
 ROOT_DIR = os.path.join(os.environ['USERPROFILE'], \
                         'projects', \
                         'posts', \
@@ -40,4 +44,11 @@ else:
     target_file = os.path.join(os.getcwd(), article_title + '.html')
 
 with open(target_file, 'w', encoding='utf-8') as f:
-        f.write('this is a simple test')
+        url_obj = urlopen(article_url)
+        html = url_obj.read().decode('UTF-8')
+        url_obj.close()
+
+        header = tny.GetHeader()
+        header.feed(html)
+        print(header.GetContent())
+        #f.write('this is a simple test')
