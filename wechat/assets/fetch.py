@@ -53,4 +53,5 @@ with open(target_file, 'w', encoding='utf-8') as f:
         header = tny.header.GetHeader()
         header.feed(html)
         print(header.GetContent())
+        #TODO: write to the file instead of standard output 
         #f.write('this is a simple test')
