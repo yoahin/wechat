@@ -23,6 +23,7 @@ parser = argparse.ArgumentParser(description='Fetch the content of an online art
 
 # command line args
 parser.add_argument('-d', '--directory', \
+                    nargs='?', const='.', default=os.getcwd(), \
                     help='destination where the output will be stored')
 parser.add_argument('-u', '--url', help='the url of which to be scraped')
 
@@ -54,4 +55,4 @@ with open(target_file, 'w', encoding='utf-8') as f:
         header.feed(html)
         print(header.GetContent())
         #TODO: write to the file instead of standard output 
-        #f.write('this is a simple test')
+        f.write('this is a simple test')
