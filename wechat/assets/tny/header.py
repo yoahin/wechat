@@ -5,6 +5,7 @@
 
 from urllib.request import urlopen
 from html.parser import HTMLParser
+import argparse
 
 class GetHeader(HTMLParser):
     def __init__(self):
@@ -70,10 +71,15 @@ class GetHeader(HTMLParser):
     
 
 if __name__ == '__main__':
-    url = urlopen('https://www.newyorker.com/magazine/2019/11/25/my-life-as-a-child-chef')
-    html = url.read().decode('UTF-8')
-    url.close()
+    parser = argparse.ArgumentParser('Scrape the header from a New Yorker article page')
+    parser.add_argument('url', help='The URL/link of the article to be scraped')
+    args = parser.parse_args()
+    try:
+        url = urlopen(args.url)
+        html = url.read().decode('UTF-8')
+        url.close()
 
-    test = GetHeader()
-    test.feed(html)
-    print(test.GetContent())
+        header = GetHeader()
+        header.feed(html)
+        print('Header content is:')
+        print(header.GetContent())
