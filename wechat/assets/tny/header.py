@@ -83,3 +83,5 @@ if __name__ == '__main__':
         header.feed(html)
         print('Header content is:')
         print(header.GetContent())
+    except ValueError as val:
+        print(val)
