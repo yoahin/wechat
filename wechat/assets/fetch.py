@@ -6,7 +6,10 @@
 
 import os.path
 import os
+import sys
 import argparse
+
+os_name = sys.platform
 
 ROOT_DIR = os.path.join(os.environ['USERPROFILE'], \
                         'projects', \
@@ -17,7 +20,7 @@ parser = argparse.ArgumentParser(description='Fetch the content of an online art
 
 # command line args
 parser.add_argument('-u', '--url', help='the url of which to be scraped')
-parser.add_argument('-d', '--directory', \
+parser.add_argument('-d', '--directory', const='.', default=os.getcwd(), \
                     help='destination where the output will be stored')
 
 
@@ -36,7 +39,7 @@ if target_folder != None:
     target_file = os.path.join(ROOT_DIR, target_folder, article_title + '.html')
 # defaults to None; save to current directory then
 else:
-    target_file = os.path.join(os.getcwd(), article_title + '.html')
+    target_file = os.path.join(args.directory, article_title + '.html')
 
 with open(target_file, 'w', encoding='utf-8') as f:
         f.write('this is a simple test')
