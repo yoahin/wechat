@@ -19,9 +19,6 @@ ROOT_DIR = os.path.join(os.environ['USERPROFILE'], \
 parser = argparse.ArgumentParser(description='Fetch the content of an online article')
 
 # command line args
-parser.add_argument('-u', '--url', help='the url of which to be scraped')
-parser.add_argument('-d', '--directory', const='.', default=os.getcwd(), \
-                    help='destination where the output will be stored')
 
 
 args = parser.parse_args()
