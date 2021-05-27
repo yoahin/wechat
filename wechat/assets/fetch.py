@@ -8,6 +8,12 @@ import os.path
 import os
 import sys
 import argparse
+from urllib.request import urlopen
+
+
+# 3rd party (my own) module
+import tny.header
+import te_parse
 
 os_name = sys.platform
 
@@ -19,6 +25,10 @@ ROOT_DIR = os.path.join(os.environ['USERPROFILE'], \
 parser = argparse.ArgumentParser(description='Fetch the content of an online article')
 
 # command line args
+parser.add_argument('-d', '--directory', \
+                    nargs='?', const='.', default=os.getcwd(), \
+                    help='destination where the output will be stored')
+parser.add_argument('-u', '--url', help='the url of which to be scraped')
 
 
 args = parser.parse_args()
@@ -39,4 +49,12 @@ else:
     target_file = os.path.join(args.directory, article_title + '.html')
 
 with open(target_file, 'w', encoding='utf-8') as f:
+        url_obj = urlopen(article_url)
+        html = url_obj.read().decode('UTF-8')
+        url_obj.close()
+
+        header = tny.header.GetHeader()
+        header.feed(html)
+        print(header.GetContent())
+        #TODO: write to the file instead of standard output 
         f.write('this is a simple test')
