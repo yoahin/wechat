@@ -17,7 +17,13 @@ import te_parse
 
 os_name = sys.platform
 
-ROOT_DIR = os.path.join(os.environ['USERPROFILE'], \
+if os_name.startswith('win32'):
+    ROOT_DIR = os.path.join(os.environ['USERPROFILE'], \
+                        'projects', \
+                        'posts', \
+                        'wechat')
+else:
+    ROOT_DIR = os.path.join(os.environ['HOME'], \
                         'projects', \
                         'posts', \
                         'wechat')
