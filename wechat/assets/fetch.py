@@ -44,7 +44,7 @@ article_url = args.url
 
 # extract article title from the url
 article_title = article_url[article_url.rfind('/') + 1:]
-print('Article title is ', article_title)
+print('Article title is', article_title.replace('-', ' '))
 
 # write to the file named article_title.html under the dest passed
 target_folder = args.directory
