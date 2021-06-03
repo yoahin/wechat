@@ -3,4 +3,4 @@ Posts for my WeChat channel, focus on reading long, (usually) well-written artic
 
 All posts are marked up with HTML plus a few CSS styles, mimicing those from which they are extracted.
 
-Contents are scraped from online using Python.
+Contents are scraped from online using Python and lxml/html.parser.
