@@ -62,7 +62,7 @@ else:
 resp_obj = requests.get(article_url)
 html_content = resp_obj.text
 tree = html.fromstring(html_content)
-bylines = tree.xpath('//span[contains(@class, "byline__preamble")]')
+bylines = tree.xpath('//span[contains(@class, "byline__preamble")]/text()')
 print(bylines)
 #with open(target_file, 'w', encoding='utf-8') as f:
 
