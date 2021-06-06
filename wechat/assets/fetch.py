@@ -18,21 +18,21 @@ import te_parse
 os_name = sys.platform
 
 if os_name.startswith('win32'):
-    ROOT_DIR = os.path.join(os.environ['USERPROFILE'], \
-                        'projects', \
-                        'posts', \
-                        'wechat')
+    ROOT_DIR = os.path.join(os.environ['USERPROFILE'],
+                            'projects',
+                            'posts',
+                            'wechat')
 else:
-    ROOT_DIR = os.path.join(os.environ['HOME'], \
-                        'projects', \
-                        'posts', \
-                        'wechat')
+    ROOT_DIR = os.path.join(os.environ['HOME'],
+                            'projects',
+                            'posts',
+                            'wechat')
 
-parser = argparse.ArgumentParser(description='Fetch the content of an online article')
+parser = argparse.ArgumentParser(description='Fetch content of online article')
 
 # command line args
-parser.add_argument('-d', '--directory', \
-                    nargs='?', const='.', default=os.getcwd(), \
+parser.add_argument('-d', '--directory',
+                    nargs='?', const='.', default=os.getcwd(),
                     help='destination where the output will be stored')
 parser.add_argument('-u', '--url', help='the url of which to be scraped')
 
@@ -48,19 +48,19 @@ print('Article title is', article_title.replace('-', ' '))
 
 # write to the file named article_title.html under the dest passed
 target_folder = args.directory
-if target_folder != None:
+if target_folder is not None:
     target_file = os.path.join(ROOT_DIR, target_folder, article_title + '.html')
 # defaults to None; save to current directory then
 else:
     target_file = os.path.join(args.directory, article_title + '.html')
 
 with open(target_file, 'w', encoding='utf-8') as f:
-        url_obj = urlopen(article_url)
-        html = url_obj.read().decode('UTF-8')
-        url_obj.close()
+    url_obj = urlopen(article_url)
+    html = url_obj.read().decode('UTF-8')
+    url_obj.close()
 
-        header = tny.header.GetHeader()
-        header.feed(html)
-        print(header.GetContent())
-        #TODO: write to the file instead of standard output 
-        f.write('this is a simple test')
+    header = tny.header.GetHeader()
+    header.feed(html)
+    print(header.GetContent())
+    # TODO: write to the file instead of standard output 
+    f.write('this is a simple test')
