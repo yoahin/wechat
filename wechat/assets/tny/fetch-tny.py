@@ -3,7 +3,8 @@
 """
 This script, as a module, will try to scrape the header, body, and footer
 from a New Yorker online article page.
-If it is used as a script, it will ask the user for a New Yorker url instead.
+If it is used as a script, it will use the first argument
+passed on command line to the script.
 """
 
 import argparse
