@@ -59,25 +59,33 @@ class Header():
         Get the column name and mark it up accrodingly
         Column name, for example, DAILY COMMENT.
         """
-        self.h3 = self.tree.xpath('//a[\
+        self.column = self.tree.xpath('//a[\
                                     contains(@class, "rubric__link")\
                                     ]/span[1]/text()')[0]
-        return '<h3>' + self.h3.upper() + '</h3>'
+        return '<h3>' + self.column.upper() + '</h3>'
 
     def get_byline(self):
         """
         Get the byline text and mark it up accrodingly
         Byline, for example, By Peter Hessle.
         """
-        self.h3 = self.tree.xpath('//a[\
-                                    contains(@class, "rubric__link")\
-                                    ]/span[1]/text()')[0]
-        return '<h3>' + self.h3.upper() + '</h3>'
-        pass
+        self.preamble = self.tree.xpath('//span[\
+                                        contains(@class, "byline__preamble")\
+                                        ]/text()')[0]
+        # TNY splits byline name into weird two parts
+        self.byline_part1 = self.tree.xpath('//a[\
+                                    contains(@class, "byline__name-link")\
+                                    ]/text()')[0]
+        self.byline_part2 = self.tree.xpath('//span[\
+                                contains(@class, "link__last-letter-spacing")\
+                                    ]/text()')[0]
+        return '<h4>' + self.preamble\
+                      + self.byline_part1\
+                      + self.byline_part2\
+                      + '</h4>'
 
     def get_pubdate(self):
         pass
-
 
 
 if __name__ == '__main__':
@@ -92,5 +100,7 @@ if __name__ == '__main__':
     print(f'Article Headline #1 is {h1}')
     h2 = header.get_h2()
     print(f'Article Headline #2 is {h2}')
-    h3 = header.get_column()
-    print(f'Article Headline #3 is {h3}')
+    column = header.get_column()
+    print(f'Article column is {column}')
+    byline = header.get_byline()
+    print(f'Article byline is {byline}')
