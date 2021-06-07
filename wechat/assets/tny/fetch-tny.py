@@ -37,27 +37,43 @@ class Header():
     def get_h1(self):
         """
         Get the headline #1 text and mark it up accrodingly
+        Headline #1 is the article title.
         """
-        return self.tree.xpath('//h1[\
+        self.h1 = self.tree.xpath('//h1[\
                                     contains(@class, "content-header__row")\
-                                    ]/text()')
+                                    ]/text()')[0]
+        return '<h1>' + self.h1 + '</h1>'
 
-    def get_h2():
+    def get_h2(self):
+        """
+        Get the headline #2 text and mark it up accrodingly
+        Headline #2 is the article's subtile.
+        """
+        self.h2 = self.tree.xpath('//div[\
+                                    contains(@class, "content-header__dek")\
+                                    ]/text()')[0]
+        return '<h2>' + self.h2 + '</h2>'
+
+    def get_h3(self):
+        """
+        Get the headline #3 text and mark it up accrodingly
+        Headline #3 is the column name, for example, DAILY COMMENT.
+        """
+        self.h3 = self.tree.xpath('//div[\
+                                    contains(@class, "content-header__dek")\
+                                    ]/text()')[0]
+        return '<h2>' + self.h2 + '</h2>'
+
+    def get_h4(self):
         pass
 
-    def get_h3():
+    def get_h5(self):
         pass
 
-    def get_h4():
+    def get_column(self):
         pass
 
-    def get_h5():
-        pass
-
-    def get_column():
-        pass
-
-    def get_byline():
+    def get_byline(self):
         pass
 
 
@@ -70,4 +86,6 @@ if __name__ == '__main__':
     # Create an header instance
     header = Header(article_url)
     h1 = header.get_h1()
-    print(f'Article Header is {h1}')
+    print(f'Article Headline #1 is {h1}')
+    h2 = header.get_h2()
+    print(f'Article Headline #2 is {h2}')
