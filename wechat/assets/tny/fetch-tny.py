@@ -54,27 +54,30 @@ class Header():
                                     ]/text()')[0]
         return '<h2>' + self.h2 + '</h2>'
 
-    def get_h3(self):
-        """
-        Get the headline #3 text and mark it up accrodingly
-        Headline #3 is the column name, for example, DAILY COMMENT.
-        """
-        self.h3 = self.tree.xpath('//div[\
-                                    contains(@class, "content-header__dek")\
-                                    ]/text()')[0]
-        return '<h2>' + self.h2 + '</h2>'
-
-    def get_h4(self):
-        pass
-
-    def get_h5(self):
-        pass
-
     def get_column(self):
-        pass
+        """
+        Get the column name and mark it up accrodingly
+        Column name, for example, DAILY COMMENT.
+        """
+        self.h3 = self.tree.xpath('//a[\
+                                    contains(@class, "rubric__link")\
+                                    ]/span[1]/text()')[0]
+        return '<h3>' + self.h3.upper() + '</h3>'
 
     def get_byline(self):
+        """
+        Get the byline text and mark it up accrodingly
+        Byline, for example, By Peter Hessle.
+        """
+        self.h3 = self.tree.xpath('//a[\
+                                    contains(@class, "rubric__link")\
+                                    ]/span[1]/text()')[0]
+        return '<h3>' + self.h3.upper() + '</h3>'
         pass
+
+    def get_pubdate(self):
+        pass
+
 
 
 if __name__ == '__main__':
@@ -89,3 +92,5 @@ if __name__ == '__main__':
     print(f'Article Headline #1 is {h1}')
     h2 = header.get_h2()
     print(f'Article Headline #2 is {h2}')
+    h3 = header.get_column()
+    print(f'Article Headline #3 is {h3}')
