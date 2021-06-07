@@ -85,7 +85,13 @@ class Header():
                       + '</h4>'
 
     def get_pubdate(self):
-        pass
+        """
+        Ge the publishing date of the article and mark it up with h5.
+        """
+        self.pubdate = self.tree.xpath('//time[\
+                            contains(@class, "content-header__publish-date")\
+                            ]/text()')[0]
+        return '<h5>' + self.pubdate + '</h5>'
 
 
 if __name__ == '__main__':
@@ -104,3 +110,5 @@ if __name__ == '__main__':
     print(f'Article column is {column}')
     byline = header.get_byline()
     print(f'Article byline is {byline}')
+    publishing_date = header.get_pubdate()
+    print(f'Article byline is {publishing_date}')
