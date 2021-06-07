@@ -36,10 +36,11 @@ class Header():
 
     def get_h1(self):
         """
-        get the headline #1 text and mark it up accrodingly
+        Get the headline #1 text and mark it up accrodingly
         """
-
-        pass
+        return self.tree.xpath('//h1[\
+                                    contains(@class, "content-header__row")\
+                                    ]/text()')
 
     def get_h2():
         pass
@@ -63,3 +64,10 @@ class Header():
 if __name__ == '__main__':
     args = cmd_arg_parser()
     article_url = args.url
+    article_title = article_url[article_url.rfind('/') + 1:].replace('-', ' ')
+    print(f'Article tilte is {article_title}')
+
+    # Create an header instance
+    header = Header(article_url)
+    h1 = header.get_h1()
+    print(f'Article Header is {h1}')
