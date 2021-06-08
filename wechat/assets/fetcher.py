@@ -9,13 +9,13 @@ import os
 import sys
 import argparse
 import requests
-#from urllib.request import urlopen
+# from urllib.request import urlopen
 
 
 # 3rd party (my own) module
 from lxml import html
-#import tny.header
-#import te_parse
+# import tny.header
+# import te_parse
 
 os_name = sys.platform
 
@@ -59,12 +59,7 @@ if target_folder is not None:
 else:
     target_file = os.path.join(args.directory, article_title + '.html')
 
-resp_obj = requests.get(article_url)
-html_content = resp_obj.text
-tree = html.fromstring(html_content)
-bylines = tree.xpath('//span[contains(@class, "byline__preamble")]/text()')
-print(bylines)
-#with open(target_file, 'w', encoding='utf-8') as f:
+# with open(target_file, 'w', encoding='utf-8') as f:
 
     #header = tny.header.GetHeader()
     #header.feed(html)
