@@ -127,6 +127,10 @@ class Article():
             self.tree = tree
 
         def get_paras(self):
+            """
+            Get all paragraphs of the article
+            """
+            # TODO: handle the nested tags such as <a>, <em>.
             self.paras = self.tree.xpath('//p[@class="paywall"]/text()')
             return self.paras
 
@@ -157,7 +161,7 @@ if __name__ == '__main__':
     print(f'Article caption text is {cap_text}')
     print(f'Article caption text is {cap_credit}')
 
-    # Get the body paras by create a body instance
+    # Get the body paras by creating a body instance
     body = article.Body(html_tree)
     paras = body.get_paras()
     print(paras)
