@@ -41,7 +41,7 @@ class Article():
     class Header():
         """
         Header class focuses on fetch the article's header parts:
-        title, subtitle, byline, publshing date, column name
+        title, subtitle, byline, publshing date, column name and so on.
         """
 
         def __init__(self, tree):
@@ -109,11 +109,26 @@ class Article():
                                 ]/text()')[0]
             return '<h5>' + self.pubdate + '</h5>'
 
+        def get_caption(self):
+            self.caption_text = '<h2 class="cap_text">'\
+                + self.tree.xpath('//span[contains(@class, "caption__text")]/text()')[0]\
+                + '</h2>'
+            self.caption_credit = '<span class="cap_credit">'\
+                + self.tree.xpath('//span[contains(@class, "caption__credit")]/text()')[0]\
+                + '</span>'
+            return self.caption_text, self.caption_credit
+
     class Body():
         """
         Get all the body paragraphs and mark them up with p tag.
         """
-        pass
+
+        def __init__(self, tree):
+            self.tree = tree
+
+        def get_paras(self):
+            # self.paras = 
+            pass
 
 
 if __name__ == '__main__':
@@ -137,4 +152,7 @@ if __name__ == '__main__':
     byline = header.get_byline()
     print(f'Article byline is {byline}')
     publishing_date = header.get_pubdate()
-    print(f'Article byline is {publishing_date}')
+    print(f'Article was published online on {publishing_date}')
+    cap_text, cap_credit = header.get_caption()
+    print(f'Article caption text is {cap_text}')
+    print(f'Article caption text is {cap_credit}')
