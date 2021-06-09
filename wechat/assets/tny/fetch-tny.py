@@ -131,7 +131,19 @@ class Article():
             Get all paragraphs of the article
             """
             # TODO: handle the nested tags such as <a>, <em>.
-            self.paras = self.tree.xpath('//p[@class="paywall"]/a/text()')
+            self.paras = self.tree.xpath('//p[@class="paywall"]/')
+            self.para_num = len(self.paras)
+
+            self.anchor_counter = 0
+            self.emphas_counter = 0
+
+            for i in range(self.para_num):
+                _anchor_text = self.paras[i].xpath('./a[@class="external-link"]/text()]')
+                _emphas_text = self.paras[i].xpath('./em/text()]')
+
+                if _anchor_text:
+                    self.anchor_counter += 1
+
             return self.paras
 
 
