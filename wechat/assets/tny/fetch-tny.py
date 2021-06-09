@@ -127,8 +127,8 @@ class Article():
             self.tree = tree
 
         def get_paras(self):
-            # self.paras = 
-            pass
+            self.paras = self.tree.xpath('//p[@class="paywall"]/text()')
+            return self.paras
 
 
 if __name__ == '__main__':
@@ -156,3 +156,8 @@ if __name__ == '__main__':
     cap_text, cap_credit = header.get_caption()
     print(f'Article caption text is {cap_text}')
     print(f'Article caption text is {cap_credit}')
+
+    # Get the body paras by create a body instance
+    body = article.Body(html_tree)
+    paras = body.get_paras()
+    print(paras)
