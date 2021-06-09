@@ -39,6 +39,10 @@ class Article():
         return self.tree
 
     class Header():
+        """
+        Header class focuses on fetch the article's header parts:
+        title, subtitle, byline, publshing date, column name
+        """
 
         def __init__(self, tree):
             """
