@@ -20,7 +20,7 @@ def cmd_arg_parser():
     return args
 
 
-class Header():
+class Article():
     """
     Accept an url as it argument and return the text nodes of the header part.
     The header part can be further divided into headlines 1-5, byline, column."
@@ -35,64 +35,81 @@ class Header():
         self.content = requests.get(self.url).text
         self.tree = html.fromstring(self.content)
 
-    def get_h1(self):
-        """
-        Get the headline #1 text and mark it up accrodingly
-        Headline #1 is the article title.
-        """
-        self.h1 = self.tree.xpath('//h1[\
-                                    contains(@class, "content-header__row")\
-                                    ]/text()')[0]
-        return '<h1>' + self.h1 + '</h1>'
+    def get_tree(self):
+        return self.tree
 
-    def get_h2(self):
-        """
-        Get the headline #2 text and mark it up accrodingly
-        Headline #2 is the article's subtile.
-        """
-        self.h2 = self.tree.xpath('//div[\
-                                    contains(@class, "content-header__dek")\
-                                    ]/text()')[0]
-        return '<h2>' + self.h2 + '</h2>'
+    class Header():
 
-    def get_column(self):
-        """
-        Get the column name and mark it up accrodingly
-        Column name, for example, DAILY COMMENT.
-        """
-        self.column = self.tree.xpath('//a[\
-                                    contains(@class, "rubric__link")\
-                                    ]/span[1]/text()')[0]
-        return '<h3>' + self.column.upper() + '</h3>'
+        def __init__(self, tree):
+            """
+            Initialize the nested class to use the tree
+            """
+            self.tree = tree
 
-    def get_byline(self):
-        """
-        Get the byline text and mark it up accrodingly
-        Byline, for example, By Peter Hessle.
-        """
-        self.preamble = self.tree.xpath('//span[\
-                                        contains(@class, "byline__preamble")\
+        def get_h1(self):
+            """
+            Get the headline #1 text and mark it up accrodingly
+            Headline #1 is the article title.
+            """
+            self.h1 = self.tree.xpath('//h1[\
+                                        contains(@class, "content-header__row")\
                                         ]/text()')[0]
-        # TNY splits byline name into weird two parts
-        self.byline_part1 = self.tree.xpath('//a[\
-                                    contains(@class, "byline__name-link")\
-                                    ]/text()')[0]
-        self.byline_part2 = self.tree.xpath('//span[\
-                                contains(@class, "link__last-letter-spacing")\
-                                    ]/text()')[0]
-        return '<h4>' + self.preamble\
-                      + self.byline_part1\
-                      + self.byline_part2\
-                      + '</h4>'
+            return '<h1>' + self.h1 + '</h1>'
 
-    def get_pubdate(self):
+        def get_h2(self):
+            """
+            Get the headline #2 text and mark it up accrodingly
+            Headline #2 is the article's subtile.
+            """
+            self.h2 = self.tree.xpath('//div[\
+                                        contains(@class, "content-header__dek")\
+                                        ]/text()')[0]
+            return '<h2>' + self.h2 + '</h2>'
+
+        def get_column(self):
+            """
+            Get the column name and mark it up accrodingly
+            Column name, for example, DAILY COMMENT.
+            """
+            self.column = self.tree.xpath('//a[\
+                                        contains(@class, "rubric__link")\
+                                        ]/span[1]/text()')[0]
+            return '<h3>' + self.column.upper() + '</h3>'
+
+        def get_byline(self):
+            """
+            Get the byline text and mark it up accrodingly
+            Byline, for example, By Peter Hessle.
+            """
+            self.preamble = self.tree.xpath('//span[\
+                                            contains(@class, "byline__preamble")\
+                                            ]/text()')[0]
+            # TNY splits byline name into weird two parts
+            self.byline_part1 = self.tree.xpath('//a[\
+                                        contains(@class, "byline__name-link")\
+                                        ]/text()')[0]
+            self.byline_part2 = self.tree.xpath('//span[\
+                                    contains(@class, "link__last-letter-spacing")\
+                                        ]/text()')[0]
+            return '<h4>' + self.preamble\
+                          + self.byline_part1\
+                          + self.byline_part2\
+                          + '</h4>'
+
+        def get_pubdate(self):
+            """
+            Ge the publishing date of the article and mark it up with h5.
+            """
+            self.pubdate = self.tree.xpath('//time[\
+                                contains(@class, "content-header__publish-date")\
+                                ]/text()')[0]
+            return '<h5>' + self.pubdate + '</h5>'
+
+    class Body():
         """
-        Ge the publishing date of the article and mark it up with h5.
+        Get all the body paragraphs and mark them up with p tag.
         """
-        self.pubdate = self.tree.xpath('//time[\
-                            contains(@class, "content-header__publish-date")\
-                            ]/text()')[0]
-        return '<h5>' + self.pubdate + '</h5>'
+        pass
 
 
 if __name__ == '__main__':
@@ -101,12 +118,16 @@ if __name__ == '__main__':
     article_title = article_url[article_url.rfind('/') + 1:].replace('-', ' ')
     print(f'Article tilte is {article_title}')
 
-    # Create an header instance
-    header = Header(article_url)
+    # Create an article instance and scrape the html tree
+    article = Article(article_url)
+    html_tree = article.get_tree()
+
+    # Get the header parts by create a header instance and using the tree
+    header = article.Header(html_tree)
     h1 = header.get_h1()
-    print(f'Article Headline #1 is {h1}')
+    print(f'Article Title is {h1}')
     h2 = header.get_h2()
-    print(f'Article Headline #2 is {h2}')
+    print(f'Article Subtitle is {h2}')
     column = header.get_column()
     print(f'Article column is {column}')
     byline = header.get_byline()
