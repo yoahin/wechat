@@ -131,20 +131,22 @@ class Article():
             Get all paragraphs of the article
             """
             # TODO: handle the nested tags such as <a>, <em>.
-            self.paras = self.tree.xpath('//p[@class="paywall"]/')
+            self.paras = self.tree.xpath('//p[@class="paywall"]')
             self.para_num = len(self.paras)
 
-            self.anchor_counter = 0
-            self.emphas_counter = 0
+            self.anchor_counter = []
+            self.emphas_counter = []
 
             for i in range(self.para_num):
-                _anchor_text = self.paras[i].xpath('./a[@class="external-link"]/text()]')
-                _emphas_text = self.paras[i].xpath('./em/text()]')
+                _anchor_text = self.paras[i].xpath('./a[@class="external-link"]/text()')
+                _emphas_text = self.paras[i].xpath('./em/text()')
 
                 if _anchor_text:
-                    self.anchor_counter += 1
+                    self.anchor_counter.append(_anchor_text)
+                elif _emphas_text:
+                    self.emphas_counter.append(_emphas_text)
 
-            return self.paras
+            return self.anchor_counter, self.emphas_counter
 
 
 if __name__ == '__main__':
@@ -175,5 +177,5 @@ if __name__ == '__main__':
 
     # Get the body paras by creating a body instance
     body = article.Body(html_tree)
-    paras = body.get_paras()
-    print(paras)
+    (anchor_num, emphas_num) = body.get_paras()
+    print(anchor_num, emphas_num)
