@@ -7,7 +7,7 @@ import os.path
 
 #TODO
 # [X] pass the article dir as a tempalte folder
-# [X] test if include will work 
+# [X] test if include will work
 project_dir = '${PROJECTS_HOME}/gitty/wechat/'
 article_dir = os.path.join(project_dir, str(argv[1]))
 # each time article part template will be updated: 1.html, 2.html, 3.html, ... and so on
@@ -15,10 +15,10 @@ article_part = str(argv[2])
 
 
 file_loader = FileSystemLoader(
-        ['templates/te-templates',\
-         'templates/dict-templates',\
-         'templates/twitter-templates',\
-          article_dir])
+        ['templates/te-templates',
+         'templates/dict-templates',
+         'templates/twitter-templates',
+         article_dir])
 env = Environment(loader=file_loader)
 
 print(env.list_templates(extensions=["html"]))
