@@ -9,12 +9,19 @@ passed on command line to the script.
 
 import argparse
 import requests
+import os
+import os.path
 from lxml import html
 
 
 def cmd_arg_parser():
     parser = argparse.ArgumentParser(description='Parse user input url')
-    # 1st arg: url
+    # 1st arg: destination/directory
+    parser.add_argument('-d', '--destination',
+                        nargs='?', const='.', default='.',
+                        help='destination of the output file (default: cwd)')
+
+    # 2nd arg: url
     parser.add_argument('url', help='url of online article to be scrpaed')
     args = parser.parse_args()
     return args
@@ -33,9 +40,7 @@ class Article():
         """
         self.url = url
         self.content = requests.get(self.url).text
-        # self.content = requests.get(self.url)    # Response object
-        self.tree = html.fromstring(self.content)  # HtmlObject
-        #self.tree = html.parse(self.content)
+        self.tree = html.fromstring(self.content)
 
     def get_tree(self):
         return self.tree
@@ -172,6 +177,8 @@ if __name__ == '__main__':
     article_title = article_url[article_url.rfind('/') + 1:].replace('-', ' ')
     print(f'Article tilte is {article_title}')
 
+    dest = args.destination
+
     # Create an article instance and scrape the html tree
     article = Article(article_url)
     html_tree = article.get_tree()
@@ -179,21 +186,36 @@ if __name__ == '__main__':
     # Get the header parts by create a header instance and using the tree
     header = article.Header(html_tree)
     h1 = header.get_h1()
-    print(f'Article Title is {h1}')
     h2 = header.get_h2()
-    print(f'Article Subtitle is {h2}')
     column = header.get_column()
-    print(f'Article column is {column}')
     byline = header.get_byline()
-    print(f'Article byline is {byline}')
     publishing_date = header.get_pubdate()
-    print(f'Article was published online on {publishing_date}')
     cap_text, cap_credit = header.get_caption()
-    print(f'Article caption text is {cap_text}')
-    print(f'Article caption text is {cap_credit}')
+    #print(f'Article Title is {h1}')
+    #print(f'Article Subtitle is {h2}')
+    #print(f'Article column is {column}')
+    #print(f'Article byline is {byline}')
+    #print(f'Article was published online on {publishing_date}')
+    #print(f'Article caption text is {cap_text}')
+    #print(f'Article caption text is {cap_credit}')
+
+    with open(os.path.join(dest, 'header.html'), 'w', encoding='utf-8') as f:
+        f.write(h1+'\n')
+        f.write(h2+'\n')
+        f.write(column+'\n')
+        f.write(byline+'\n')
+        f.write(publishing_date+'\n')
+        f.write(cap_text+'\n')
+        f.write(cap_credit+'\n')
+
+
 
     # Get the body paras by creating a body instance
     body = article.Body(html_tree)
-    # (a_or_em, paras) = body.get_breakers()
     paras = body.get_paras()
+
+    with open(os.path.join(dest, 'body.html'), 'w', encoding='utf-8') as f:
+        for p in paras:
+            f.write(paras[p] + '\n')
+
     print(paras)
