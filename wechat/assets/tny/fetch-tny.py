@@ -33,7 +33,9 @@ class Article():
         """
         self.url = url
         self.content = requests.get(self.url).text
-        self.tree = html.fromstring(self.content)
+        # self.content = requests.get(self.url)    # Response object
+        self.tree = html.fromstring(self.content)  # HtmlObject
+        #self.tree = html.parse(self.content)
 
     def get_tree(self):
         return self.tree
@@ -126,27 +128,40 @@ class Article():
         def __init__(self, tree):
             self.tree = tree
 
-        def get_paras(self):
+        def get_breakers(self):
             """
-            Get all paragraphs of the article
+            Get all breaking points of the paragraphs.
+            Such as a tags, em tags and so on.
             """
             # TODO: handle the nested tags such as <a>, <em>.
-            self.paras = self.tree.xpath('//p[@class="paywall"]')
-            self.para_num = len(self.paras)
-            self.para_anchors = {}
-            self.para_ems = {}
+            self.first_para = self.tree.xpath('//p[contains(@class, "has-dropcap")]')
+            self.paras_raw = self.first_para + self.tree.xpath('//p[@class="paywall"]')
+            self.para_num = len(self.paras_raw)
+            self.paras_text = {}
+            self.para_a_or_em = {}
+            # self.para_ems = {}
 
             for i in range(self.para_num):
-                _anchor_text = self.paras[i].xpath('./a[@class="external-link"]/text()')
-                _emphas_text = self.paras[i].xpath('./em/text()')
+                self.paras_text[i] = self.paras_raw[i].xpath('./text()')
+                _a_or_em_text = self.paras_raw[i].xpath(
+                        './a[@class="external-link"]/text() | ./em/text()'
+                        )
+                # _emphas_text = self.paras_raw[i].xpath('./em/text()')
 
                 # Filter out empty nodes
-                if _anchor_text:
-                    self.para_anchors[i] = _anchor_text
-                if _emphas_text:
-                    self.para_ems[i] = _emphas_text
+                if _a_or_em_text:
+                    self.para_a_or_em[i] = _a_or_em_text
+                # if _emphas_text:
+                #    self.para_ems[i] = _emphas_text
 
-            return self.para_anchors, self.para_ems
+            # for para_num, para_fragements in self.paras_text:
+            #    pass
+
+            return self.para_a_or_em, self.paras_text
+
+        def get_paras(self):
+            self.para_atags, self.para_emtags = self.get_breakers()
+            pass
 
 
 if __name__ == '__main__':
@@ -177,5 +192,5 @@ if __name__ == '__main__':
 
     # Get the body paras by creating a body instance
     body = article.Body(html_tree)
-    (anchors, ems) = body.get_paras()
-    print(anchors, ems)
+    (a_or_em, paras) = body.get_breakers()
+    print(a_or_em, paras)
