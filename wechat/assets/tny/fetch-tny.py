@@ -133,18 +133,20 @@ class Article():
             # TODO: handle the nested tags such as <a>, <em>.
             self.paras = self.tree.xpath('//p[@class="paywall"]')
             self.para_num = len(self.paras)
-
-            self.anchor_counter = []
-            self.emphas_counter = []
+            self.para_anchors = {}
+            self.para_ems = {}
 
             for i in range(self.para_num):
                 _anchor_text = self.paras[i].xpath('./a[@class="external-link"]/text()')
                 _emphas_text = self.paras[i].xpath('./em/text()')
 
-                self.anchor_counter.append(_anchor_text)
-                self.emphas_counter.append(_emphas_text)
+                # Filter out empty nodes
+                if _anchor_text:
+                    self.para_anchors[i] = _anchor_text
+                if _emphas_text:
+                    self.para_ems[i] = _emphas_text
 
-            return self.anchor_counter, self.emphas_counter
+            return self.para_anchors, self.para_ems
 
 
 if __name__ == '__main__':
@@ -175,5 +177,5 @@ if __name__ == '__main__':
 
     # Get the body paras by creating a body instance
     body = article.Body(html_tree)
-    (anchor_num, emphas_num) = body.get_paras()
-    print(anchor_num, emphas_num)
+    (anchors, ems) = body.get_paras()
+    print(anchors, ems)
