@@ -128,7 +128,7 @@ class Article():
         def __init__(self, tree):
             self.tree = tree
 
-        def get_breakers(self):
+        def get_paras(self):
             """
             Get all breaking points of the paragraphs.
             Such as a tags, em tags and so on.
@@ -142,26 +142,28 @@ class Article():
             # self.para_ems = {}
 
             for i in range(self.para_num):
-                self.paras_text[i] = self.paras_raw[i].xpath('./text()')
+                self.paras_text[str(i)] = self.paras_raw[i].xpath('./text()')
                 _a_or_em_text = self.paras_raw[i].xpath(
                         './a[@class="external-link"]/text() | ./em/text()'
                         )
-                # _emphas_text = self.paras_raw[i].xpath('./em/text()')
 
                 # Filter out empty nodes
                 if _a_or_em_text:
-                    self.para_a_or_em[i] = _a_or_em_text
-                # if _emphas_text:
-                #    self.para_ems[i] = _emphas_text
+                    self.para_a_or_em[str(i)] = _a_or_em_text
 
-            # for para_num, para_fragements in self.paras_text:
-            #    pass
+            for p_num, nodes in self.para_a_or_em.items():
+                # if a paragraph has a or em tags
+                if p_num in self.paras_text:
+                    # concatenate the a/em_text to the text before/after
+                    # the breaking point so paras' number remains the same
+                    for i in range(len(nodes)):
+                        self.paras_text[p_num][i] = self.paras_text[p_num][i] + nodes[i]
 
-            return self.para_a_or_em, self.paras_text
+            # Mark up all the paragraphs
+            for p in self.paras_text:
+                self.paras_text[p] = '<p>' + ''.join(self.paras_text[p]) + '</p>'
 
-        def get_paras(self):
-            self.para_atags, self.para_emtags = self.get_breakers()
-            pass
+            return self.paras_text
 
 
 if __name__ == '__main__':
@@ -192,5 +194,6 @@ if __name__ == '__main__':
 
     # Get the body paras by creating a body instance
     body = article.Body(html_tree)
-    (a_or_em, paras) = body.get_breakers()
-    print(a_or_em, paras)
+    # (a_or_em, paras) = body.get_breakers()
+    paras = body.get_paras()
+    print(paras)
