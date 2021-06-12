@@ -141,10 +141,8 @@ class Article():
                 _anchor_text = self.paras[i].xpath('./a[@class="external-link"]/text()')
                 _emphas_text = self.paras[i].xpath('./em/text()')
 
-                if _anchor_text:
-                    self.anchor_counter.append(_anchor_text)
-                elif _emphas_text:
-                    self.emphas_counter.append(_emphas_text)
+                self.anchor_counter.append(_anchor_text)
+                self.emphas_counter.append(_emphas_text)
 
             return self.anchor_counter, self.emphas_counter
 
