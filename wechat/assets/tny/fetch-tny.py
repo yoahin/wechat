@@ -10,7 +10,7 @@ passed on command line to the script.
 import argparse
 import requests
 import os
-import os.path
+from os.path import abspath, join, exists
 from lxml import html
 
 
@@ -25,12 +25,12 @@ def cmd_arg_parser():
     parser.add_argument('url', help='url of online article to be scrpaed')
 
     args = parser.parse_args()
-    if os.path.exists(args.destination):
-        print(f'Html files will be stored in directory {os.path.abspath(args.destination)}')
+    if exists(args.destination):
+        print(f'Html files will be stored in {abspath(args.destination)}')
     else:
         os.mkdir(args.destination)
         print(f'{args.destination} does not exist yet, creating it ...')
-        print(f'Html files will be stored in directory {args.destination}')
+        print(f'Html files will be stored in {args.destination}')
     return args
 
 
@@ -70,8 +70,8 @@ class Article():
             Headline #1 is the article title.
             """
             self.h1 = self.tree.xpath('//h1[\
-                                        contains(@class, "content-header__row")\
-                                        ]/text()')[0]
+                                    contains(@class, "content-header__row")\
+                                    ]/text()')[0]
             return '<h1>' + self.h1 + '</h1>'
 
         def get_h2(self):
@@ -80,8 +80,8 @@ class Article():
             Headline #2 is the article's subtile.
             """
             self.h2 = self.tree.xpath('//div[\
-                                        contains(@class, "content-header__dek")\
-                                        ]/text()')[0]
+                                    contains(@class, "content-header__dek")\
+                                    ]/text()')[0]
             return '<h2>' + self.h2 + '</h2>'
 
         def get_column(self):
@@ -100,15 +100,15 @@ class Article():
             Byline, for example, By Peter Hessle.
             """
             self.preamble = self.tree.xpath('//span[\
-                                            contains(@class, "byline__preamble")\
-                                            ]/text()')[0]
+                                        contains(@class, "byline__preamble")\
+                                        ]/text()')[0]
             # TNY splits byline name into weird two parts
             self.byline_part1 = self.tree.xpath('//a[\
                                         contains(@class, "byline__name-link")\
                                         ]/text()')[0]
             self.byline_part2 = self.tree.xpath('//span[\
-                                    contains(@class, "link__last-letter-spacing")\
-                                        ]/text()')[0]
+                                contains(@class, "link__last-letter-spacing")\
+                                ]/text()')[0]
             return '<h4>' + self.preamble\
                           + self.byline_part1\
                           + self.byline_part2\
@@ -119,8 +119,8 @@ class Article():
             Ge the publishing date of the article and mark it up with h5.
             """
             self.pubdate = self.tree.xpath('//time[\
-                                contains(@class, "content-header__publish-date")\
-                                ]/text()')[0]
+                            contains(@class, "content-header__publish-date")\
+                            ]/text()')[0]
             return '<h5>' + self.pubdate + '</h5>'
 
         def get_caption(self):
@@ -156,8 +156,7 @@ class Article():
             for i in range(self.para_num):
                 self.paras_text[str(i)] = self.paras_raw[i].xpath('./text()')
                 _a_or_em_text = self.paras_raw[i].xpath(
-                        './a[@class="external-link"]/text() | ./em/text()'
-                        )
+                        './a[@class="external-link"]/text() | ./em/text()')
 
                 # Filter out empty nodes
                 if _a_or_em_text:
@@ -206,7 +205,7 @@ if __name__ == '__main__':
     #print(f'Article caption text is {cap_text}')
     #print(f'Article caption text is {cap_credit}')
 
-    with open(os.path.join(dest, 'header.html'), 'w', encoding='utf-8') as f:
+    with open(join(dest, 'header.html'), 'w', encoding='utf-8') as f:
         f.write(h1+'\n')
         f.write(h2+'\n')
         f.write(column+'\n')
@@ -221,7 +220,7 @@ if __name__ == '__main__':
     body = article.Body(html_tree)
     paras = body.get_paras()
 
-    with open(os.path.join(dest, 'body.html'), 'w', encoding='utf-8') as f:
+    with open(join(dest, 'body.html'), 'w', encoding='utf-8') as f:
         for p in paras:
             f.write(paras[p] + '\n')
 
