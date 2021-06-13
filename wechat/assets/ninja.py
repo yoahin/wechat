@@ -1,29 +1,43 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""
+This script will use base templates under ./templates and 
+children templates in various dirs under ../wechat/*/ to
+create the html files used for wechat posts.
+"""
+
 from jinja2 import Environment, FileSystemLoader
 import argparse
-import os.path
-import os
+from os.path import abspath, basename, join
 
 #TODO
 # [X] pass the article dir as a tempalte folder
 # [X] test if include will work
-parser = argparse.ArgumentParser(description='Generate template html for posts')
+parser = argparse.ArgumentParser(description='Create template htmls for posts')
 
+# read the doc: https://docs.python.org/dev/library/argparse.html#dest
 # 1st arg: article dir where children templates stored
 parser.add_argument('-d', '--article-directory',
+                    metavar='/path/to/article/dir',
                     help='article dir of children templates')
 # 2nd arg: base templates dir
 parser.add_argument('-t', '--templates-directory',
-                    default=os.abspath('./templates'),
-                    help='Templates direcotry (default: ./templates')
+                    metavar='/path/to/templates',
+                    default=abspath('./templates'),
+                    help='Templates direcotry (default: ./templates)')
+# 3rd arg: template part to be posted
+parser.add_argument('-p', '--post-part',
+                    metavar='/path/to/article/part',
+                    default='1.html',
+                    help='The part of article to be posted; (default: 1.html)')
 args = parser.parse_args()
 
-project_dir = '${PROJECTS_HOME}/posts/wechat/'
-article_dir = os.path.join(project_dir, str(argv[1]))
+# abspath is platform independent
+article_dir = abspath(args.article_directory)
+
 # each time article part template will be updated: 1.html, 2.html, 3.html, ... and so on
-article_part = str(argv[2])
+article_part = args.post_part
 
 
 file_loader = FileSystemLoader(
@@ -45,7 +59,7 @@ print(env.list_templates(extensions=["html"]))
     # better to keep templates in the same folder at the same depth
 template = env.get_template(article_part)
 
-output = template.render(title='Tiktok')
+output = template.render(title=f'{basename(article_dir) + article_part}')
 print('output is', output, sep='\n')
 #with open('test.html', 'w', encoding='utf-8') as test:
 #    test.write(output)
