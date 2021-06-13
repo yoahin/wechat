@@ -9,7 +9,7 @@ passed on command line to the script.
 
 import argparse
 import requests
-import os
+from os import mkdir
 from os.path import abspath, join, exists
 from lxml import html
 
@@ -28,7 +28,7 @@ def cmd_arg_parser():
     if exists(args.destination):
         print(f'Html files will be stored in {abspath(args.destination)}')
     else:
-        os.mkdir(args.destination)
+        mkdir(args.destination)
         print(f'{args.destination} does not exist yet, creating it ...')
         print(f'Html files will be stored in {args.destination}')
     return args
@@ -213,8 +213,6 @@ if __name__ == '__main__':
         f.write(publishing_date+'\n')
         f.write(cap_text+'\n')
         f.write(cap_credit+'\n')
-
-
 
     # Get the body paras by creating a body instance
     body = article.Body(html_tree)
