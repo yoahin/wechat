@@ -23,7 +23,14 @@ def cmd_arg_parser():
 
     # 2nd arg: url
     parser.add_argument('url', help='url of online article to be scrpaed')
+
     args = parser.parse_args()
+    if os.path.exists(args.destination):
+        print(f'Html files will be stored in directory {os.path.abspath(args.destination)}')
+    else:
+        os.mkdir(args.destination)
+        print(f'{args.destination} does not exist yet, creating it ...')
+        print(f'Html files will be stored in directory {args.destination}')
     return args
 
 
