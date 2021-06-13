@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from jinja2 import Environment, FileSystemLoader
-from sys import argv
+import argparse
 import os.path
 
 #TODO
