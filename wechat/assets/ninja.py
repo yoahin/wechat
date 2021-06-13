@@ -4,11 +4,23 @@
 from jinja2 import Environment, FileSystemLoader
 import argparse
 import os.path
+import os
 
 #TODO
 # [X] pass the article dir as a tempalte folder
 # [X] test if include will work
-project_dir = '${PROJECTS_HOME}/gitty/wechat/'
+parser = argparse.ArgumentParser(description='Generate template html for posts')
+
+# 1st arg: article dir where children templates stored
+parser.add_argument('-d', '--article-directory',
+                    help='article dir of children templates')
+# 2nd arg: base templates dir
+parser.add_argument('-t', '--templates-directory',
+                    default=os.abspath('./templates'),
+                    help='Templates direcotry (default: ./templates')
+args = parser.parse_args()
+
+project_dir = '${PROJECTS_HOME}/posts/wechat/'
 article_dir = os.path.join(project_dir, str(argv[1]))
 # each time article part template will be updated: 1.html, 2.html, 3.html, ... and so on
 article_part = str(argv[2])
