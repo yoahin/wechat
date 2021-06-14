@@ -24,8 +24,9 @@ parser.add_argument('-d', '--article-directory',
                     help='article dir of children templates; defaults to cwd')
 # 2nd arg: article part to be posted
 parser.add_argument('-p', '--post-part',
-                    metavar='/path/to/article/part',
-                    default=abspath('./1.html'),
+                    nargs=2,
+                    metavar=('/path/to/article/part', 'part number'),
+                    default=(abspath('./1.html'), ''),
                     help='The article part to be posted; (default: ./1.html)')
 # 3rd arg: base template to be used
 parser.add_argument('-b', '--base-template',
@@ -40,7 +41,8 @@ args = parser.parse_args()
 article_dir = abspath(args.article_directory)
 
 # each time article part template will be updated: 1.html, 2.html, 3.html, ...
-article_part = args.post_part
+article_part = args.post_part[0]
+part_num = args.post_part[1]
 
 base_template = args.base_template
 
@@ -67,7 +69,9 @@ print(env.list_templates(extensions=["html"]))
 # i.e. the one that extends the base
 template = env.get_template(basename(article_part))
 
-output = template.render(title=f'{basename(article_dir)}-{basename(article_part)[0:-5]}')
-print('output is', output, sep='\n')
-#with open('test.html', 'w', encoding='utf-8') as test:
-#    test.write(output)
+output = template.render(
+        title=f'{basename(article_dir)}-{basename(article_part)[0:-5]}'
+        )
+#print('output is', output, sep='\n')
+with open(join(article_dir, part_num+'.html'), 'w', encoding='utf-8') as f:
+    f.write(output)
