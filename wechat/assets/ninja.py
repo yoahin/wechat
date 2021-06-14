@@ -26,7 +26,7 @@ parser.add_argument('-d', '--article-directory',
 parser.add_argument('-p', '--post-part',
                     nargs=2,
                     metavar=('/path/to/article/part', 'part number'),
-                    default=(abspath('./1.html'), ''),
+                    default=(abspath('./current.html'), '1'),
                     help='The article part to be posted; (default: ./1.html)')
 # 3rd arg: base template to be used
 parser.add_argument('-b', '--base-template',
@@ -72,6 +72,5 @@ template = env.get_template(basename(article_part))
 output = template.render(
         title=f'{basename(article_dir)}-{basename(article_part)[0:-5]}'
         )
-#print('output is', output, sep='\n')
 with open(join(article_dir, part_num+'.html'), 'w', encoding='utf-8') as f:
     f.write(output)
