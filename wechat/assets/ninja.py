@@ -20,7 +20,8 @@ parser = argparse.ArgumentParser(description='Create template htmls for posts')
 # 1st arg: article dir where children templates stored
 parser.add_argument('-d', '--article-directory',
                     metavar='/path/to/article/dir',
-                    help='article dir of children templates')
+                    default=abspath('.'),
+                    help='article dir of children templates; defaults to cwd')
 # 2nd arg: base templates dir
 parser.add_argument('-t', '--templates-directory',
                     metavar='/path/to/templates',
@@ -29,14 +30,14 @@ parser.add_argument('-t', '--templates-directory',
 # 3rd arg: template part to be posted
 parser.add_argument('-p', '--post-part',
                     metavar='/path/to/article/part',
-                    default='1.html',
-                    help='The part of article to be posted; (default: 1.html)')
+                    default=abspath('./1.html'),
+                    help='The article part to be posted; (default: ./1.html)')
 args = parser.parse_args()
 
 # abspath is platform independent
 article_dir = abspath(args.article_directory)
 
-# each time article part template will be updated: 1.html, 2.html, 3.html, ... and so on
+# each time article part template will be updated: 1.html, 2.html, 3.html, ...
 article_part = args.post_part
 
 
@@ -48,18 +49,18 @@ file_loader = FileSystemLoader(
 env = Environment(loader=file_loader)
 
 print(env.list_templates(extensions=["html"]))
-    #TODO
-    # figure out how this 'parent' argument works
-    # and let the lookup order goes deeper
-    # FileSystemLoader will also load templates in subdirectories
-    # but it recognizes those templates as they are: /path/to/template
-    # if parent='string' given, then it would be string/path/to/template
-    # which in turn leads TemplateNotFound error
+# TODO
+# figure out how this 'parent' argument works
+# and let the lookup order goes deeper
+# FileSystemLoader will also load templates in subdirectories
+# but it recognizes those templates as they are: /path/to/template
+# if parent='string' given, then it would be string/path/to/template
+# which in turn leads to TemplateNotFound error
 
-    # better to keep templates in the same folder at the same depth
-template = env.get_template(article_part)
+# better to keep templates in the same folder at the same depth
+template = env.get_template('new-yorker-base.html')
 
-output = template.render(title=f'{basename(article_dir) + article_part}')
+output = template.render(title=f'{basename(article_dir) + article_part[0:-5]}')
 print('output is', output, sep='\n')
 #with open('test.html', 'w', encoding='utf-8') as test:
 #    test.write(output)
