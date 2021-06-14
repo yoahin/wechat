@@ -22,16 +22,18 @@ parser.add_argument('-d', '--article-directory',
                     metavar='/path/to/article/dir',
                     default=abspath('.'),
                     help='article dir of children templates; defaults to cwd')
-# 2nd arg: base templates dir
-parser.add_argument('-t', '--templates-directory',
-                    metavar='/path/to/templates',
-                    default=abspath('./templates'),
-                    help='Templates direcotry (default: ./templates)')
-# 3rd arg: template part to be posted
+# 2nd arg: article part to be posted
 parser.add_argument('-p', '--post-part',
                     metavar='/path/to/article/part',
                     default=abspath('./1.html'),
                     help='The article part to be posted; (default: ./1.html)')
+# 3rd arg: base template to be used
+parser.add_argument('-b', '--base-template',
+                    metavar='/path/to/base/tempalte',
+                    default='new-yorker-base.html',
+                    help='The base template; (default: new-yorker-base.html)')
+
+# parse all args
 args = parser.parse_args()
 
 # abspath is platform independent
@@ -40,9 +42,12 @@ article_dir = abspath(args.article_directory)
 # each time article part template will be updated: 1.html, 2.html, 3.html, ...
 article_part = args.post_part
 
+base_template = args.base_template
+
 
 file_loader = FileSystemLoader(
-        ['templates/te-templates',
+        ['templates',
+         'templates/te-templates',
          'templates/dict-templates',
          'templates/twitter-templates',
          article_dir])
@@ -57,10 +62,12 @@ print(env.list_templates(extensions=["html"]))
 # if parent='string' given, then it would be string/path/to/template
 # which in turn leads to TemplateNotFound error
 
-# better to keep templates in the same folder at the same depth
-template = env.get_template('new-yorker-base.html')
+# NOTE: template file should be a variable
+# template should be the one you want to get from output
+# i.e. the one that extends the base
+template = env.get_template(basename(article_part))
 
-output = template.render(title=f'{basename(article_dir) + article_part[0:-5]}')
+output = template.render(title=f'{basename(article_dir)}-{basename(article_part)[0:-5]}')
 print('output is', output, sep='\n')
 #with open('test.html', 'w', encoding='utf-8') as test:
 #    test.write(output)
