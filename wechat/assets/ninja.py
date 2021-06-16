@@ -32,16 +32,16 @@ parser.add_argument('-d', '--article-directory',
 # its content along with header, dicts or so will be populated to num.html
 parser.add_argument('-p', '--post-part',
                     nargs=2,
-                    metavar=('NEWS_SOURCE', 'PART_NUMBER'),
+                    metavar=('NEWS_SRC', 'PART_NUM'),
                     default=(basename('.'), '1'),
                     help='The article part to be posted;\
                          NOTE: this option is used to create output file under\
-                         ROOT_DIR/NEWS_SOURCE/ARTICLE_DIR_BASENAME. ROOT_DIR \
+                         ROOT_DIR/NEWS_SRC/ARTICLE_DIR_BASENAME. ROOT_DIR \
                          will always be automatically set to the following:\
-                         $HOME/projects/posts/wechat.  The output file will \
-                         be named based on num given, for example: 2.html \
-                         (i.e.part 2 of an article). NEWS_SOURCE defaults to\
-                         the current directory, PART_NUMBER to 1.')
+                         $HOME/projects/posts/wechat. The output file will \
+                         be named based on PART_NUM given, for example: 2.html\
+                          (i.e.part 2 of an article). NEWS_SRC defaults to\
+                         the basename of current directory, PART_NUM to 1.')
 # 3rd arg: base template to be used
 parser.add_argument('-b', '--base-template',
                     default='new-yorker-base.html',
@@ -51,8 +51,8 @@ parser.add_argument('-b', '--base-template',
 args = parser.parse_args()
 
 # each time article part template will be updated: 1.html, 2.html, 3.html, ...
-article_source = abspath(join('.', args.post_part[0]))
-article_dir = abspath(join('.', article_source, args.article_directory))
+article_source = abspath(join('..', args.post_part[0]))
+article_dir = abspath(join('..', article_source, args.article_directory))
 part_num = args.post_part[1]
 base_template = args.base_template
 
