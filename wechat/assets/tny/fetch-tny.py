@@ -206,9 +206,9 @@ if __name__ == '__main__':
     #print(f'Article caption text is {cap_credit}')
 
     with open(join(dest, 'header.html'), 'w', encoding='utf-8') as f:
+        f.write(column+'\n')
         f.write(h1+'\n')
         f.write(h2+'\n')
-        f.write(column+'\n')
         f.write(byline+'\n')
         f.write(publishing_date+'\n')
         f.write(cap_text+'\n')
