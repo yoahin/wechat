@@ -82,7 +82,7 @@ class Article():
             self.h2 = self.tree.xpath('//div[\
                                     contains(@class, "content-header__dek")\
                                     ]/text()')[0]
-            return '<h2>' + self.h2 + '</h2>'
+            return '<h2 class="sub-title">' + self.h2 + '</h2>'
 
         def get_column(self):
             """
@@ -92,7 +92,7 @@ class Article():
             self.column = self.tree.xpath('//a[\
                                         contains(@class, "rubric__link")\
                                         ]/span[1]/text()')[0]
-            return '<h3>' + self.column.upper() + '</h3>'
+            return '<h3 class="column">' + self.column.upper() + '</h3>'
 
         def get_byline(self):
             """
@@ -109,10 +109,11 @@ class Article():
             self.byline_part2 = self.tree.xpath('//span[\
                                 contains(@class, "link__last-letter-spacing")\
                                 ]/text()')[0]
-            return '<h4>' + self.preamble\
-                          + self.byline_part1\
-                          + self.byline_part2\
-                          + '</h4>'
+            return '<h4 class="author">'\
+                   + self.preamble\
+                   + self.byline_part1\
+                   + self.byline_part2\
+                   + '</h4>'
 
         def get_pubdate(self):
             """
@@ -121,13 +122,13 @@ class Article():
             self.pubdate = self.tree.xpath('//time[\
                             contains(@class, "content-header__publish-date")\
                             ]/text()')[0]
-            return '<h5>' + self.pubdate + '</h5>'
+            return '<h5 class="timestamp">' + self.pubdate + '</h5>'
 
         def get_caption(self):
-            self.caption_text = '<h2 class="cap_text">'\
+            self.caption_text = '<h2 class="caption">'\
                 + self.tree.xpath('//span[contains(@class, "caption__text")]/text()')[0]\
                 + '</h2>'
-            self.caption_credit = '<span class="cap_credit">'\
+            self.caption_credit = '<span class="credit">'\
                 + self.tree.xpath('//span[contains(@class, "caption__credit")]/text()')[0]\
                 + '</span>'
             return self.caption_text, self.caption_credit
