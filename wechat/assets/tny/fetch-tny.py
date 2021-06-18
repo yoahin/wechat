@@ -146,9 +146,8 @@ class Article():
             Get all breaking points of the paragraphs.
             Such as a tags, em tags and so on.
             """
-            # TODO: handle the nested tags such as <a>, <em>.
-            self.first_para = self.tree.xpath('//p[contains(@class, "has-dropcap")]')
-            self.paras_raw = self.first_para + self.tree.xpath('//p[@class="paywall"]')
+            self.first_paras_raw = self.tree.xpath('//p[contains(@class, "has-dropcap")]')
+            self.paras_raw = self.first_paras_raw + self.tree.xpath('//p[@class="paywall"]')
             self.para_num = len(self.paras_raw)
             self.paras_text = {}
             self.para_a_or_em = {}
@@ -224,3 +223,4 @@ if __name__ == '__main__':
             f.write(paras[p] + '\n')
 
     print(paras)
+
