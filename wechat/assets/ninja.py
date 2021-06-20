@@ -17,7 +17,7 @@ from os import makedirs
 # [ ] test if modularized dict templates  will work
 
 parser = argparse.ArgumentParser(
-        description='Create template htmls for wechat posts')
+        description='Create html templates for wechat posts')
 
 # read the doc: https://docs.python.org/dev/library/argparse.html#dest
 # 1st arg: article dir where children templates stored
@@ -51,7 +51,7 @@ parser.add_argument('-p', '--post-part',
 # 3rd arg: base template to be used
 parser.add_argument('-b', '--base-template',
                     default='new-yorker-base.html',
-                    help='The base templata name, without extension.\
+                    help='The base template name, without extension.\
                           Default: new-yorker-base.html')
 
 # parse all args
@@ -66,12 +66,6 @@ article_dir = join(ROOT_DIR, news_source, args.post_part[0])
 if not exists(article_dir):
     makedirs(article_dir)
 part_num = args.post_part[1]
-
-# detect base_template
-if args.base_template == 'new-yorker-base.html':
-    pass
-else:
-    base_template = args.base_template + '.html'
 
 file_loader = FileSystemLoader(
         ['templates',
@@ -97,9 +91,16 @@ print(env.list_templates(extensions=["html"]))
 
 template = env.get_template('current.html')
 
-
-output = template.render(
-        title=f'{args.post_part[0]}-{part_num}',
-        )
+# decide base_template
+if args.base_template == 'new-yorker-base.html':
+    output = template.render(
+            title=f'{args.post_part[0]}-{part_num}',
+            )
+else:
+    base_template = args.base_template + '.html'
+    output = template.render(
+            title=f'{args.post_part[0]}-{part_num}',
+            base=base_template
+            )
 with open(join(article_dir, part_num+'.html'), 'w', encoding='utf-8') as f:
     f.write(output)
