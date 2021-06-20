@@ -11,7 +11,7 @@ from jinja2 import Environment, FileSystemLoader
 import argparse
 from os.path import abspath, basename, join
 
-#TODO
+# TODO
 # [X] pass the article dir as a tempalte folder
 # [X] test if include will work
 
@@ -58,16 +58,16 @@ base_template = args.base_template
 
 file_loader = FileSystemLoader(
         ['templates',
-         'templates/te-templates',
-         'templates/dict-templates',
-         'templates/twitter-templates',
-         article_dir])
+         'templates/economist',
+         'templates/dicts',
+         'templates/twitter',
+         'templates/icons',
+         article_dir
+         ])
 env = Environment(loader=file_loader)
 
 print(env.list_templates(extensions=["html"]))
-# TODO
-# figure out how this 'parent' argument works
-# and let the lookup order goes deeper
+# NOTE
 # FileSystemLoader will also load templates in subdirectories
 # but it recognizes those templates as they are: /path/to/template
 # if parent='string' given, then it would be string/path/to/template
@@ -82,4 +82,3 @@ output = template.render(
         title=f'{args.article_directory}-{part_num}')
 with open(join(article_dir, part_num+'.html'), 'w', encoding='utf-8') as f:
     f.write(output)
-
