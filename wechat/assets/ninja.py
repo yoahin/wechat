@@ -51,7 +51,7 @@ parser.add_argument('-p', '--post-part',
 # 3rd arg: base template to be used
 parser.add_argument('-b', '--base-template',
                     default='new-yorker-base.html',
-                    help='The base template name, without extension.\
+                    help='The base template file name, with extension.\
                           Default: new-yorker-base.html')
 
 # parse all args
@@ -91,16 +91,9 @@ print(env.list_templates(extensions=["html"]))
 
 template = env.get_template('current.html')
 
-# decide base_template
-if args.base_template == 'new-yorker-base.html':
-    output = template.render(
-            title=f'{args.post_part[0]}-{part_num}',
-            )
-else:
-    base_template = args.base_template + '.html'
-    output = template.render(
-            title=f'{args.post_part[0]}-{part_num}',
-            base=base_template
-            )
+output = template.render(
+        title=f'{args.post_part[0]}-{part_num}',
+        base=args.base_template
+        )
 with open(join(article_dir, part_num+'.html'), 'w', encoding='utf-8') as f:
     f.write(output)
