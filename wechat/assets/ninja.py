@@ -12,10 +12,11 @@ import argparse
 from os.path import abspath, basename, join
 
 # TODO
-# [X] pass the article dir as a tempalte folder
-# [X] test if include will work
+# [ ] swap 1st and 2nd args
+# [ ] test if modularized dict templates  will work
 
-parser = argparse.ArgumentParser(description='Create template htmls for posts')
+parser = argparse.ArgumentParser(
+        description='Create template htmls for wechat posts')
 
 # read the doc: https://docs.python.org/dev/library/argparse.html#dest
 # 1st arg: article dir where children templates stored
