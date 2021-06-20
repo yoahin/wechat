@@ -19,3 +19,6 @@ mstch/
 
 # ignore macOS stuff
 .DS_Store
+
+# ignore notes.html file
+notes.html
