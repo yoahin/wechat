@@ -16,3 +16,6 @@ __pycache__/
 
 # ignore github libraries
 mstch/
+
+# ignore macOS stuff
+.DS_Store
