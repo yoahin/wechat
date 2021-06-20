@@ -51,6 +51,11 @@ section p {
   padding-bottom: 0.5em;
 }
 
+small {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
 hr {
   margin: 0.5em 0;
   color: #4C566A;
