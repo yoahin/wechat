@@ -1,12 +1,5 @@
 # ignore img
-img*/
-
-# ignore test
-wechat/test*
-
-wechat/node_modules/
-*.json
-*.js
+img/
 
 # ignore notebook file
 *ipynb*
@@ -20,5 +13,6 @@ mstch/
 # ignore macOS stuff
 .DS_Store
 
-# ignore notes.html file
+# ignore {notes,current}.html file
+current.html
 notes.html
