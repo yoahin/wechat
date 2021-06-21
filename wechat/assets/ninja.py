@@ -75,15 +75,27 @@ file_loader = FileSystemLoader(
          article_dir
          ])
 env = Environment(loader=file_loader)
-
-print(env.list_templates(extensions=["html"]))
+templates = env.list_templates(extensions=["html"])
+print('Templates are as follows: ')
+print(templates)
+print(f'Found {len(templates)} templates in total.')
 # NOTE
 # FileSystemLoader will also load templates in subdirectories
 # but it recognizes those templates as they are: /path/to/template
 
 # NOTE:
-# The final result should be the template that extends/import other
-# templates, rather than the base templates themselves.
+# The final template to be rendered should be the one that extends/includes
+# other templates, rather than the base templates themselves, like the "main"
+# function in C programs. Here it is named "current.html".
+
+# The "current.html" template is placed in the same dir as the parts of an
+# artcile, for example, "New Yorker/involution/current.html".
+
+# It indicates the most recent changes for a specific article and will
+# not be tracked in the git tree, as it is clearly not necessary to do so.
+# Similarly, the "notes.html" under the same dir will not be tracked either.
+# Both will be moved over to the new article's dir once they are done with
+# the current one.
 
 template = env.get_template('current.html')
 
