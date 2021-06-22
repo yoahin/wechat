@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  {% include 'economist/te-styles.html' %}
+  <title>{{ title }}</title>
+</head>
+<body>
+  {% include 'economist/te-header.html' %}
+  {% block content %}{% endblock %}
+  {% include 'body.html' %}
+</body>
+</html>
