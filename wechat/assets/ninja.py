@@ -13,8 +13,8 @@ from os.path import exists, expanduser, join
 from os import makedirs
 
 # TODO
-# [ ] swap 1st and 2nd args
-# [ ] test if modularized dict templates  will work
+# [X] swap 1st and 2nd args
+# [ ] test if modularized dict templates will work
 
 parser = argparse.ArgumentParser(
         description='Create html templates for wechat posts')
@@ -66,12 +66,12 @@ if not exists(article_dir):
     makedirs(article_dir)
 part_num = args.post_part[1]
 
+# NOTE: sub-directories will be counted relatively.
+# For example, templates/economist/te-color.htm' will be recognized as
+# /economist/te-color.html. The template root dir will be stripped.
 file_loader = FileSystemLoader(
         [
-         'templates/economist',
-         'templates/dicts',
-         'templates/twitter',
-         'templates/icons',
+         'templates',
          article_dir
          ])
 env = Environment(loader=file_loader)
