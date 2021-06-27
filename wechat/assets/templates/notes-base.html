@@ -6,25 +6,88 @@
     <link rel="stylesheet" href="../../../style/news.css">
     <link rel="stylesheet" href="../../../style/newyorker/new-yorker.css">
     <link href="../../../style/twitter.css" rel="stylesheet"/>
-    <title>template</title>
+    <title>notes/title>
   </head>
   <body>
-    <!-- New Yorker's Title -->
-<p class="biblio">
-    <span class="column">personal history</span> October 7, 2019 Issue
-</p>
-<p class="sub-title">Memories of my father.</p>
-<p class="timestamp">
-<span class="author">By Haruki Murakami<sup>❉</sup></span><br>
-September 30, 2019<br>
-<!-- Translated, from the Japanese, by Philip Gabriel. -->
-</p>
 
-
-
+{# =================== NOTE ================ #}
 <!-- wikipedia -->
 <!-- wiki no img -->
+{# wiki symbol #}
+{%- set wiki_symbol -%}
 <sup>❉</sup>
+{% endset %}
+
+{# wiki with pure text #}
+{% macro wiki_text(content) %}
+<section class="wiki">
+  <section class="wiki-heading">
+    ❉<span class="wiki-title">
+      WikipediA
+    </span>
+    <p class="wiki-entry">{{ content['entry'] }}</p>
+  </section>
+  
+  <section class="wiki-content">
+    {% for para in content['paras'] %}
+    <p>
+      {{ para }}
+    </p>
+    {% endfor %}
+  </section>
+</section>
+{% endmacro %}
+
+{# wiki with small-img #}
+{% macro wiki_small_img(content) %}
+<section class="wiki">
+  <section class="wiki-heading">
+    ❉<span class="wiki-title">
+      WikipediA
+    </span>
+    <p class="wiki-entry">{{ content['entry'] }}</p>
+  </section>
+  
+  <section class="wiki-content wiki-with-small-img">
+    <figure class="wiki-small-img">
+      <img src="{{ content['img'][0] }}" alt="table1">
+      <figcaption>{{ content['img'][1] }}</figcaption>
+    </figure>
+    {% for para in content['paras'] %}
+    <p>
+      {{ para }}
+    </p>
+    {% endfor %}
+  </section>
+</section>
+{% endmacro %}
+
+{# wiki with large-img #}
+{% macro wiki_large_img(content) %}
+<!-- wiki with large img -->
+<section class="wiki">
+  <section class="wiki-heading">
+    ❉<span class="wiki-title">
+      WikipediA
+    </span>
+    <p class="wiki-entry">content['entry']</p>
+  </section>
+  
+  <section class="wiki-content wiki-with-large-img">
+    {% for para in content['paras'] %}
+    <p>
+      {{ para }}
+    </p>
+    {% endfor %}
+    <figure class="wiki-large-img">
+      <img src="{{ content['img'][0] }}" alt="table1">
+      <figcaption>{{ content['img'][1] }}</figcaption>
+    </figure>
+  </section>
+</section>
+{% endmacro %}
+
+<!-- demo -->
 <section class="wiki">
   <section class="wiki-heading">
     ❉<span class="wiki-title">
@@ -88,9 +151,45 @@ September 30, 2019<br>
 </section>
 
 
+{# =================== NOTE ================ #}
+<!-- note jinja -->
 
-<!-- note -->
+{# murmur symbol #}
+{%- set note_symbol -%}
 <sup style="color: #B48EAD;">㋡</sup>
+{% endset %}
+
+{# note number marks #}
+{% set notemarks = {
+                  '1': '❶', '2': '❷', 
+                  '3': '❸', '4': '❹',
+                  '5': '❺', '6': '❻',
+                  '7': '❼', '8': '❽',
+                  '9': '❾', '0': '⓿',
+                  '10': '❿', '11': '⓫',
+                  '12': '⓬', '13': '⓭'
+                  } 
+%}
+
+
+{% macro murmurs(paras, short=true) %}
+<section class="note">
+  <section class="note-title">
+    <span>㋡Murmurs</span>
+  </section>
+  {% if short %}
+  <section class="note-content note-short">
+  {% else %}
+  <section class="note-content">
+  {% endif -%}
+    {%- for para in paras -%}
+      <p>{{ para }}</p>
+    {%- endfor -%}
+  </section>
+</section>
+{% endmacro %}
+
+<!-- demo -->
 <sup style="color: #B48EAD;">↷</sup>
 <section class="note">
   <section class="note-title">
@@ -105,7 +204,33 @@ September 30, 2019<br>
   </section>
 </section>
 
+{# ================ FOOTNOTE =========== #}
+<!-- footnote jinja -->
+{%- macro ftnum(n) -%}
+<sup style="color: #81A1C1">[{{n}}]</sup>
+{% endmacro %}
+
+{%- macro footnote(urls, start=1, auto=true) -%}
 <!-- footnote -->
+<section class="ft">
+    <span class="ft-title">↸Footnote</span>
+    {% if auto %}
+    <section class="ft-links note-short">
+    {% else %}
+    <section class="ft-links">
+    {% endif %}
+      <ol start="{{start}}">
+        {% for url in urls -%}
+        <li>
+          {{ url }}
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+</section>
+{% endmacro -%}
+
+<!-- demo -->
 see article<sup style="color: #81A1C1">[1]</sup>
 <section class="ft">
     <span class="ft-title">↸Footnote</span>
@@ -130,19 +255,21 @@ see article<sup style="color: #81A1C1">[1]</sup>
     </section>
 </section>
 
+{# ================ CAPTION =========== #}
+{% macro illustration(img, caption) %}
+<figure class="illus">
+  <img src="{{img}}" alt="">
+  <figcaption>{{caption}}</figcaption>
+</figure>
+{% endmacro %}
+
+<!-- demo -->
 <figure class="illus">
   <img src="img/Cooking South of the Clouds.png" alt="">
   <figcaption>Cooking South of the Clouds</figcaption>
 </figure>
 
-
-<sup style="color: #B48EAD;">❶</sup>
-❷ ❸ ❹ ❺ ❻ ❼ ❽ ❾ ❿ ⓿
-
-<span class="small-cap-style"></span>
-
-
-
+{# ================ OTHERS =========== #}
 <sup style="color: #BF616A;">☠</sup>
 <section class="tips">
     <span class="tips-title">⚙Tips</span>
