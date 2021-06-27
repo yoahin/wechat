@@ -80,14 +80,16 @@ ol li {
   padding-top: 0;   
 }
 
+/**
+ * deprecated to make way for 
+ * .highlight class
 
 u {
   text-decoration: none;
-  /* border-bottom: 1pt solid #81A1C1; */
   background-color: #88C0D0;
   border-radius: 0.2em;
-  /* border: none; */
 }
+*/
 
 
 /* ------------------------------------------- */
@@ -285,4 +287,12 @@ u {
   font-style: italic;
   font-weight: 500;
   color: #333;
+}
+
+.highlight {
+  /*display: inline-block;*/
+  /*background: linear-gradient(rgba(255,255,255,0) 32%,#14EB1E 32%);*/
+  background: linear-gradient(rgba(255,255,255,0) 30%,#b3d3f0 30%);
+  /*background: linear-gradient(rgba(255,255,255,0) 30%,#19865c 30%);*/
+  padding: 0 .1em;
 }
