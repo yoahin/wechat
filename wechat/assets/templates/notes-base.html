@@ -1,14 +1,4 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <!-- css -->
-    <link rel="stylesheet" href="../../../style/news.css">
-    <link rel="stylesheet" href="../../../style/newyorker/new-yorker.css">
-    <link href="../../../style/twitter.css" rel="stylesheet"/>
-    <title>notes/title>
-  </head>
-  <body>
+
 
 {# =================== NOTE ================ #}
 <!-- wikipedia -->
@@ -87,69 +77,6 @@
 </section>
 {% endmacro %}
 
-<!-- demo -->
-<section class="wiki">
-  <section class="wiki-heading">
-    ❉<span class="wiki-title">
-      WikipediA
-    </span>
-    <p class="wiki-entry">Wikipedia</p>
-  </section>
-  
-  <section class="wiki-content">
-    <p>
-      Wikipedia is a free online encyclopedia, created and edited by volunteers around the world and hosted by the Wikimedia Foundation. 
-    </p>
-    <p>
-      Wikipedia is a multilingual open-collaborative online encyclopedia created and maintained by a community of volunteer editors using a wiki-based editing system. It is one of the 15 most popular websites as ranked by Alexa, as of August 2020.
-    </p>
-  </section>
-</section>
-
-<!-- wiki with large img -->
-<section class="wiki">
-  <section class="wiki-heading">
-    ❉<span class="wiki-title">
-      WikipediA
-    </span>
-    <p class="wiki-entry">Wikipedia</p>
-  </section>
-  
-  <section class="wiki-content wiki-with-large-img">
-    <p>
-      Wikipedia is a free online encyclopedia, created and edited by volunteers around the world and hosted by the Wikimedia Foundation. 
-    </p>  
-    <figure class="wiki-large-img">
-      <img src="img/table1.png" alt="table1">
-      <figcaption>Nivoce</figcaption>
-    </figure>
-  </section>
-</section>
-
-<!-- wiki with small img -->
-<section class="wiki">
-  <section class="wiki-heading">
-    ❉<span class="wiki-title">
-      WikipediA
-    </span>
-    <p class="wiki-entry">Wikipedia</p>
-  </section>
-  
-  <section class="wiki-content wiki-with-small-img">
-    <figure class="wiki-small-img">
-      <img src="https://mmbiz.qpic.cn/mmbiz_jpg/zj7iaGicBGSDtiaLPBpo91clqjeCg13EQPGlpVribcp3FbWPA2CNd7XCdXYicyPqCWU3lMW4BOPGlEHhV118BSSxsjw/0?wx_fmt=jpeg" alt="table1">
-      <figcaption>Notebook</figcaption>
-    </figure>
-    <p>
-      Wikipedia is a free online encyclopedia, created and edited by volunteers around the world and hosted by the Wikimedia Foundation. 
-    </p> 
-    
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe blanditiis quia nulla vitae atque explicabo, nobis consequatur consectetur quae aliquam recusandae error quidem ipsa id fuga autem vel eos aut.
-    </p>
-  </section>
-</section>
-
 
 {# =================== NOTE ================ #}
 <!-- note jinja -->
@@ -189,20 +116,6 @@
 </section>
 {% endmacro %}
 
-<!-- demo -->
-<sup style="color: #B48EAD;">↷</sup>
-<section class="note">
-  <section class="note-title">
-    <span>㋡Murmurs</span>
-  </section>
-  
-  <section class="note-content">
-    <p>
-      Look up the <b>"in"</b> in any learner's dictionary for more information about such usage. Purus, in mollis nunc sed id semper risus in hendrerit gravida rutrum quisque. Pretium lectus quam id leo in vitae turpis massa sed elementum tempus egestas sed sed risus pretium! In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper? Neque aliquam vestibulum morbi blandit cursus risus, at ultrices mi tempus imperdiet nulla malesuada pellentesque elit eget gravida cum!
-      Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales. Est velit egestas dui, id ornare arcu odio ut sem nulla pharetra diam sit amet nisl suscipit adipiscing.
-    </p>
-  </section>
-</section>
 
 {# ================ FOOTNOTE =========== #}
 <!-- footnote jinja -->
@@ -230,30 +143,6 @@
 </section>
 {% endmacro -%}
 
-<!-- demo -->
-see article<sup style="color: #81A1C1">[1]</sup>
-<section class="ft">
-    <span class="ft-title">↸Footnote</span>
-    <section class="ft-links">
-      <ol>
-        <li>
-          https://www.nytimes.com/2020/04/14/nyregion/new-york-coronavirus-deaths.html
-        </li>
-        <li>
-          https://www.w3schools.com/charsets/ref_emoji.asp
-        </li>
-        <li>
-          https://melpa.org/#/dash
-        </li>
-        <li>
-          http://ergoemacs.org/emacs/emacs_find_replace.html
-        </li>
-        <li>
-          https://docs.python.org/3/tutorial/introduction.html#strings
-        </li>
-      </ol>
-    </section>
-</section>
 
 {# ================ CAPTION =========== #}
 {% macro illustration(img, caption) %}
@@ -262,12 +151,6 @@ see article<sup style="color: #81A1C1">[1]</sup>
   <figcaption>{{caption}}</figcaption>
 </figure>
 {% endmacro %}
-
-<!-- demo -->
-<figure class="illus">
-  <img src="img/Cooking South of the Clouds.png" alt="">
-  <figcaption>Cooking South of the Clouds</figcaption>
-</figure>
 
 {# ================ OTHERS =========== #}
 <sup style="color: #BF616A;">☠</sup>
