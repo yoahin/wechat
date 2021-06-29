@@ -2,7 +2,11 @@
 	box-sizing: border-box;
 }
 
-/* the overall frame */
+/**
+ **************************
+ *** the overall frame ****
+ **************************
+ **/
 .ox-dict-frame {
 /*	display: flex;
 	flex-direction: column;
@@ -23,7 +27,7 @@
 
 /* dict content: overflow */
 .ox-dict-content {
-	height: 220px;
+	height: 260px;
 	overflow-y: scroll;
 	scrollbar-color: #81A1C1;
 	scrollbar-width: thin;
@@ -35,10 +39,14 @@
 **************************
 */
 .ox-entry {
+	margin-top: 1rem;
+	/*border-top: 1px solid black;*/
+}
+.ox-entry-word {
 	display: flex;
 	align-items: baseline; 
-	margin-left: 0.1rem;
-	margin-top: 0.5rem;
+	margin-left: .1rem;
+	margin-top: .5rem;
 }
 
 .ox-headword {
@@ -95,7 +103,7 @@
 
 /*
 **************************
-*********  sense *********
+********* sense **********
 **************************
 */
 .ox-sense {
@@ -131,6 +139,12 @@
 
 .ox-sense-gram {
 	color: #6F6F6F;
+}
+
+.ox-sense-labels {
+	color: #6F6F6F;
+	font-style: italic;
+	font-weight: 400;
 }
 
 .ox-sense-def {
@@ -216,8 +230,8 @@
 }
 
 .ox-extra-heading {
-	padding:0rem 0rem 0.2rem 0.6rem;
-	font-size: 13pt;
+	padding:0rem 0rem 0.2rem 0.2rem;
+	font-size: 11.5pt;
 	font-weight: 600;
 }
 
