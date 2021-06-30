@@ -19,9 +19,10 @@
 h1.h1-special {
     text-transform: uppercase;
     font-family: Optima-Regula, Palatino, Georgia, 'Times New Roman', Times, serif;
-    font-size: 40px;
+    font-size: 32px;
     font-weight: normal;
     text-align: center;
+    line-height: 1.5;
     padding-bottom: .6em;
     margin-bottom: 0;
 }
@@ -29,9 +30,10 @@ h1.h1-special {
 h1.h1-normal {
     text-transform: uppercase;
     font-family: Optima-Regula, Palatino, Georgia, 'Times New Roman', Times, serif;
-    font-size: 40px;
+    font-size: 32px;
     font-weight: bold;
     text-align: left;
+    line-height: 1.2;
     padding-bottom: 0.4em;
 }
 
@@ -128,9 +130,9 @@ img {
 .drop-cap {
     font-family: sans-serif;
     float: left;
-    font-size: 310%;
+    font-size: 340%;
     line-height: 80%;
-    padding-top: 5px;
+    padding-top: 6pt;
 }
 
 .quotes {
