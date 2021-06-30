@@ -1,0 +1,188 @@
+{# {% import %} #}
+{# {% macro oxford_dict(word) %}  #}
+  
+  <!-- entry -->  
+  {% macro oxford_dict(word)%}
+  <section class="ox-entry">
+  	<!-- headword -->
+		<section class="ox-entry-word">
+      <section class="ox-headword">
+        <span>{{ word['entry'] }}</span>
+			</section>
+      <section class="ox-pos">
+        <span>{{ word['pos'] }}</span>
+      </section>
+		</section>
+
+		<!-- pronounciation -->
+		<section class="ox-phonetics">
+			{% include 'icons/dict-ox-phonetic.html' %}
+			<section>
+  			<span>{{ word['pro'] }}</span>  
+			</section>
+		</section>
+
+		<!-- sense  -->
+		<section class="ox-sense">
+			{% if word['sense-num'] %}
+  		<section class="ox-sense-num">
+  			<span>{{ word['sense-num'] }}</span>
+  		</section>
+  		{% endif %}
+
+  		<section class="ox-sense-specs">
+  			<!-- ox-def-gram: to align def and syn sections -->
+  			{# <section class="ox-def-specs"> #}
+  				{% if word['sense-stop'] %}
+  				<!-- optional sensetop -->
+  				<span class="ox-sensetop">
+  						{{ word['sense-stop'] }}
+  				</span>
+  				{% endif %}
+
+  				{% if word['sense-gram'] %}
+  				<!-- optional grammar -->
+  				<span class="ox-sense-gram">
+  						{# noun, adjective, etc  #}
+  						[{{ word['sense-gram'] }}]
+  				</span>
+  				{% endif %}
+
+  				{% if word['sense-labels'] %}
+  				<!-- optional grammar -->
+  				<span class="ox-sense-labels">
+  						{# noun, adjective, etc  #}
+  						{{ word['sense-labels'] }}
+  				</span>
+  				{% endif %}
+
+  				{% if word['sense-cf'] %}
+  				<!-- optional cf -->
+  				<span class="ox-sensecf">
+  						{{ word['sense-cf'] }}
+  				</span>
+  				{% endif %}
+
+  				<span class="ox-sense-def">
+  						{{ word['def'] }}
+  				</span>
+  			{# </section> #}
+  			<!-- optional synonyms -->
+  		</section>
+		</section>
+		
+		{% if word['examples'] %}
+		<!-- exmaples -->
+		<section class="ox-example">
+    	<ul>
+    		{% for example in word['examples'] %}
+    			<li>{{ example }}</li>
+    		{% endfor %}
+    	</ul>
+  	</section>
+  	{% endif %}
+
+		{% if word['topics'] %}
+  	<!-- optional topics section-->
+  	<section class="ox-topics">
+    		<span class="prefix">topics</span>
+    		<span class="topic-name">{{word['topics']['topic']}}</span>
+    		<span class="topic-cefr">{{word['topics']['level']}}</span>
+    </section>
+    {% endif %}
+
+{#
+    <!-- optional wordfinder exmaples -->
+    <section class="ox-extra">
+    	<section class="ox-extra-heading">
+    		<span><span style="color: #F08B6E">▼</span> Wordfinder</span>
+    	</section>
+    	<section class="ox-extra-cont">
+    		<p>
+    		<span style="font-weight: 600; color: #0069B4;">word</span>
+    		<span class="ox-extra-dot">•</span>
+    		</p> 
+    	</section>
+    </section>
+#}
+		{% if word['col'] %}
+    <!-- optional collocation -->
+    <section class="ox-extra">
+    	<section class="ox-extra-heading">
+    		<span><span style="color: #F08B6E">Ⓦ</span> Collocations</span>
+    	</section>
+    	
+    	<section class="ox-extra-cont">
+    		<!-- one section -->
+    		{% if word['col']['tip'] %}
+    			<p>
+    				{{ word['col']['tip'] }}
+    			</p>
+    		{% endif %}
+
+    		{% for type, egs in word['col']['options'].items() %}
+    			{% if type != 'empty' %}
+    				<p class="ox-extra-col-cato">
+    					{{ type }}
+    				</p>
+    				<p style="margin-top: 0; margin-bottom: .5rem">
+    					<span class="ox-extra-dot">•</span><span>{{ egs | join('<span class="ox-extra-dot">•</span>') }}</span>
+    				</p>
+    			{% else %}
+    				<p>
+    					<span class="ox-extra-dot">•</span><span>{{ egs | join('<span class="ox-extra-dot">•</span>') }}</span>
+    				</p>
+    			{% endif %}
+    		{% endfor %}
+    		{# <!-- another section -->
+    		<p class="ox-extra-col-cato">
+    			verb + abuse
+    		</p>
+    		<p style="margin-top: 0; margin-bottom: .5rem">
+    		<span class="ox-extra-dot">•</span>
+    		<span>prevent</span>
+    		<span class="ox-extra-dot">•</span>
+    		<span>stop</span>
+    		</p> #}
+    	</section>
+    </section>
+    {% endif %}
+
+
+
+    {% if word['extra-examples'] %}
+    <!-- optional extra example -->
+    <section class="ox-extra">
+	    <section class="ox-extra-heading">
+	      <span>
+	      	<span style="color: #F08B6E">＋</span> Extra Examples
+	      </span>
+	    </section>
+	    <section class="ox-extra-cont">
+	   {# wechat list suuuuuuuucks! so using p tag #}
+	    	{% for eg in word['extra-examples'] %}
+					<p class="ox-extra-example">
+		    		<span class="ox-extra-dot">•</span> {{ eg }}
+		    	</p>
+	    	{% endfor %}
+	    </section>
+	  </section>
+	  {% endif %}
+
+	  {% if word['origin'] %}
+    <!-- word origin -->
+	  <section class="ox-extra">
+	    <section class="ox-extra-heading">
+	      <span>
+	      	<span style="color: #F08B6E">ⓞ</span> Word Origin
+	      </span>
+	    </section>
+	    <section class="ox-extra-cont">
+	    	<p>
+	      {{ word['origin'] }}
+	    	</p>
+	    </section>
+	  </section>
+	  {% endif %}
+  </section>
+	{% endmacro %}
