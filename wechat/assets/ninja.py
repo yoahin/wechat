@@ -49,7 +49,7 @@ parser.add_argument('-p', '--post-part',
                          passing "cyber 1" will make TITLE_KEYWORD "cyber" and\
                          PART_NUM "1".')
 # 3rd arg: base template to be used
-parser.add_argument('-b', '--base-template',
+parser.add_argument('-t', '--base-template',
                     default='example-base.html',
                     help='The base template file name, with extension.\
                           Default: example-base.html')
