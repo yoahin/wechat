@@ -13,6 +13,7 @@ mstch/
 # ignore macOS stuff
 .DS_Store
 
-# ignore {notes,current}.html file
+# ignore {notes,current,vocab}.html file
 current.html
 notes.html
+vocab.html
