@@ -1,6 +1,4 @@
-
-
-{# =================== NOTE ================ #}
+{# =================== WIKI ================ #}
 <!-- wikipedia -->
 <!-- wiki no img -->
 {# wiki symbol #}
@@ -60,7 +58,7 @@
     ❉<span class="wiki-title">
       WikipediA
     </span>
-    <p class="wiki-entry">content['entry']</p>
+    <p class="wiki-entry">{{ content['entry'] }}</p>
   </section>
   
   <section class="wiki-content wiki-with-large-img">
@@ -86,16 +84,17 @@
 <sup style="color: #B48EAD;">㋡</sup>
 {% endset %}
 
+
 {# note number marks #}
 {% set notemarks = {
-                  '1': '❶', '2': '❷', 
-                  '3': '❸', '4': '❹',
-                  '5': '❺', '6': '❻',
-                  '7': '❼', '8': '❽',
-                  '9': '❾', '0': '⓿',
-                  '10': '❿', '11': '⓫',
-                  '12': '⓬', '13': '⓭'
-                  } 
+  '1': '❶', '2': '❷', 
+  '3': '❸', '4': '❹',
+  '5': '❺', '6': '❻',
+  '7': '❼', '8': '❽',
+  '9': '❾', '0': '⓿',
+  '10': '❿', '11': '⓫',
+  '12': '⓬', '13': '⓭'
+  } 
 %}
 
 
