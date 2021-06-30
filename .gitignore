@@ -17,3 +17,6 @@ mstch/
 current.html
 notes.html
 vocab.html
+
+# ignore deprecated folder
+deprecated/
