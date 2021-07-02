@@ -2,16 +2,12 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	border: 0;
 }
 
-.web-frame {
-	margin: 0 auto;
-}
 
 .web-header {
 	/*border: 1pt red solid;*/
-	height: 28px;
+	height: 40px;
 	padding-left: 3px;
 	padding-right: 2px;
 	margin: 0 auto;
@@ -26,12 +22,12 @@
 .web-header-frame {
 	display: flex;
 	align-items: center;
-	width: 80px;
+	width: 120px;
 }
 
 .web-logo {
 	/* must be 8 px higher than header */
-	height: 36px;
+	height: 48px;
 	padding: 0;
 	margin: 0;
 
@@ -46,18 +42,18 @@
 .web-history {
 	color:  #fff;
 	font-family: Times,serif;
-	font-size: 8px;
+	font-size: 12px;
 	display: flex;
 	line-height: 1;
 	align-items: center;
-	margin: 0 2px 4px 2px;
+	margin: 0 4px 4px 4px;
 	/*max-width: 45px;*/
 
 }
 
 .since1828-text {
 	text-transform: uppercase;
-	margin-right: 2px;
+	margin-right: 4px;
 }
 
 
@@ -65,7 +61,7 @@
  * scrollable webster entry content 
  * */
 .web-entry-content {
- 	max-height: 300px;
+ 	height: 300px;
  	overflow-y: scroll;
  	margin: 10px 0;
  	border: 1px solid cyan;
@@ -73,7 +69,7 @@
 
 .web-headword {
  	font-family: Times, serif;
- 	font-size: 20px;
+ 	font-size: 24px;
  	font-weight: 700;
  	color: #303336;
  	letter-spacing: 1px;
@@ -82,16 +78,16 @@
 
 .web-pos {
  	font-family: Times, serif;
- 	font-size: 13px;
+ 	font-size: 16px;
  	font-weight: 700;
  	letter-spacing: .3px;
  	color: #4a7d95;
 }
 
 .web-pro-frame {
- 	font-size: 8px;
+ 	font-size: 12px;
  	font-family: Helvetica, sans-serif;
- 	margin: 4px 0;
+ 	margin: 10px 0;
  	color: #225f73;
  	padding: 0 4px;
 }
@@ -101,23 +97,41 @@
 }
 
 /**
- * definition 
+ * definition and notes such as 
+ * did you know
  */
 
-.web-def-header {
-	font-size: 9px;
+.web-def-header, 
+.did-you-know-header,
+.web-1s-header {
+	font-size: 16px;
 	font-weight: 600;
  	font-family: sans-serif;
  	color: #265667;
- 	margin: 2px 0;
+ 	margin: 10px 0;
  	padding: 0 4px;
 }
 
-.web-def {
+
+.web-def, 
+.did-you-know-content {
 	font-family: sans-serif;
-	font-size: 9px;
+	font-size: 14px;
 	font-weight: normal;
-	padding: 0 0 0 4px;
+	padding: 0 4px;
 }
 
+.web-1s-content {
+	font-family: sans-serif;
+	font-size: 14px;
+	color: #225f73;
+	font-weight: normal;
+	padding: 0 4px;
+}
 
+.web-example-hr {
+	height: 2px;
+	background-color: #cbe1ea;
+	width: 160px;
+	margin: 15px 4px;
+}
