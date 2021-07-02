@@ -1,0 +1,74 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.web-frame {
+
+}
+
+.web-header {
+	/*border: 1pt red solid;*/
+	height: 28px;
+	padding-left: 3px;
+	padding-right: 2px;
+	margin: 0 auto;
+	background-color: #305f7a;
+}
+
+/**
+ * this frame to contain logo and logo text
+ * so that they will be left adjusted
+ * otherwise they will be centered 
+ **/
+.web-header-frame {
+	display: flex;
+	align-items: center;
+	width: 80px;
+}
+
+.web-logo {
+	/* must be 8 px higher than header */
+	height: 36px;
+	padding: 0;
+	margin: 0;
+
+}
+
+/**
+ * since1828 text and num frame
+ * use margin to lift its position
+ * becasue my version lacks other
+ * 2 elements to automatically align
+ * all items to a higher center point*/
+.web-history {
+	color:  #fff;
+	font-family: Times,serif;
+	font-size: 8px;
+	display: flex;
+	line-height: 1;
+	align-items: center;
+	margin: 0 2px 4px 2px;
+	/*max-width: 45px;*/
+
+}
+
+.since1828-text {
+	text-transform: uppercase;
+	margin-right: 2px;
+}
+
+
+/**
+ * scrollable webster entry content 
+ * */
+ .web-entry-content {
+ 	max-height: 300px;
+ 	overflow-y: scroll;
+ 	margin: 10px 0;
+ 	border: 1px solid cyan;
+ }
+
+ .
