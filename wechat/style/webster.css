@@ -64,26 +64,38 @@
 /**
  * scrollable webster entry content 
  * */
- .web-entry-content {
+.web-entry-content {
  	max-height: 300px;
  	overflow-y: scroll;
  	margin: 10px 0;
  	border: 1px solid cyan;
- }
+}
 
- .web-headword {
+.web-headword {
  	font-family: Times, serif;
  	font-size: 20px;
  	font-weight: 700;
  	color: #303336;
  	letter-spacing: 1px;
  	margin: 0 4px;
- }
+}
 
- .web-pos {
+.web-pos {
  	font-family: Times, serif;
  	font-size: 13px;
- 	font: 700;
+ 	font-weight: 700;
  	letter-spacing: .3px;
  	color: #4a7d95;
- }
+}
+
+.web-pro-frame {
+ 	font-size: 8px;
+ 	font-family: Helvetica, sans-serif;
+ 	margin: 4px 0;
+ 	color: #225f73;
+ 	padding: 0 4px;
+}
+
+.web-audio-icon {
+	vertical-align: middle;
+}
