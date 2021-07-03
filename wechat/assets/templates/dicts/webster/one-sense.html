@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="../../../style/webster.css">
-  <title>webster</title>
-</head>
-<body>
+{% import 'notes.html' as nc %}
 
-	<p>
-		this is for svg brand to work
-	</p>
+{% macro mw_dict(word) %}
 	<!-- Frame for Webster -->
 	<section class="mw-frame">
 		<!-- header, fixed position -->
@@ -22,7 +13,7 @@
 				
 				<section class="mw-history">
 					<span class="since1828-text">since</span>
-					<span class="since1828-num">1812</span>
+					<span class="since1828-num">1828</span>
 				</section>
 			</section>
 		</section>
@@ -132,5 +123,4 @@
 
 		</section>
 	</section>
-</body>
-</html>
+{% endmacro %}
