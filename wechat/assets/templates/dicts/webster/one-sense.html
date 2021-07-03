@@ -23,28 +23,32 @@
 			<!-- headword and pos -->
 			<section class="mw-headword-frame">
 				<span class="mw-headword">
-					peloton
+					{{ word['entry'] }}
 				</span>
 				<span class="mw-pos">
-					noun
+					{{ word['pos'] }}
 				</span>
 			</section>
 
 			<!-- pronounciation  -->
-			<section class="mw-pro-frame">
+      <section class="mw-pro-frame">
+        {% if word['syllables'] %}
 				<span class="mw-syllables">
-						pel·&ZeroWidthSpace;o·&ZeroWidthSpace;ton
+					{{ word['syllables'] }}
 				</span>
 				<span class="mw-pro-style-break">|</span>
+        {% endif %}
 				<span class="mw-pro-first-slash">\</span>
 				<span class="mw-pro">
-						 ˌpe-lə-ˈtän
+						 {{ word['pro'] }}
 				</span>
 				<span class="mw-audio-icon">
 				{% include 'icons/mw-audio.html' %}
 				</span>
+        {% if word['pro2'] }}
 				<span class="mw-pro-punct">,</span>
 				<span class="mw-pro"> ˈpe-lə-ˌtän</span>
+        {% endif %}
 				<span class="mw-pro-last-slash">\</span>
 			</section>
 
@@ -52,11 +56,11 @@
 			<section class="mw-def-frame">
 				<p class="mw-def-header">
 					Definition of
-					<em>peloton</em>
+					<em>{{ word['entry'] }}</em>
 				</p>
 				<p class="mw-def">
 						<strong>:</strong>
-					the main body of riders in a bicycle race
+					{{ word['def'] }}
 				</p>
 			</section>
 
@@ -64,29 +68,27 @@
 			<section class="mw-example-fram">
 				<section class="mw-example-1s">
 					<p class="mw-1s-header">
-						Examples of <em>peloton</em> in a Sentence
+						Examples of <em>{{ word['entry'] }}</em> in a Sentence
 					</p>
 					<p class="mw-1s-content">
-						<strong>//</strong> He broke away from the <em>peloton</em> and sprinted into the lead.
+						<strong>//</strong> {{ word['example-1s'] }}
 					</p>
+          {% if word['recent'] %}
 					<!-- separate two example sections -->
 					<section class="mw-example-hr">
 					</section>
 					<p class="mw-recent-example-header">
 						Recent Examples on the Web
 					</p>
+          {% for example in word['recent'] %}
 					<p class="mw-recent-example-content">
-						<strong>//</strong> On Tuesday, during stage four, the <em>peloton</em> halted the race for about a minute in a silent protest for safer racing conditions.
+						<strong>//</strong> {{ example['sentence'] }}
 					</p>
 					<p class="mw-recent-example-source">
-						— Pierre Bairin And Lorraine Poupon, <em>CNN</em>, 30 June 2021
+						— {{ example['source'] }}
 					</p>
-					<p class="mw-recent-example-content">
-						<strong>//</strong> On Tuesday, during stage four, the <em>peloton</em> halted the race for about a minute in a silent protest for safer racing conditions.
-					</p>
-					<p class="mw-recent-example-source">
-						— Ryan Gaydos, <em>Fox News</em>, 28 June 2021
-					</p>
+          {% endfor %}
+          {% endif %}
 				</section>
 			</section>
 
@@ -95,28 +97,28 @@
 				<p class="did-you-know-header">
 					Did you know?
 				</p>
-					<p class="did-you-know-content">
-					If you have ever watched the Tour de France on television, you have seen the peloton, the brightly colored pack of riders making up the central group. You may have also gained some inadvertent insight into the word itself, which as you may have guessed is French in origin. In French, "peloton" literally means "ball," but it is most often used with the meaning "group." It's frequently used in the bicycling context, just as in English, but it can also refer to a group in a marathon or other sporting event. French <em>peloton</em> can also mean "squad" or "platoon," and since we've told you that you probably won’t be too surprised to learn that it is also the source of our word <em>platoon</em>.
+				<p class="did-you-know-content">
+				{{ word['did-you-know'] }}	
 				</p>
 			</section>
 
 			<!-- first use -->
 			<section class="mw-1st-use">
 				<p class="mw-1st-use-header">
-					First Known Use of <em>peloton</em>
+					First Known Use of <em>{{ word['entry'] }}</em>
 				</p>
 				<p class="mw-1st-use-content">
-					1951, in the meaning defined above
+					{{ word['1st-use'] }}
 				</p>
 			</section>
 
 			<!-- etymology -->
 			<section class="mw-etymology">
 				<p class="mw-etymology-header">
-					History and Etymology for <em>peloton</em>
+					History and Etymology for <em>{{ word['entry'] }}</em>
 				</p>
 				<p class="mw-etymology-content">
-					French, literally, ball — more at <span class="mw-root">platoon</span>
+					{{ word['etymology'] }}
 				</p>
 			</section>
 
