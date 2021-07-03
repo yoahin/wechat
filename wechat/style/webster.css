@@ -5,7 +5,7 @@
 }
 
 
-.web-header {
+.mw-header {
 	/*border: 1pt red solid;*/
 	height: 50px;
 	padding-left: 12px;
@@ -19,13 +19,13 @@
  * so that they will be left adjusted
  * otherwise they will be centered 
  **/
-.web-header-frame {
+.mw-header-frame {
 	display: flex;
 	align-items: center;
 	width: 140px;
 }
 
-.web-logo {
+.mw-logo {
 	/* must be 8 px higher than header */
 	height: 58px;
 	background-color: transparent;
@@ -40,7 +40,7 @@
  * becasue my version lacks other
  * 2 elements to automatically align
  * all items to a higher center point*/
-.web-history {
+.mw-history {
 	color:  #fff;
 	font-family: Times,serif;
 	font-size: 14px;
@@ -61,13 +61,13 @@
 /**
  * scrollable webster entry content 
  * */
-.web-entry-content {
+.mw-entry-content {
  	height: 300px;
  	overflow-y: scroll;
  	margin: 10px 0;
 }
 
-.web-headword {
+.mw-headword {
  	font-family: Times, serif;
  	font-size: 24px;
  	font-weight: 700;
@@ -76,7 +76,7 @@
  	margin: 0 4px;
 }
 
-.web-pos {
+.mw-pos {
  	font-family: Times, serif;
  	font-size: 18px;
  	font-weight: 700;
@@ -84,7 +84,7 @@
  	color: #4a7d95;
 }
 
-.web-pro-frame {
+.mw-pro-frame {
  	font-size: 14px;
  	font-family: Helvetica, sans-serif;
  	margin: 10px 0;
@@ -92,7 +92,7 @@
  	padding: 0 4px;
 }
 
-.web-audio-icon {
+.mw-audio-icon {
 	vertical-align: middle;
 }
 
@@ -101,11 +101,11 @@
  * did you know
  */
 
-.web-def-header, 
+.mw-def-header, 
 .did-you-know-header,
-.web-1s-header,
-.web-1st-use-header,
-.web-etymology-header {
+.mw-1s-header,
+.mw-1st-use-header,
+.mw-etymology-header {
 	font-size: 16px;
 	font-weight: 600;
  	font-family: sans-serif;
@@ -115,10 +115,10 @@
 }
 
 
-.web-def, 
+.mw-def, 
 .did-you-know-content,
-.web-1st-use-content,
-.web-etymology-content {
+.mw-1st-use-content,
+.mw-etymology-content {
 	font-family: sans-serif;
 	font-size: 14px;
 	font-weight: 400;
@@ -128,8 +128,8 @@
 	letter-spacing: .2px;
 }
 
-.web-1s-content,
-.web-recent-example-content {
+.mw-1s-content,
+.mw-recent-example-content {
 	font-family: sans-serif;
 	font-size: 14px;
 	color: #225f73;
@@ -139,14 +139,14 @@
 	line-height: 18px;
 }
 
-.web-example-hr {
+.mw-example-hr {
 	height: 2px;
 	background-color: #cbe1ea;
 	width: 160px;
 	margin: 30px 4px;
 }
 
-.web-recent-example-header {
+.mw-recent-example-header {
 	font-size: 14px;
 	font-weight: 600;
  	font-family: sans-serif;
@@ -155,7 +155,7 @@
  	padding: 0 4px;
 }
 
-.web-recent-example-source {
+.mw-recent-example-source {
 	color: #525a5b;
 	font-family: sans-serif;
 	font-size: 13px;
@@ -163,7 +163,7 @@
 	line-height: 18px;
 }
 
-.web-root {
+.mw-root {
 	display: inline-block;
 	color: #265667;
 	text-transform: uppercase;
