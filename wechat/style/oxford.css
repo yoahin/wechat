@@ -7,7 +7,7 @@
  *** the overall frame ****
  **************************
  **/
-.ox-dict-frame {
+.oald-dict-frame {
 /*	display: flex;
 	flex-direction: column;
 	align-items: stretch;*/
@@ -18,7 +18,7 @@
 }
 
 /* dict name */
-.ox-dict-band {
+.oald-dict-band {
 	background-color: #01356F;
 	color: #FFF;
 	padding: 0.3rem;
@@ -26,7 +26,7 @@
 }
 
 /* dict content: overflow */
-.ox-dict-content {
+.oald-dict-content {
 	height: 260px;
 	overflow-y: scroll;
 	scrollbar-color: #81A1C1;
@@ -38,18 +38,18 @@
 ******** headword ********
 **************************
 */
-.ox-entry {
+.oald-entry {
 	margin-top: 1rem;
 	/*border-top: 1px solid black;*/
 }
-.ox-entry-word {
+.oald-entry-word {
 	display: flex;
 	align-items: baseline; 
 	margin-left: .1rem;
 	margin-top: .5rem;
 }
 
-.ox-headword {
+.oald-headword {
 	font-family: sans-serif;
 	font-weight: 600;
 	font-size: 18pt;
@@ -57,7 +57,7 @@
 	line-height: 2rem;
 }
 
-.ox-pos {
+.oald-pos {
 	font-family: sans-serif;
 	font-size: 9.5pt;
 	font-weight: 400;
@@ -70,7 +70,7 @@
 ******** level svg *******
 **************************
 */
-.ox-level {
+.oald-level {
 	margin: .3rem 0rem;
 }
 
@@ -80,7 +80,7 @@
 ******* pronounce ********
 **************************
 */
-.ox-phonetics {
+.oald-phonetics {
 	display: flex;
 	align-items: center;
 	font-size: 11pt;
@@ -95,7 +95,7 @@
 	align-items: center;
 }
 
-.ox-phon {
+.oald-phon {
 	margin-left: 2px;
 	letter-spacing: 1px;
 }
@@ -106,7 +106,7 @@
 ********* sense **********
 **************************
 */
-.ox-sense {
+.oald-sense {
 	display: flex;
 	align-items: flex-start;
 	font-family: sans-serif;
@@ -114,11 +114,11 @@
 	margin-top: .4rem;
 }
 
-.ox-sense-specs {
+.oald-sense-specs {
 	line-height: 1.2;
 }
 
-.ox-sense-num {
+.oald-sense-num {
 	font-size: .8rem;
 	background-color: #8F0610;
 	background-color: #E51059;
@@ -132,27 +132,27 @@
 	border-radius: 50%;
 }
 
-.ox-sensetop {
+.oald-sensetop {
 	font-weight: 600;
 	color: #1A3561;
 }
 
-.ox-sensecf {
+.oald-sensecf {
 	font-weight: 600;
 	color: #333333;
 }
 
-.ox-sense-gram {
+.oald-sense-gram {
 	color: #6F6F6F;
 }
 
-.ox-sense-labels {
+.oald-sense-labels {
 	color: #6F6F6F;
 	font-style: italic;
 	font-weight: 400;
 }
 
-.ox-sense-def {
+.oald-sense-def {
 	line-height: 1.3;
 }
 
@@ -162,16 +162,16 @@
 ******** see also ********
 **************************
 */
-.ox-synonym {
+.oald-synonym {
 	margin: 0.5rem 0rem;
 }
 
-.ox-synonym small {
+.oald-synonym small {
 	font-family: sans-serif;
 	text-transform: uppercase;
 }
 
-.ox-synonym span {
+.oald-synonym span {
 	font-family: sans-serif;
 	font-weight: 600;
 	color: #0069B4;
@@ -182,7 +182,7 @@
 ********* example ********
 **************************
 */
-.ox-example {
+.oald-example {
 	font-style: italic;
 	font-family: sans-serif;
 	font-size: 14px;
@@ -194,7 +194,7 @@
 	margin: .5rem 0;
 }
 
-.ox-topics {
+.oald-topics {
 	margin: .5rem .1rem;
 	font-family: sans-serif;
 	line-height: 1.5;
@@ -224,7 +224,7 @@
 
 
 
-.ox-extra {
+.oald-extra {
 	border-left: .2rem solid #F08B6E;
 	background-color: #FADED7;
 	padding: .3rem 0 0 0;
@@ -234,34 +234,34 @@
 	line-height: 1.3;
 }
 
-.ox-extra-heading {
+.oald-extra-heading {
 	padding:0 0 0.2rem .3rem;
 	margin-left: 0;
 	font-size: 11.5pt;
 	font-weight: 600;
 }
 
-.ox-extra-cont {
+.oald-extra-cont {
 	margin: 0;
 	background-color: #FDF3F0;
 	padding: .2rem 0 .2rem .5rem;
 }
 
-.ox-extra-example {
+.oald-extra-example {
 	padding: 0;
 	margin: 0.1rem;
 	font-style: italic;
 	font-family: sans-serif;
 }
 
-.ox-extra-cont p {
+.oald-extra-cont p {
 	font-family: inherit;
 	padding: 0 0;
 	font-size: 11pt;
 	margin: 0;
 }
 
-.ox-extra-dot {
+.oald-extra-dot {
 	color: #6F6F6F; 
 	padding: 0 .25rem; 
 	font-weight: 600; 
@@ -269,13 +269,13 @@
 	font-size: 18px;
 }
 
-.ox-extra-col-cato {
+.oald-extra-col-cato {
    font-weight: 600; 
    margin-bottom: .1rem; 
    font-size: 16px; 
 }
 
-.ox-extra-cont ul {
+.oald-extra-cont ul {
 	margin-left: 0;
 	padding-left: 0;
 	margin-top: .5rem;
