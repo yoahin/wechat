@@ -14,7 +14,7 @@ from os import makedirs
 
 # TODO
 # [X] swap 1st and 2nd args
-# [ ] test if modularized dict templates will work
+# [X] test if modularized dict templates will work
 
 parser = argparse.ArgumentParser(
         description='Create html templates for wechat posts')
@@ -75,7 +75,7 @@ file_loader = FileSystemLoader(
          article_dir
          ])
 env = Environment(loader=file_loader)
-templates = env.list_templates(extensions=["html"])
+templates = env.list_templates(extensions=['html', 'j2'])
 print('Templates are as follows: ')
 print(templates)
 print(f'Found {len(templates)} templates in total.')
@@ -97,7 +97,7 @@ print(f'Found {len(templates)} templates in total.')
 # Both will be moved over to the new article's dir once they are done with
 # the current one.
 
-template = env.get_template('current.html')
+template = env.get_template('current.j2')
 
 output = template.render(
         title=f'{args.post_part[0]}-{part_num}',
