@@ -1,14 +1,12 @@
-{# {% import %} #}
-{# {% macro oxford_dict(word) %}  #}
-  
+{# OALD word entry macro #}
   <!-- entry -->  
-  {% macro oxford_dict(word)%}
+  {% macro oald(word)%}
   <section class="oald-entry">
   	<!-- headword -->
-		<section class="oald-entry-word">
+     <section class="oald-entry-word">
       <section class="oald-headword">
         <span>{{ word['entry'] }}</span>
-			</section>
+      </section>
       <section class="oald-pos">
         <span>{{ word['pos'] }}</span>
       </section>
