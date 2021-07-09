@@ -3,46 +3,46 @@
   
   <!-- entry -->  
   {% macro oxford_dict(word)%}
-  <section class="ox-entry">
+  <section class="oald-entry">
   	<!-- headword -->
-		<section class="ox-entry-word">
-      <section class="ox-headword">
+		<section class="oald-entry-word">
+      <section class="oald-headword">
         <span>{{ word['entry'] }}</span>
 			</section>
-      <section class="ox-pos">
+      <section class="oald-pos">
         <span>{{ word['pos'] }}</span>
       </section>
 		</section>
 
 		<!-- pronounciation -->
-		<section class="ox-phonetics">
-			{% include 'icons/dict-ox-phonetic.html' %}
+		<section class="oald-phonetics">
+			{% include 'icons/dict-oald-phonetic.html' %}
 			<section>
   			<span>{{ word['pro'] }}</span>  
 			</section>
 		</section>
 
 		<!-- sense  -->
-		<section class="ox-sense">
+		<section class="oald-sense">
 			{% if word['sense-num'] %}
-  		<section class="ox-sense-num">
+  		<section class="oald-sense-num">
   			<span>{{ word['sense-num'] }}</span>
   		</section>
   		{% endif %}
 
-  		<section class="ox-sense-specs">
-  			<!-- ox-def-gram: to align def and syn sections -->
-  			{# <section class="ox-def-specs"> #}
+  		<section class="oald-sense-specs">
+  			<!-- oald-def-gram: to align def and syn sections -->
+  			{# <section class="oald-def-specs"> #}
   				{% if word['sense-stop'] %}
   				<!-- optional sensetop -->
-  				<span class="ox-sensetop">
+  				<span class="oald-sensetop">
   						{{ word['sense-stop'] }}
   				</span>
   				{% endif %}
 
   				{% if word['sense-gram'] %}
   				<!-- optional grammar -->
-  				<span class="ox-sense-gram">
+  				<span class="oald-sense-gram">
   						{# noun, adjective, etc  #}
   						[{{ word['sense-gram'] }}]
   				</span>
@@ -50,7 +50,7 @@
 
   				{% if word['sense-labels'] %}
   				<!-- optional grammar -->
-  				<span class="ox-sense-labels">
+  				<span class="oald-sense-labels">
   						{# noun, adjective, etc  #}
   						{{ word['sense-labels'] }}
   				</span>
@@ -58,12 +58,12 @@
 
   				{% if word['sense-cf'] %}
   				<!-- optional cf -->
-  				<span class="ox-sensecf">
+  				<span class="oald-sensecf">
   						{{ word['sense-cf'] }}
   				</span>
   				{% endif %}
 
-  				<span class="ox-sense-def">
+  				<span class="oald-sense-def">
   						{{ word['def'] }}
   				</span>
   			{# </section> #}
@@ -73,7 +73,7 @@
 		
 		{% if word['examples'] %}
 		<!-- exmaples -->
-		<section class="ox-example">
+		<section class="oald-example">
     	<ul>
     		{% for example in word['examples'] %}
     			<li>{{ example }}</li>
@@ -84,7 +84,7 @@
 
 		{% if word['topics'] %}
   	<!-- optional topics section-->
-  	<section class="ox-topics">
+  	<section class="oald-topics">
     		<span class="prefix">topics</span>
     		<span class="topic-name">{{word['topics']['topic']}}</span>
     		<span class="topic-cefr">{{word['topics']['level']}}</span>
@@ -93,26 +93,26 @@
 
 {#
     <!-- optional wordfinder exmaples -->
-    <section class="ox-extra">
-    	<section class="ox-extra-heading">
+    <section class="oald-extra">
+    	<section class="oald-extra-heading">
     		<span><span style="color: #F08B6E">▼</span> Wordfinder</span>
     	</section>
-    	<section class="ox-extra-cont">
+    	<section class="oald-extra-cont">
     		<p>
     		<span style="font-weight: 600; color: #0069B4;">word</span>
-    		<span class="ox-extra-dot">•</span>
+    		<span class="oald-extra-dot">•</span>
     		</p> 
     	</section>
     </section>
 #}
 		{% if word['col'] %}
     <!-- optional collocation -->
-    <section class="ox-extra">
-    	<section class="ox-extra-heading">
+    <section class="oald-extra">
+    	<section class="oald-extra-heading">
     		<span><span style="color: #F08B6E">Ⓦ</span> Collocations</span>
     	</section>
     	
-    	<section class="ox-extra-cont">
+    	<section class="oald-extra-cont">
     		<!-- one section -->
     		{% if word['col']['tip'] %}
     			<p>
@@ -122,26 +122,26 @@
 
     		{% for type, egs in word['col']['options'].items() %}
     			{% if type != 'empty' %}
-    				<p class="ox-extra-col-cato">
+    				<p class="oald-extra-col-cato">
     					{{ type }}
     				</p>
     				<p style="margin-top: 0; margin-bottom: .5rem">
-    					<span class="ox-extra-dot">•</span><span>{{ egs | join('<span class="ox-extra-dot">•</span>') }}</span>
+    					<span class="oald-extra-dot">•</span><span>{{ egs | join('<span class="oald-extra-dot">•</span>') }}</span>
     				</p>
     			{% else %}
     				<p>
-    					<span class="ox-extra-dot">•</span><span>{{ egs | join('<span class="ox-extra-dot">•</span>') }}</span>
+    					<span class="oald-extra-dot">•</span><span>{{ egs | join('<span class="oald-extra-dot">•</span>') }}</span>
     				</p>
     			{% endif %}
     		{% endfor %}
     		{# <!-- another section -->
-    		<p class="ox-extra-col-cato">
+    		<p class="oald-extra-col-cato">
     			verb + abuse
     		</p>
     		<p style="margin-top: 0; margin-bottom: .5rem">
-    		<span class="ox-extra-dot">•</span>
+    		<span class="oald-extra-dot">•</span>
     		<span>prevent</span>
-    		<span class="ox-extra-dot">•</span>
+    		<span class="oald-extra-dot">•</span>
     		<span>stop</span>
     		</p> #}
     	</section>
@@ -152,17 +152,17 @@
 
     {% if word['extra-examples'] %}
     <!-- optional extra example -->
-    <section class="ox-extra">
-	    <section class="ox-extra-heading">
+    <section class="oald-extra">
+	    <section class="oald-extra-heading">
 	      <span>
 	      	<span style="color: #F08B6E">＋</span> Extra Examples
 	      </span>
 	    </section>
-	    <section class="ox-extra-cont">
+	    <section class="oald-extra-cont">
 	   {# wechat list suuuuuuuucks! so using p tag #}
 	    	{% for eg in word['extra-examples'] %}
-					<p class="ox-extra-example">
-		    		<span class="ox-extra-dot">•</span> {{ eg }}
+					<p class="oald-extra-example">
+		    		<span class="oald-extra-dot">•</span> {{ eg }}
 		    	</p>
 	    	{% endfor %}
 	    </section>
@@ -171,13 +171,13 @@
 
 	  {% if word['origin'] %}
     <!-- word origin -->
-	  <section class="ox-extra">
-	    <section class="ox-extra-heading">
+	  <section class="oald-extra">
+	    <section class="oald-extra-heading">
 	      <span>
 	      	<span style="color: #F08B6E">ⓞ</span> Word Origin
 	      </span>
 	    </section>
-	    <section class="ox-extra-cont">
+	    <section class="oald-extra-cont">
 	    	<p>
 	      {{ word['origin'] }}
 	    	</p>
