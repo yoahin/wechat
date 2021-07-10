@@ -84,7 +84,8 @@
  	color: #4a7d95;
 }
 
-.mw-pro-frame {
+.mw-pro-frame,
+.mw-morphs-frame {
  	font-size: 14px;
  	font-family: Helvetica, sans-serif;
  	margin: 10px 0;
@@ -94,6 +95,11 @@
 
 .mw-audio-icon {
 	vertical-align: middle;
+}
+
+.mw-morph {
+  font-family: sans-serif;
+  font-weight: 700;
 }
 
 /**
