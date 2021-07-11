@@ -1,128 +1,90 @@
-{% import 'notes.html' as nc %}
+{#
+Dict marcro for mw words.
+No need to prepare for mutil-senses words because
+only the relevant one sense will be used. 
+#}
+{#
+Word data structure:
+word = {
+'entry': 'word',
+'pos': 'pos',
+'pro': 'pro',
+'def': 'definition',
+'example-1s': 'example-1s',
+'recent': [
+{'sentence': '', 'source': ''},
+],
+'did-you-know': '',
+'1st-use': '',
+'etymology': ''
+}
+#}
 
 {% macro mw_dict(word) %}
-	<!-- Frame for Webster -->
-	<section class="mw-frame">
-		<!-- header, fixed position -->
-		<section class="mw-header">
-			<!-- header frame to hold brand -->
-			<section class="mw-header-frame">
-				<section class="mw-logo">
-          {% include 'icons/dict-mw-brand.html' %}
-				</section>
-				
-				<section class="mw-history">
-					<span class="since1828-text">since</span>
-					<span class="since1828-num">1828</span>
-				</section>
-			</section>
-		</section>
+  <!-- Frame for Webster -->
+  <section class="mw-frame">
+  
+    <!-- header, fixed position -->
+    <section class="mw-header">
+      {% include 'dicts/webster/header.j2' %}
+    </section>
 
-		<!-- content; scrollable  -->
-		<section class="mw-entry-content">
-			<!-- headword and pos -->
-			<section class="mw-headword-frame">
-				<span class="mw-headword">
-					{{ word['entry'] }}
-				</span>
-				<span class="mw-pos">
-					{{ word['pos'] }}
-				</span>
-			</section>
-
-			<!-- pronounciation  -->
+    <!-- content; scrollable  -->
+	  <section class="mw-entry-content">
+    
+		  <!-- headword and pos -->  
+		  {% include 'dicts/webster/headword.j2' %}
+    
+		  <!-- pronounciation  -->
       <section class="mw-pro-frame">
-        {% if word['syllables'] %}
-				<span class="mw-syllables">
-					{{ word['syllables'] }}
-				</span>
-				<span class="mw-pro-style-break">|</span>
+        {% include 'dicts/webster/pron.j2' %}
+      </section>
+
+      {# morphs and their pronounciations #}
+      {% if word['morphs'] %}
+        {% include 'dicts/webster/morphs.j2' %}
+      {% endif %}
+
+      <!-- webster definition -->
+		  <section class="mw-def-frame">
+        <p class="mw-def-header">
+          Definition of
+          <em>{{ word['entry'] }}</em>
+        </p>
+
+        <!-- grammar for the entry -->
+        {% if word['grammar'] %}
+          {% include 'dicts/webster/grammar.j2' %}
         {% endif %}
-				<span class="mw-pro-first-slash">\</span>
-				<span class="mw-pro">
-						 {{ word['pro'] }}
-				</span>
-				<span class="mw-audio-icon">
-				{% include 'icons/mw-audio.html' %}
-				</span>
-        {% if word['pro2'] }}
-				<span class="mw-pro-punct">,</span>
-				<span class="mw-pro"> ˈpe-lə-ˌtän</span>
-        {% endif %}
-				<span class="mw-pro-last-slash">\</span>
-			</section>
 
-			<!-- webster definition -->
-			<section class="mw-def-frame">
-				<p class="mw-def-header">
-					Definition of
-					<em>{{ word['entry'] }}</em>
-				</p>
-				<p class="mw-def">
-						<strong>:</strong>
-					{{ word['def'] }}
-				</p>
-			</section>
+        <!-- def block; details in template -->
+        {% include 'dicts/webster/def.j2' %} 
+      </section>
 
-			<!-- example -->
-			<section class="mw-example-fram">
-				<section class="mw-example-1s">
-					<p class="mw-1s-header">
-						Examples of <em>{{ word['entry'] }}</em> in a Sentence
-					</p>
-					<p class="mw-1s-content">
-						<strong>//</strong> {{ word['example-1s'] }}
-					</p>
-          {% if word['recent'] %}
-					<!-- separate two example sections -->
-					<section class="mw-example-hr">
-					</section>
-					<p class="mw-recent-example-header">
-						Recent Examples on the Web
-					</p>
-          {% for example in word['recent'] %}
-					<p class="mw-recent-example-content">
-						<strong>//</strong> {{ example['sentence'] }}
-					</p>
-					<p class="mw-recent-example-source">
-						— {{ example['source'] }}
-					</p>
-          {% endfor %}
-          {% endif %}
-				</section>
-			</section>
+		  <!-- example -->
+		  <section class="mw-example-fram">
+        {% include 'dicts/webster/examples.j2' %}
+      </section>
 
-			<!-- did you know -->
-			<section class="did-you-know">
-				<p class="did-you-know-header">
-					Did you know?
-				</p>
-				<p class="did-you-know-content">
-				{{ word['did-you-know'] }}	
-				</p>
-			</section>
+      <!-- did you know; optional -->
+      {% if word['did-you-know'] %}
+        {% include 'dicts/webster/didyouknow.j2' %}
+      {% endif %}
 
-			<!-- first use -->
-			<section class="mw-1st-use">
-				<p class="mw-1st-use-header">
-					First Known Use of <em>{{ word['entry'] }}</em>
-				</p>
-				<p class="mw-1st-use-content">
-					{{ word['1st-use'] }}
-				</p>
-			</section>
+		  <!-- first use -->
+		  <section class="mw-1st-use">
+			  <p class="mw-1st-use-header">
+				  First Known Use of <em>{{ word['entry'] }}</em>
+			  </p>
+			  <p class="mw-1st-use-content">
+				  {{ word['1st-use'] }}
+			  </p>
+		  </section>
 
-			<!-- etymology -->
-			<section class="mw-etymology">
-				<p class="mw-etymology-header">
-					History and Etymology for <em>{{ word['entry'] }}</em>
-				</p>
-				<p class="mw-etymology-content">
-					{{ word['etymology'] }}
-				</p>
-			</section>
-
-
-		</section>
-	</section>
+		  <!-- etymology; optional -->
+      {% if word['etymology'] %}
+        {% include 'ditcs/webster/etymology.j2' %}
+      {% endif %}
+    </section>
+  </section>
 {% endmacro %}
