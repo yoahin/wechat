@@ -31,7 +31,6 @@
 	background-color: transparent;
 	padding: 0;
 	margin: 0;
-
 }
 
 /**
@@ -100,11 +99,32 @@
 .mw-morph {
   font-family: sans-serif;
   font-weight: 700;
+  color: #303336;
 }
 
+
+/**
+ * grammar, e.g transitive verb, uncountable
+ */
+
+.mw-grammar {
+  padding-left: 4px;
+  margin-top: .5rem;
+}
+
+.mw-grammar span {
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: .2px;
+  line-height: 20px;
+  text-decoration: underline;
+  color: #225f73;
+}
 /**
  * definition and notes such as 
- * did you know
+ * did you know, History, Examples
  */
 
 .mw-def-header, 
@@ -120,7 +140,6 @@
  	padding: 0 4px;
 }
 
-
 .mw-def, 
 .did-you-know-content,
 .mw-1st-use-content,
@@ -132,6 +151,62 @@
 	padding: 0 4px;
 	line-height: 18px;
 	letter-spacing: .2px;
+}
+
+/**
+ * special multi-def style
+ */
+.mw-multi-def-frame {
+  display: flex;
+  align-items: flex-start;
+  padding-left: 4px;
+  margin: 4px 0;
+}
+
+.mw-multi-def-long-frame,
+.mw-multi-def-short-frame {
+  display: flex;
+  flex-direction: column;
+}
+
+.mw-multi-def-short-frame section {
+  margin: 3px 0;
+}
+
+.mw-multi-def-order,
+.mw-multi-def-sense-order {
+  font-weight: 700;
+  font-size: 16px;
+  font-family: sans-serif;
+  margin-right: .8rem;
+  padding-top: 4px;
+}
+
+.mw-multi-def-long-def span {
+  font-family: sans-serif;
+}
+.mw-multi-def-short-syns {
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  color: #265667;
+  display: inline-block;
+  margin-right: 2px;
+}
+.mw-multi-def-short-eg {
+  font-family: sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  color: #225f73;
+}
+
+.mw-multi-def-short-src {
+  font-family: sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  color: #525a5b;
 }
 
 .mw-1s-content,
