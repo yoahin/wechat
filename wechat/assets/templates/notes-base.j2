@@ -13,10 +13,10 @@
     ❉<span class="wiki-title">
       WikipediA
     </span>
-    <p class="wiki-entry">{{ content['entry'] }}</p>
   </section>
   
   <section class="wiki-content">
+    <p class="wiki-entry">{{ content['entry'] }}</p>
     {% for para in content['paras'] %}
     <p>
       {{ para }}
@@ -27,24 +27,26 @@
 {% endmacro %}
 
 {# wiki with small-img #}
-{% macro wiki_small_img(content) %}
+{% macro wiki_small_img(contents) %}
 <section class="wiki">
   <section class="wiki-heading">
     ❉<span class="wiki-title">
       WikipediA
     </span>
-    <p class="wiki-entry">{{ content['entry'] }}</p>
   </section>
   
   <section class="wiki-content wiki-with-small-img">
-    <figure class="wiki-small-img">
-      <img src="{{ content['img'][0] }}" alt="table1">
-      <figcaption>{{ content['img'][1] }}</figcaption>
-    </figure>
-    {% for para in content['paras'] %}
-    <p>
-      {{ para }}
-    </p>
+    {% for content in contents %}
+      <p class="wiki-entry">{{ content['entry'] }}</p>
+      <figure class="wiki-small-img">
+        <img src="{{ content['img'][0] }}" alt="table1">
+        <figcaption>{{ content['img'][1] }}</figcaption>
+      </figure>
+      {% for para in content['paras'] %}
+        <p>
+          {{ para }}
+        </p>
+      {% endfor %}
     {% endfor %}
   </section>
 </section>
