@@ -1,0 +1,19 @@
+{# mw pronounciation template #}
+  {% if word['syllables'] %}
+	<span class="mw-syllables">
+    {{ word['syllables'] }}
+  </span>
+  <span class="mw-pro-style-break">|</span>
+  {% endif %}
+  <span class="mw-pro-first-slash">\</span>
+  <span class="mw-pro">
+    {{ word['pro'] }}
+  </span>
+  <span class="mw-audio-icon">
+    {% include 'icons/mw-audio.html' %}
+  </span>
+  {% if word['pro2'] %}
+  <span class="mw-pro-punct">,</span>
+  <span class="mw-pro">{{ word['pro2'] }}</span>
+  {% endif %}
+	<span class="mw-pro-last-slash">\</span>

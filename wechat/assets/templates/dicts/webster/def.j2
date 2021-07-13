@@ -1,0 +1,88 @@
+{# def or multi-defs, that is a question #}
+{#
+'def': 'def'
+'multi-def-long': {'order': '1', 'defs': ['def-a', 'def-b']}
+'multi-def-short': {'order': '2', 'syns': ['syns-a', 'syns-b'], 'eg': 'have his … deeds emblazoned by a poet', 'src': 'Thomas Nash'}
+#}
+
+{% set sense_order = ('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z') %}
+
+{%if word['def'] %}
+  <p class="mw-def">
+    <strong>:</strong>
+    {{ word['def'] }}
+  </p>
+{% elif word['multi-def-long'] %}
+  <section class="mw-multi-def-frame">
+    <!-- multi-def order num, e.g. 1,2,3 ... -->
+    <section class="mw-multi-def-order">
+      <span>{{ word['multi-def-long']['order'] }}</span>
+    </section>
+
+    <!-- long def: describe what the word means -->
+    <section class="mw-multi-def-long-frame">
+      {% if word['multi-def-long']['defs'] %}
+        {% for i in range(word['multi-def-long']['defs']|length) %}
+          <section class="mw-multi-def-long-def">
+            <span class="mw-multi-def-sense-order">
+              {{ sense_order[i] }}
+            </span>
+        
+            <span>
+              <strong>:</strong>
+              {{ word['multi-def-long']['defs'][i] }}
+            </span>
+          </section>
+        {% endfor %}
+      {% endif %}
+    </section>
+  </section>
+{% elif word['multi-def-short'] %}
+  <section class="mw-multi-def-frame">
+     <!-- multi-def order num, e.g. 1,2,3 ... -->
+     <section class="mw-multi-def-order">
+       <span>{{ word['multi-def-short']['order'] }}</span>
+     </section>
+
+    <!-- short def: use synonyms/related words -->
+    <section class="mw-multi-def-short-frame">
+      
+      {% if word['multi-def-short']['syns'] %}
+        {% set syns_num = word['multi-def-short']['syns']|length %}
+        <section>
+          <strong>:</strong>
+          {% for i in range(syns_num) %}
+            {% if i < syns_num - 1 %}
+              <span class="mw-multi-def-short-syns">
+                {{ word['multi-def-short']['syns'][i] }}
+              </span><span>, </span>
+            {% elif i == syns_num - 1 %}
+              <span class="mw-multi-def-short-syns">
+                {{ word['multi-def-short']['syns'][i] }}
+              </span>
+            {% endif %}
+          {% endfor %}
+        </section>
+      {% endif %}
+      
+      {% if word['multi-def-short']['eg'] %}
+        <section>
+          <span class="mw-multi-def-short-eg">
+            <strong>//</strong>
+            {{ word['multi-def-short']['eg'] }}
+          </span>
+        </section>
+      {% endif %}
+      
+      {% if word ['multi-def-short']['src'] %}
+        <section>
+          <span>—</span>
+          <span class="mw-multi-def-short-src">
+            {{ word['multi-def-short']['src'] }}
+          </span>
+        </section>
+      {% endif %}
+      
+    </section>
+  </section>
+{% endif %}

@@ -1,0 +1,38 @@
+{# example template #}
+{#
+'example-1s': 'colossal statues and other monumental constructions that were intended to emblazon his name for eons to come',
+# optional recent examples on web
+'recent': [
+{'sentence': 'Dust loves me now, along with leaflets, plastic bags, anything unattached, anything looking for somewhere to stop, something to emblazon.',
+'source': 'Monica Youn, <em>The New Yorker</em>, 7 Dec. 2020'},
+{'sentence': 'Many residents of the city reacted angrily to his comment on its conduct of elections, while a few chose to emblazon the remark on T-shirts as a humorous declaration of civic toughness.',
+'source': 'James Freeman, <em>WSJ</em>, 6 Nov. 2020'}
+],
+#}
+<section class="mw-example-1s">
+  <p class="mw-1s-header">
+    Examples of <em>{{ word['entry'] }}</em> in a Sentence
+  </p>
+  <p class="mw-1s-content">
+    <strong>//</strong> {{ word['example-1s'] }}
+  </p>
+
+  {% if word['recent'] %}
+    <!-- separate two example sections -->
+    <section class="mw-example-hr">
+    </section>
+
+    <p class="mw-recent-example-header">
+      Recent Examples on the Web
+    </p>
+    {% for example in word['recent'] %}
+      <p class="mw-recent-example-content">
+        <strong>//</strong> {{ example['sentence'] }}
+      </p>
+
+      <p class="mw-recent-example-source">
+        — {{ example['source'] }}
+      </p>
+    {% endfor %}
+  {% endif %}
+</section>

@@ -1,0 +1,32 @@
+{# morphs and their pronounciations #}
+{#
+'morphs': {'1': 'morph-1;', '2', 'morph2', }
+'morphs-pro': {'mph-pro-1': '', 'mph-pro2': ''}
+#}
+<section class="mw-morphs-frame">
+  {% for morph in word['morphs'].keys() %}
+    <span class="mw-morph">
+      {{ word['morphs'][morph] }}
+    </span>
+  {% endfor %}
+
+  {% if word['morphs-pro'] %}
+  <span class="mw-pro-first-slash">\</span>
+  <span class="mw-morph-pro">
+    {{ word['morphs-pro']['pro1'] }}
+  </span>
+  
+  <span class="mw-audio-icon">
+    {% include 'icons/mw-audio.html' %}
+  </span>
+ 
+    {% if word['morphs-pro']['pro2'] %}
+    <span class="mw-pro-punct">,</span>
+    <span class="mw-pro">
+      {{ word['morphs-pro']['pro2'] }}
+    </span>
+    {% endif %}
+  
+  {% endif %}
+  <span class="mw-pro-last-slash">\</span>
+</section>
