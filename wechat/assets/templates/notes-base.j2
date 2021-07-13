@@ -124,11 +124,11 @@
 <sup style="color: #81A1C1">[{{n}}]</sup>
 {% endmacro %}
 
-{%- macro footnote(urls, start=1, auto=true) -%}
+{%- macro footnote(urls, start=1, unscroll=true) -%}
 <!-- footnote -->
 <section class="ft">
     <span class="ft-title">↸Footnote</span>
-    {% if auto %}
+    {% if unscroll %}
     <section class="ft-links note-short">
     {% else %}
     <section class="ft-links">
