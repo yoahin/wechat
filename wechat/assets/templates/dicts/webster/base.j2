@@ -62,13 +62,18 @@ word = {
       </section>
 
 		  <!-- example -->
-		  <section class="mw-example-fram">
+		  <section class="mw-example-frame">
         {% include 'dicts/webster/examples.j2' %}
       </section>
 
       <!-- did you know; optional -->
       {% if word['did-you-know'] %}
         {% include 'dicts/webster/didyouknow.j2' %}
+      {% endif %}
+
+      <!-- history of word; optional -->
+      {% if word['history'] %}
+        {% include 'dicts/webster/history.j2' %}
       {% endif %}
 
 		  <!-- first use -->
@@ -83,8 +88,10 @@ word = {
 
 		  <!-- etymology; optional -->
       {% if word['etymology'] %}
-        {% include 'ditcs/webster/etymology.j2' %}
+        {% include 'dicts/webster/etymology.j2' %}
       {% endif %}
+      
     </section>
+    
   </section>
 {% endmacro %}
