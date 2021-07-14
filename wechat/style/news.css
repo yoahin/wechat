@@ -290,9 +290,7 @@ u {
 }
 
 .highlight {
-  /*display: inline-block;*/
-  /*background: linear-gradient(rgba(255,255,255,0) 32%,#14EB1E 32%);*/
+  text-decoration: none;
   background: linear-gradient(rgba(255,255,255,0) 30%,#b3d3f0 30%);
-  /*background: linear-gradient(rgba(255,255,255,0) 30%,#19865c 30%);*/
   padding: 0 .1em;
 }
