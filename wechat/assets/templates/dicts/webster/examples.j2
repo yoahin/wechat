@@ -13,9 +13,11 @@
   <p class="mw-1s-header">
     Examples of <em>{{ word['entry'] }}</em> in a Sentence
   </p>
-  <p class="mw-1s-content">
-    <strong>//</strong> {{ word['example-1s'] }}
-  </p>
+  {% for example in word['example-1s'] %}
+    <p class="mw-1s-content">
+      <strong>//</strong> {{ example }}
+    </p>
+  {% endfor %}
 
   {% if word['recent'] %}
     <!-- separate two example sections -->
