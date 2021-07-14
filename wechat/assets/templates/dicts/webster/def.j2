@@ -8,10 +8,21 @@
 {% set sense_order = ('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z') %}
 
 {%if word['def'] %}
-  <p class="mw-def">
-    <strong>:</strong>
-    {{ word['def'] }}
-  </p>
+  {% if word['def']['order'] %}
+    <section class="mw-def-single-frame">
+      <span class="mw-def-single-order">
+        {{ word['def']['order'] }}
+      </span>
+      <span><strong>:</strong>
+        {{ word['def']['def'] }}
+      </span>
+    </section>
+  {% else %}
+    <p class="mw-def">
+      <strong>:</strong>
+      {{ word['def'] }}
+    </p>
+  {% endif %}
 {% elif word['multi-def-long'] %}
   <section class="mw-multi-def-frame">
     <!-- multi-def order num, e.g. 1,2,3 ... -->
