@@ -43,7 +43,7 @@ else:
 	raise SystemExit('No sense number given; Execution terminated')
 
 
-def def_eg(node):
+def get_def_eg(node):
 	# XPath must be like the one in a filesystem
 	# Those in the middle of a path cannot be skipped over
 	sense = node.xpath('./text()')[0].strip(' ,\n\t')
@@ -55,12 +55,38 @@ def def_eg(node):
 
 	return sense, egs
 
-def syns(node):
-	
+# 
+def get_synonyms(node):
+	'''Get the list of syns or related words'''
+	syns_nds = node.xpath('./div/ul/li')
+	syns_num = len(syns_nds)
+	syns_lst = []
+	syns_usg = {}
+	syns_vrt = {}
 
-def related(node):
-	pass
+	for ith in range(syns_num):
+		# NOTE: current node now is a single <li> element!
+		# if it is a synonym, add it to the list
+		if syns_nds[ith].xpath('./a/text()'):
+			syns_lst.append(syns_nds[ith].xpath('./a/text()')[0])
+		# if it is a usage tag, add it to usg dict with its order number
+		elif syns_nds[ith].xpath('./span[contains(@class, "wsls")]'):
+			syns_usg[ith] = '[' + syns_nds[ith].xpath('./span[contains(@class, "wsls")]/text()')[0] + ']'
+		# # if it is a word variant, add it to vrt dict with its order number
+		elif syns_nds[ith].xpath('./span[contains(@class, "wvrs")]/span'):
+			syns_vrt[ith] = '(' \
+						+ syns_nds[ith].xpath('./span[contains(@class, "wvrs")]/span[1]/text()')[0]\
+						+ ' '\
+						+ syns_nds[ith].xpath('./span[contains(@class, "wvrs")]/span[2]/a/text()')[0]\
+						+ ')'
+	 
 
-if not output:
-	print(syn_blocks)
-	sense, egs = def_eg(syn_blocks[0])
+	return syns_lst, syns_usg, syns_vrt
+
+
+if __name__ == '__main__':
+	if not output:
+		#print(syn_blocks)
+		#sense, egs = def_eg(syn_blocks[0])
+		lst, usg, vrt = get_synonyms(syn_blocks[2])
+		print(lst,usg,vrt,sep='\n')
