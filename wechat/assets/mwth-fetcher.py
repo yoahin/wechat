@@ -43,5 +43,24 @@ else:
 	raise SystemExit('No sense number given; Execution terminated')
 
 
+def def_eg(node):
+	# XPath must be like the one in a filesystem
+	# Those in the middle of a path cannot be skipped over
+	sense = node.xpath('./text()')[0].strip(' ,\n\t')
+	egs = []
+	egs_num = len(node.xpath('./ul'))
+	for ith in range(egs_num):
+		eg = ''.join(node.xpath(f'./ul[{ith+1}]/li/span/text() | ./ul[{ith+1}]/li/span/em/text()'))
+		egs.append(eg)
+
+	return sense, egs
+
+def syns(node):
+	
+
+def related(node):
+	pass
+
 if not output:
 	print(syn_blocks)
+	sense, egs = def_eg(syn_blocks[0])
