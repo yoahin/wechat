@@ -35,10 +35,9 @@ output = args.out_put
 raw_content = requests.get(url).text
 etree = html.fromstring(raw_content)
 
-# TODO: fix bug -- group the fetched words according the original page
 if sensenum:
 	# syn_blocks consist of 1) def & e.g.s, 2) synonyms, 3) related words
-	syn_blocks = etree.xpath(f'//span[contains(@class, "sense-{sensenum}")]/following-sibling::*')
+	syn_blocks = etree.xpath(f'//span[@class="sn sense-{sensenum}"]/following-sibling::*')
 else:
 	raise SystemExit('No sense number given; Execution terminated')
 
@@ -55,7 +54,7 @@ def get_def_eg(node):
 
 	return sense, egs
 
-# 
+# syns blocks are all the same
 def get_synonyms(node):
 	'''Get the list of syns or related words'''
 	syns_nds = node.xpath('./div/ul/li')
@@ -70,14 +69,14 @@ def get_synonyms(node):
 		if syns_nds[ith].xpath('./a/text()'):
 			syns_lst.append(syns_nds[ith].xpath('./a/text()')[0])
 		# if it is a usage tag, add it to usg dict with its order number
-		elif syns_nds[ith].xpath('./span[contains(@class, "wsls")]'):
-			syns_usg[ith] = '[' + syns_nds[ith].xpath('./span[contains(@class, "wsls")]/text()')[0] + ']'
+		elif syns_nds[ith].xpath('./span[@class="wsls"]'):
+			syns_usg[ith] = '[' + syns_nds[ith].xpath('./span[@class="wsls"]/text()')[0] + ']'
 		# # if it is a word variant, add it to vrt dict with its order number
-		elif syns_nds[ith].xpath('./span[contains(@class, "wvrs")]/span'):
+		elif syns_nds[ith].xpath('./span[@class="wvrs"]/span'):
 			syns_vrt[ith] = '(' \
-						+ syns_nds[ith].xpath('./span[contains(@class, "wvrs")]/span[1]/text()')[0]\
+						+ syns_nds[ith].xpath('./span[@class="wvrs"]/span[1]/text()')[0]\
 						+ ' '\
-						+ syns_nds[ith].xpath('./span[contains(@class, "wvrs")]/span[2]/a/text()')[0]\
+						+ syns_nds[ith].xpath('./span[@class="wvrs"]/span[2]/a/text()')[0]\
 						+ ')'
 	 
 
@@ -88,5 +87,5 @@ if __name__ == '__main__':
 	if not output:
 		#print(syn_blocks)
 		#sense, egs = def_eg(syn_blocks[0])
-		lst, usg, vrt = get_synonyms(syn_blocks[2])
+		lst, usg, vrt = get_synonyms(syn_blocks[1])
 		print(lst,usg,vrt,sep='\n')
