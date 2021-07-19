@@ -16,7 +16,9 @@ parser = argparse.ArgumentParser(description='Fetch synonyms of a ginve word fro
 
 # 1st arg: Sense num of a given word
 
-parser.add_argument('-s', '--sense-num', help="Sense number of the word (Default: none)")
+parser.add_argument('-s', '--sense-num', 
+	default=None,
+	help="Sense number of the word (Default: none)")
 
 # 2nd arg: Merriam-Webster word page url
 parser.add_argument('-u', '--url', help='URL of the word\' dictionary page')
@@ -32,27 +34,30 @@ sensenum = args.sense_num
 url = args.url
 output = args.out_put
 
-raw_content = requests.get(url).text
-etree = html.fromstring(raw_content)
+def get_blocks(etree, sense_num=None):
+	if sense_num:
+		# syn_blocks consist of 1) def & e.g.s, 2) synonyms, 3) related words
+		syn_blocks = etree.xpath(f'//span[@class="sn sense-{sense_num}"]/following-sibling::*')
+	else:
+		syn_blocks = etree.xpath(f'//div[@class="sense no-subnum"]/child::*')
+		# raise SystemExit('No sense number given; Execution terminated')
+	return syn_blocks
 
-if sensenum:
-	# syn_blocks consist of 1) def & e.g.s, 2) synonyms, 3) related words
-	syn_blocks = etree.xpath(f'//span[@class="sn sense-{sensenum}"]/following-sibling::*')
-else:
-	raise SystemExit('No sense number given; Execution terminated')
+def get_sense(node):
+	sense = node.xpath('./text()')[0].strip(' ,\n\t')
+	return sense
 
 
-def get_def_eg(node):
+def get_egs(node):
 	# XPath must be like the one in a filesystem
 	# Those in the middle of a path cannot be skipped over
-	sense = node.xpath('./text()')[0].strip(' ,\n\t')
 	egs = []
 	egs_num = len(node.xpath('./ul'))
 	for ith in range(egs_num):
 		eg = ''.join(node.xpath(f'./ul[{ith+1}]/li/span/text() | ./ul[{ith+1}]/li/span/em/text()'))
 		egs.append(eg)
 
-	return sense, egs
+	return egs
 
 # syns blocks are all the same
 def get_synonyms(node):
@@ -82,10 +87,24 @@ def get_synonyms(node):
 
 	return syns_lst, syns_usg, syns_vrt
 
+def get_related(node):
+	pass
+
+def get_antonyms(node):
+	pass
 
 if __name__ == '__main__':
+	raw_content = requests.get(url).text
+	etree = html.fromstring(raw_content)
+	syn_blocks = get_blocks(etree)
+
 	if not output:
-		#print(syn_blocks)
-		#sense, egs = def_eg(syn_blocks[0])
-		lst, usg, vrt = get_synonyms(syn_blocks[1])
-		print(lst,usg,vrt,sep='\n')
+		# print(syn_blocks)
+		sense = get_sense(syn_blocks[0])
+		egs = get_egs(syn_blocks[0])
+		lst, usg, vrt = get_synonyms(syn_blocks[2])
+		print(sense,egs,lst,usg,vrt,sep='\n')
+
+	if output:
+		pass
+
