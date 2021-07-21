@@ -1,0 +1,48 @@
+<!-- syns blocks templates -->
+{% if word['syns'] %}
+  <section class="mwth-syns-block-frame">
+    <section class="mw-recent-example-header">
+      <p>
+        Synonyms for <em>{{ word['entry'] }}</em>
+      </p>
+    </section>
+    
+    <section class="mwth-syns-content">
+      {% for syn word['syns']['syns'] %}
+        {{ syn }}
+      {% endfor %}
+    </section>
+  </section>
+{% endif %}
+
+{% if word['rels'] %}
+  <section class="mwth-syns-block-frame">
+    <section class="mw-recent-example-header">
+      <p>
+        Words Realted to <em>{{ word['entry'] }}</em>
+      </p>
+    </section>
+    
+    <section class="mwth-syns-content">
+      {% for rel word['rels']['rels'] %}
+        {{ rel }}
+      {% endfor %}
+    </section>
+  </section>
+{% endif %}
+
+{% if word['ants'] %}
+  <section class="mwth-syns-block-frame">
+    <section class="mw-recent-example-header">
+      <p>
+        Near Antonyms for <em>{{ word['entry'] }}</em>
+      </p>
+    </section>
+    
+    <section class="mwth-syns-content">
+      {% for ant word['ants']['ants'] %}
+        {{ ant }}
+      {% endfor %}
+    </section>
+  </section>
+{% endif %}

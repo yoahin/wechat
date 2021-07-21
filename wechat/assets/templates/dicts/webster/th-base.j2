@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <link href="../../../style/mw.css" rel="stylesheet"/>
+    <link href="../../../style/mwth.css" rel="stylesheet"/>
+    <title>thesaurus</title>
+  </head>
+  <body>
+    <!-- Frame for Webster entry -->
+    <section class="mw-frame">
+      <!-- header, fixed position -->
+      <section class="mw-header">
+        {% include 'dicts/webster/header.j2' %}
+      </section>
+
+      <!-- content; scrollable -->
+      <section class="mw-entry-content">
+        <!-- headword and pos -->  
+		    {% include 'dicts/webster/headword.j2' %}
+
+        <!-- definition -->
+        <section class="mw-def-frame">
+          <p class="mw-def-header">
+            Synonyms & Antonyms of <em>{{ word['entry'] }}</em> (Entry {{ x }} of {{ y }})
+          </p>
+        </section>
+
+        <!-- sense num, egs, synonyms -->
+        <section class="mwth-blocks-frame">
+          {% if word['sense-num'] %}
+            <!-- sense num -->
+            <section>
+              <span class="mwth-sense-num">
+                {{ word['sense-num'] }}
+              </span>
+            </section>
+          {% endif %}
+
+          <!-- def, synonyms, realted, antonyms -->
+          <section class="mwth-syns-blocks-frame">
+            <!-- word definition -->
+            <section class="mw-def">
+              <p>
+                {{ word['def'] }}
+              </p>
+            </section>
+
+            <!-- examples -->
+            <section class="mw-1s-content">
+              {% for eg in word['egs'] %}
+                <p>
+                  <strong>//</strong>
+                  {{ eg }}
+                </p>
+            </section>
+            
+            {% include 'dicts/webster/th-syns.j2' %}
+          </section>
+          
+        <section>
+      </section>
+    </section>
+  </body>
+</html>
