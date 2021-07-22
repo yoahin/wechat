@@ -44,6 +44,7 @@ if args.file:
 
 output = args.out_put
 
+
 def get_blocks(etree, sense_num=None):
 	if sense_num:
 		# syn_blocks consist of 1) def & e.g.s, 2) synonyms, 3) related words
@@ -69,14 +70,30 @@ def get_egs(node):
 
 	return egs
 
-# syns blocks are all the same
-def get_synonyms(node):
+# syns blocks are very similar:
+# - Synonyms --> type:syn
+# - Related Words --> type: rel
+# - Phrases Synonyms --> type: phr
+# - Near Antonyms --> type: ant
+def get_synonyms(blocks,type='syn'):
 	'''Get the list of syns or related words'''
-	syns_nds = node.xpath('./div/ul/li')
+
+	for block in blocks:
+		if block.xpath(f'//span[contains(@class, "{type}-list")]'):
+			node = block.xpath(f'//span[contains(@class, "{type}-list")]')[0]
+			break
+			# print('Found syn block')
+
+	# get the list content header
+	syns_hed = node.xpath('./div[@class="thes-list-header"]/p[@class="function-label"]/text()')[0] +\
+		node.xpath('./div[@class="thes-list-header"]/p[@class="function-label"]/em/text()')[0]
+	
+	# get the list
+	syns_nds = node.xpath('./div[@class="thes-list-content synonyms_list"]/ul/li')
 	syns_num = len(syns_nds)
-	syns_lst = []
-	syns_usg = {}
-	syns_vrt = {}
+	syns_lst = []	# list of synonyms
+	syns_usg = {}	# word usage, e.g. slang, colloquial
+	syns_vrt = {}	# variant: also YYY
 
 	for ith in range(syns_num):
 		# NOTE: current node now is a single <li> element!
@@ -95,15 +112,18 @@ def get_synonyms(node):
 						+ ')'
 	 
 
-	return syns_lst, syns_usg, syns_vrt
+	return syns_hed, syns_lst, syns_usg, syns_vrt
 
+# 
 def get_related(node):
 	pass
 
 def get_antonyms(node):
 	pass
 
+
 if __name__ == '__main__':
+
 	if args.url:
 		raw_content = requests.get(url).text    
 	
@@ -113,12 +133,14 @@ if __name__ == '__main__':
 	etree = html.fromstring(raw_content)
 	syn_blocks = get_blocks(etree, sensenum)
 
+	# thes list keywords: 'syn', 'rel', 'phrase', 'near', 'ant'
 	if not output:
 		print(syn_blocks)
-		sense = get_sense(syn_blocks[0])
-		egs = get_egs(syn_blocks[0])
-		lst, usg, vrt = get_synonyms(syn_blocks[2])
-		print(sense,egs,lst,usg,vrt,sep='\n')
+
+		# sense = get_sense(syn_blocks, thes_list['syn'])
+		# egs = get_egs(syn_blocks[0])
+		hed, lst, usg, vrt = get_synonyms(syn_blocks, 'syn')
+		print(hed,lst,usg,vrt,sep='\n')
 
 	if output:
 		pass
