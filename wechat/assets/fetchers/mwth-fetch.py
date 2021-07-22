@@ -16,22 +16,32 @@ parser = argparse.ArgumentParser(description='Fetch synonyms of a ginve word fro
 
 # 1st arg: Sense num of a given word
 
-parser.add_argument('-s', '--sense-num', 
+parser.add_argument('-s', '--sense-num',
 	default=None,
-	help="Sense number of the word (Default: none)")
+	help='Sense number of the word (Default: none)')
 
 # 2nd arg: Merriam-Webster word page url
 parser.add_argument('-u', '--url', help='URL of the word\' dictionary page')
 
-# 3rd arg: 
+# 3rd arg:
+parser.add_argument('-f', '--file', help='Local file path')
+
+# 4th arg: 
 parser.add_argument('-o', '--out-put', help='Output to a file instead of stdout')
+
 
 args = parser.parse_args()
 
 
 # get the values of args
 sensenum = args.sense_num
-url = args.url
+if args.url:
+	url = args.url
+
+if args.file:
+	with open(args.file[7:], 'r', encoding='utf-8') as f:
+		raw_html = f.read()
+
 output = args.out_put
 
 def get_blocks(etree, sense_num=None):
@@ -94,12 +104,17 @@ def get_antonyms(node):
 	pass
 
 if __name__ == '__main__':
-	raw_content = requests.get(url).text
+	if args.url:
+		raw_content = requests.get(url).text    
+	
+	if args.file:
+		raw_content = raw_html
+
 	etree = html.fromstring(raw_content)
-	syn_blocks = get_blocks(etree)
+	syn_blocks = get_blocks(etree, sensenum)
 
 	if not output:
-		# print(syn_blocks)
+		print(syn_blocks)
 		sense = get_sense(syn_blocks[0])
 		egs = get_egs(syn_blocks[0])
 		lst, usg, vrt = get_synonyms(syn_blocks[2])
