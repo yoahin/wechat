@@ -39,7 +39,7 @@ if args.url:
 	url = args.url
 
 if args.file:
-	with open(args.file[7:], 'r', encoding='utf-8') as f:
+	with open(args.file, 'r', encoding='utf-8') as f:
 		raw_html = f.read()
 
 output = args.out_put
