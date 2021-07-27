@@ -119,9 +119,10 @@ def get_antonyms(node):
 
 
 if __name__ == '__main__':
-
+    # Get needed elements
     sensenum, url, raw_html, output = get_target()
 
+    # Detect raw html based on args passed
     if url:
         raw_content = requests.get(url).text
 
