@@ -101,6 +101,7 @@ def get_synonyms(blocks, type='syn'):
     syns_usg = {}    # word usage, e.g. slang, colloquial
     syns_vrt = {}    # variant: also YYY
 
+
     for ith in range(syns_num):
         # NOTE: current node now is a single <li> element!
         # if it is a synonym, add it to the list
@@ -119,7 +120,7 @@ def get_synonyms(blocks, type='syn'):
                  + syns_nds[ith].xpath('./span[@class="wvrs"]/span[2]/a/text()')[0]\
                  + ')'
 
-        return syns_hed, syns_lst, syns_usg, syns_vrt
+    return syns_hed, syns_lst, syns_usg, syns_vrt
 
 
 def get_related(node):
@@ -150,6 +151,6 @@ if __name__ == '__main__':
         # egs = get_egs(syn_blocks[0])
         hed, lst, usg, vrt = get_synonyms(syn_blocks, 'syn')
         print(hed, lst, usg, vrt, sep='\n')
-
+        # print(get_sense())
     if output:
         pass
