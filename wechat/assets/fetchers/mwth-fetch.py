@@ -48,31 +48,18 @@ def get_target():
     return sensenum, url, raw_html, output
 
 
+# Get the blocks for a specific sense
 def get_blocks(etree, sense_num=None):
     if sense_num:
         # syn_blocks consist of 1) def & e.g.s, 2) synonyms, 3) related words
         syn_blocks = etree.xpath(f'//span[@class="sn sense-{sense_num}"]/following-sibling::*')
+
     else:
         syn_blocks = etree.xpath('//div[@class="sense no-subnum"]/child::*')
         # raise SystemExit('No sense number given; Execution terminated')
-        return syn_blocks
 
+    return syn_blocks
 
-def get_sense(node):
-    sense = node.xpath('./text()')[0].strip(' ,\n\t')
-    return sense
-
-
-def get_egs(node):
-    # XPath must be like the one in a filesystem
-    # Those in the middle of a path cannot be skipped over
-    egs = []
-    egs_num = len(node.xpath('./ul'))
-    for ith in range(egs_num):
-        eg = ''.join(node.xpath(f'./ul[{ith+1}]/li/span/text() | ./ul[{ith+1}]/li/span/em/text()'))
-    egs.append(eg)
-
-    return egs
 
 # syns blocks are very similar:
 # - Synonyms --> type:syn
@@ -134,6 +121,7 @@ def get_antonyms(node):
 if __name__ == '__main__':
 
     sensenum, url, raw_html, output = get_target()
+
     if url:
         raw_content = requests.get(url).text
 
@@ -147,9 +135,7 @@ if __name__ == '__main__':
     if not output:
         print(syn_blocks)
 
-        # sense = get_sense(syn_blocks, thes_list['syn'])
-        # egs = get_egs(syn_blocks[0])
-        hed, lst, usg, vrt = get_synonyms(syn_blocks, 'syn')
+        hed, lst, usg, vrt = get_synonyms(syn_blocks, 'rel')
         print(hed, lst, usg, vrt, sep='\n')
         # print(get_sense())
     if output:
