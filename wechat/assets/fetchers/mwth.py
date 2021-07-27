@@ -49,18 +49,38 @@ def get_target():
 
 
 # Get the blocks for a specific sense
-def get_blocks(etree, sense_num=None):
+def get_nodes(etree, sense_num=None):
+    '''Get the target synonyms nodes such as:
+    1) defination (or sense)
+    2) example(s)
+    3) synonyms
+    4) related words
+    5) near antonyms
+    6) phrases synonymous
+    '''
     if sense_num:
-        # syn_blocks consist of 1) def & e.g.s, 2) synonyms, 3) related words
-        syn_blocks = etree.xpath(f'//span[@class="sn sense-{sense_num}"]/following-sibling::*')
+        # a synonym block consist of several nodes:
+        # 1) def & e.g.s, 2) synonyms, 3) related words, 4) phrases ...
+        blocks = etree.xpath(f'//span[@class="sn sense-{sense_num}"]/following-sibling::*')
 
     else:
-        syn_blocks = etree.xpath('//div[@class="sense no-subnum"]/child::*')
+        blocks = etree.xpath('//div[@class="sense no-subnum"]/child::*')
         # raise SystemExit('No sense number given; Execution terminated')
 
     return syn_blocks
 
 
+def get_sense(node):
+    '''Get the specific sense'''
+    sense = node.xpath('./text()')[0].strip(' ,\n\t')
+    return sense
+
+def get_egs(node):
+    '''Get all the examples listed under a specific sense.'''
+    # Xpath must be like the one of a filesystem
+    # Those in the middle of a path cannot be skipped over
+    egs = []
+    egs_num = len(node.xpath('./ul')
 # syns blocks are very similar:
 # - Synonyms --> type:syn
 # - Related Words --> type: rel
@@ -130,7 +150,7 @@ if __name__ == '__main__':
         raw_content = raw_html
 
     etree = html.fromstring(raw_content)
-    syn_blocks = get_blocks(etree, sensenum)
+    syn_blocks = get_nodes(etree, sensenum)
 
     # thes list keywords: 'syn', 'rel', 'phrase', 'near', 'ant'
     if not output:
