@@ -50,7 +50,7 @@ def get_target():
 
 # Get the blocks for a specific sense
 def get_nodes(etree, sense_num=None):
-    '''Get the target synonyms nodes such as:
+    '''Get the target synonyms span nodes such as:
     1) defination (or sense)
     2) example(s)
     3) synonyms
@@ -59,15 +59,29 @@ def get_nodes(etree, sense_num=None):
     6) phrases synonymous
     '''
     if sense_num:
-        # a synonym block consist of several nodes:
-        # 1) def & e.g.s, 2) synonyms, 3) related words, 4) phrases ...
-        blocks = etree.xpath(f'//span[@class="sn sense-{sense_num}"]/following-sibling::*')
+        nodes = etree.xpath(f'//span[@class="sn sense-{sense_num}"]/following-sibling::*')
 
     else:
-        blocks = etree.xpath('//div[@class="sense no-subnum"]/child::*')
+        nodes = etree.xpath('//div[@class="sense no-subnum"]/*')
         # raise SystemExit('No sense number given; Execution terminated')
 
-    return syn_blocks
+    # preprocess nodes so that the node list becomes
+    # a hash table of nodes: syn_nodes
+    syn_nodes = {}
+    for node in nodes:
+        # The following xpaths are identical:
+        # self::span[@class="dt "]
+        # //span/descendent-or-self::span[@class="dt "]
+        # Xpath always returns a list
+        nclasses = node.xpath('self::span/@class')[0].split()
+        # print(nclasses)
+        for ntype in ['dt', 'syn-list', 'rel-list', 'ant-list', 'near-list', 'phrase-list']:
+            if ntype in nclasses:
+                syn_nodes[ntype] = node
+                break
+
+    print(syn_nodes)
+    return syn_nodes
 
 
 def get_sense(node):
@@ -75,12 +89,20 @@ def get_sense(node):
     sense = node.xpath('./text()')[0].strip(' ,\n\t')
     return sense
 
+
 def get_egs(node):
     '''Get all the examples listed under a specific sense.'''
     # Xpath must be like the one of a filesystem
     # Those in the middle of a path cannot be skipped over
     egs = []
-    egs_num = len(node.xpath('./ul')
+    egs_num = len(node.xpath('./ul'))
+    for ith in range(egs_num):
+        # xpath counting is 1-based
+        eg = ''.join(node.xpath(f'./ul[{ith+1}]/li/span/text()'))
+        egs.append(eg)
+
+    return egs
+
 # syns blocks are very similar:
 # - Synonyms --> type:syn
 # - Related Words --> type: rel
@@ -88,14 +110,8 @@ def get_egs(node):
 # - Near Antonyms --> type: ant
 
 
-def get_synonyms(blocks, type='syn'):
+def get_synonyms(node):
     '''Get the list of syns or related words'''
-
-    for block in blocks:
-        if block.xpath(f'//span[contains(@class, "{type}-list")]'):
-            node = block.xpath(f'//span[contains(@class, "{type}-list")]')[0]
-            break
-        # print('Found syn block')
 
     # get the list content header
     syns_hed = node.xpath('./div[@class="thes-list-header"]/p[@class="function-label"]/text()')[0] +\
@@ -108,7 +124,6 @@ def get_synonyms(blocks, type='syn'):
     syns_usg = {}    # word usage, e.g. slang, colloquial
     syns_vrt = {}    # variant: also YYY
 
-
     for ith in range(syns_num):
         # NOTE: current node now is a single <li> element!
         # if it is a synonym, add it to the list
@@ -118,7 +133,6 @@ def get_synonyms(blocks, type='syn'):
         # if it is a usage tag, add it to usg dict with its order number
         elif syns_nds[ith].xpath('./span[@class="wsls"]'):
             syns_usg[ith] = '[' + syns_nds[ith].xpath('./span[@class="wsls"]/text()')[0] + ']'
-
         # if it is a word variant, add it to vrt dict with its order number
         elif syns_nds[ith].xpath('./span[@class="wvrs"]/span'):
             syns_vrt[ith] = '(' \
@@ -141,7 +155,7 @@ def get_antonyms(node):
 if __name__ == '__main__':
     # Get needed elements
     sensenum, url, raw_html, output = get_target()
-
+    print(sensenum)
     # Detect raw html based on args passed
     if url:
         raw_content = requests.get(url).text
@@ -150,14 +164,19 @@ if __name__ == '__main__':
         raw_content = raw_html
 
     etree = html.fromstring(raw_content)
-    syn_blocks = get_nodes(etree, sensenum)
+    syn_nodes = get_nodes(etree, sensenum)
 
     # thes list keywords: 'syn', 'rel', 'phrase', 'near', 'ant'
     if not output:
-        print(syn_blocks)
 
-        hed, lst, usg, vrt = get_synonyms(syn_blocks, 'rel')
-        print(hed, lst, usg, vrt, sep='\n')
-        # print(get_sense())
+        # skip the first 'dt' node
+        for ntype, node in syn_nodes.items():
+            if ntype == 'dt':
+                sns = get_sense(node)
+                egs = get_egs(node)
+                continue
+            else:
+                hed, lst, usg, vrt = get_synonyms(node)
+            print(sns, egs, hed, lst, usg, vrt, sep='\n')
     if output:
         pass
