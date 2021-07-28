@@ -12,8 +12,6 @@ import argparse
 from os.path import exists, expanduser, join
 from os import makedirs
 
-# TODO
-
 
 parser = argparse.ArgumentParser(
         description='Create html templates for wechat posts')
