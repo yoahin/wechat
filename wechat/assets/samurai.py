@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 '''
-This scirpt depends on mw-fetch.py and mwth-fetch.py;
+This scirpt depends on two fetchers: mw.py and mwth.py;
 It will use the fetched content to generate
-the needed word templates
+the needed word/synonyms templates.
 '''
 
 # standard or 3rd party libs
 import requests
+from jinja2 import Environment, FileSystemLoader
 from lxml import html
 from os.path import join
 
 # my own module
-from fetchers.mwth import get_target, get_blocks, get_synonyms
+from fetchers.mwth import get_target, get_nodes, get_sense, get_egs, get_synonyms
 
 if __name__ == '__main__':
     sensenum, url, raw_html, output = get_target()
@@ -23,14 +24,17 @@ if __name__ == '__main__':
         raw_content = raw_html
 
     etree = html.fromstring(raw_content)
-    syn_blocks = get_blocks(etree, sensenum)
+    syn_nodes = get_nodes(etree, sensenum)
 
     # thes list keywords: 'syn', 'rel', 'phrase', 'near', 'ant'
     if not output:
-        print(syn_blocks)
-
-        hed, lst, usg, vrt = get_synonyms(syn_blocks, 'rel')
-        print(hed, lst, usg, vrt, sep='\n')
+        for ntype, node in syn_nodes.items():
+            if ntype == 'dt':
+                sns = get_sense(node)
+                egs = get_egs(node)
+            else:
+                hed, lst, usg, vrt = get_synonyms(syn_nodes)
+                print(hed, lst, usg, vrt, sep='\n')
         # print(get_sense())
     if output:
         pass
