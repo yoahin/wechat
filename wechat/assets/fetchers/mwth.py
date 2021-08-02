@@ -47,7 +47,12 @@ def get_target():
     return sensenum, url, raw_html, output
 
 
-# Get the blocks for a specific sense
+def get_entry(etree):
+    '''Get the entry word ifself'''
+    entry = etree.xpath('//div[@class="row vg-header"]/div/h2/em/text()')[0]
+    return entry
+
+
 def get_nodes(etree, sense_num=None):
     '''Get the target synonyms span nodes such as:
     1) defination (or sense)
@@ -113,6 +118,7 @@ def get_synonyms(node):
     '''Get the list of syns or related words'''
 
     # get the list content header
+    # for debugging purposes only
     syns_hed = node.xpath('./div[@class="thes-list-header"]/p[@class="function-label"]/text()')[0] +\
         node.xpath('./div[@class="thes-list-header"]/p[@class="function-label"]/em/text()')[0]
 
