@@ -48,9 +48,15 @@ def get_target():
 
 
 def get_entry(etree):
-    '''Get the entry word ifself'''
-    entry = etree.xpath('//div[@class="row vg-header"]/div/h2/em/text()')[0]
-    return entry
+    '''
+    Get the entry word and entry numbers, e.g.:
+    Entry: a_word
+    Entry_nums: (Entry x of y)
+    '''
+    header_node = etree.xpath('//div[@class="row vg-header"]')[0]
+    entry = header_node.xpath('./div/h2/em/text()')[0]
+    entry_nums = header_node.xpath('./div/p[@class="entryNumbers"]/text()')[0].rstrip(' \t')
+    return entry, entry_nums
 
 
 def get_nodes(etree, sense_num=None):
