@@ -16,13 +16,18 @@
 
       <!-- content; scrollable -->
       <section class="mw-entry-content">
-        <!-- headword and pos -->  
+        <!-- headword and pos -->
 		    {% include 'dicts/webster/headword.j2' %}
 
         <!-- definition -->
         <section class="mw-def-frame">
           <p class="mw-def-header">
-            Synonyms & Antonyms of <em>{{ word['entry'] }}</em> (Entry {{ x }} of {{ y }})
+            {% if word['sense-num'] %}
+              Synonyms & Antonyms of <em>{{ word['entry'] }}</em>
+              {{ word['entry_nums'] }}
+            {% else %}
+              Synonyms & Antonyms of <em> {{ word['entry'] }}</em>
+            {% endif %}
           </p>
         </section>
 
@@ -54,10 +59,10 @@
                   {{ eg }}
                 </p>
             </section>
-            
+
             {% include 'dicts/webster/th-syns.j2' %}
           </section>
-          
+
         <section>
       </section>
     </section>
