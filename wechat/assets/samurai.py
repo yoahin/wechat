@@ -32,9 +32,13 @@ if __name__ == '__main__':
             if ntype == 'dt':
                 sns = get_sense(node)
                 egs = get_egs(node)
+                print(f'Sense: {sns}')
+                for eg in egs:
+                    print(f'E.g.: {eg}')
+                continue
             else:
-                hed, lst, usg, vrt = get_synonyms(syn_nodes)
-                print(hed, lst, usg, vrt, sep='\n')
+                hed, lst, usg, vrt = get_synonyms(node)
+                print( hed, lst, usg, vrt, sep='\n')
         # print(get_sense())
     if output:
         pass
