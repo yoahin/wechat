@@ -9,7 +9,6 @@ The syns will be stored in a list
 import argparse
 import requests
 from lxml import html
-from os.path import abspath, exists, join
 
 
 def get_target():
