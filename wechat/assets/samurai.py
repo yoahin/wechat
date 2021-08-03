@@ -12,7 +12,7 @@ from lxml import html
 from os.path import join
 
 # my own module
-from fetchers.mwth import get_target, get_nodes, get_sense, get_egs, get_synonyms
+from fetchers.mwth import get_target, get_entry, get_nodes, get_sense, get_egs, get_synonyms
 
 if __name__ == '__main__':
     sensenum, url, raw_html, output = get_target()
@@ -26,19 +26,20 @@ if __name__ == '__main__':
     etree = html.fromstring(raw_content)
     syn_nodes = get_nodes(etree, sensenum)
 
+    word = {'sense-num': f'{sensenum}'}
+    word['entry'], word['entry_nums'] = get_entry(etree)
     # thes list keywords: 'syn', 'rel', 'phrase', 'near', 'ant'
     if not output:
         for ntype, node in syn_nodes.items():
             if ntype == 'dt':
-                sns = get_sense(node)
-                egs = get_egs(node)
-                print(f'Sense: {sns}')
-                for eg in egs:
-                    print(f'E.g.: {eg}')
+                word['def'] = get_sense(node)
+                word['egs'] = get_egs(node)
+                print(word)
                 continue
             else:
                 hed, lst, usg, vrt = get_synonyms(node)
-                print( hed, lst, usg, vrt, sep='\n')
+
+                print(hed, lst, usg, vrt, sep='\n')
         # print(get_sense())
     if output:
         pass
