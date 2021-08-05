@@ -6,11 +6,14 @@
         Synonyms for <em>{{ word['entry'] }}</em>
       </p>
     </section>
-    
+
     <section class="mwth-syns-content">
-      {% for syn word['syns']['syns'] %}
-        {{ syn }}
-      {% endfor %}
+      <!-- figure out how to align list items on the same line -->
+      <ul class="mwth-syns-list">
+        {% for syn word['syns'] %}
+          <li>{{ syn }}</li>
+        {% endfor %}
+      </ul>
     </section>
   </section>
 {% endif %}
@@ -22,11 +25,13 @@
         Words Realted to <em>{{ word['entry'] }}</em>
       </p>
     </section>
-    
+
     <section class="mwth-syns-content">
-      {% for rel word['rels']['rels'] %}
-        {{ rel }}
-      {% endfor %}
+      <ul class="mwth-syns-list">
+        {% for rel word['rels'] %}
+          <li>{{ rel }}</li>
+        {% endfor %}
+      </ul>
     </section>
   </section>
 {% endif %}
@@ -38,11 +43,13 @@
         Near Antonyms for <em>{{ word['entry'] }}</em>
       </p>
     </section>
-    
+
     <section class="mwth-syns-content">
-      {% for ant word['ants']['ants'] %}
-        {{ ant }}
-      {% endfor %}
+      <ul class="mwth-syns-list">
+        {% for ant word['ants'] %}
+          {{ ant }}
+        {% endfor %}
+      </ul>
     </section>
   </section>
 {% endif %}
