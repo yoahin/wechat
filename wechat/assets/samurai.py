@@ -38,7 +38,12 @@ if __name__ == '__main__':
                 continue
             else:
                 hed, lst, usg, vrt = get_synonyms(node)
-
+                #if usg:
+                #    for pst in usg.keys():
+                #        lst[pst - 1] = lst[pst - 1] +  usg[pst]
+                #if vrt:
+                #    for pst in vrt.keys():
+                #        lst[pst - 1] = lst[pst - 1] + vrt[pst]
                 print(hed, lst, usg, vrt, sep='\n')
         # print(get_sense())
     if output:
