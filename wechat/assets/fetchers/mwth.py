@@ -132,8 +132,8 @@ def get_synonyms(node):
     syns_nds = node.xpath('./div[@class="thes-list-content synonyms_list"]/ul/li')
     syns_num = len(syns_nds)
     syns_lst = []    # list of synonyms
-    syns_usg = {}    # word usage, e.g. slang, colloquial
-    syns_vrt = {}    # variant: also YYY
+    #syns_usg = {}    # word usage, e.g. slang, colloquial
+    #syns_vrt = {}    # variant: also YYY
 
     for ith in range(syns_num):
         # NOTE: current node now is a single <li> element!
@@ -141,18 +141,20 @@ def get_synonyms(node):
         if syns_nds[ith].xpath('./a/text()'):
             syns_lst.append(syns_nds[ith].xpath('./a/text()')[0])
 
-        # if it is a usage tag, add it to usg dict with its order number
+        # if it is a usage tag, concat it to the previous element which it belongs to
         elif syns_nds[ith].xpath('./span[@class="wsls"]'):
-            syns_usg[ith] = '[' + syns_nds[ith].xpath('./span[@class="wsls"]/text()')[0] + ']'
-        # if it is a word variant, add it to vrt dict with its order number
+            syns_lst[-1] = syns_lst[-1] + ' <span class="mwth-syns-label">[<em>'\
+                + syns_nds[ith].xpath('./span[@class="wsls"]/text()')[0]\
+                + '</em></span>]'
+        # if it is a word variant, also concat it to the previous element
         elif syns_nds[ith].xpath('./span[@class="wvrs"]/span'):
-            syns_vrt[ith] = '(' \
+            syns_lst[-1] = syns_lst[-1] + ' <span class="mwth-syns-label">(<em>' \
                  + syns_nds[ith].xpath('./span[@class="wvrs"]/span[1]/text()')[0]\
-                 + ' '\
+                 + '</em></span> '\
                  + syns_nds[ith].xpath('./span[@class="wvrs"]/span[2]/a/text()')[0]\
-                 + ')'
+                 + '<span class="mwth-syns-label">)</span>'
 
-    return syns_hed, syns_lst, syns_usg, syns_vrt
+    return syns_hed, syns_lst
 
 
 def get_related(node):
@@ -187,7 +189,7 @@ if __name__ == '__main__':
                 egs = get_egs(node)
                 continue
             else:
-                hed, lst, usg, vrt = get_synonyms(node)
-            print(sns, egs, hed, lst, usg, vrt, sep='\n')
+                hed, lst = get_synonyms(node)
+            print(sns, egs, hed, lst, sep='\n')
     if output:
         pass
