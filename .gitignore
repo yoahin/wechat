@@ -1,6 +1,9 @@
 # ignore img
 img/
 
+# ignore vocab
+vocab/
+
 # ignore notebook file
 *ipynb*
 
