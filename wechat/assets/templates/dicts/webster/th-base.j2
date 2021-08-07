@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
-    <link href="../../../style/mw.css" rel="stylesheet"/>
-    <link href="../../../style/mwth.css" rel="stylesheet"/>
+    <link href="../style/mw.css" rel="stylesheet"/>
+    <link href="../style/mwth.css" rel="stylesheet"/>
     <title>thesaurus</title>
   </head>
   <body>
@@ -11,13 +11,13 @@
     <section class="mw-frame">
       <!-- header, fixed position -->
       <section class="mw-header">
-        {% include 'dicts/webster/header.j2' %}
+        {% include 'webster/header.j2' %}
       </section>
 
       <!-- content; scrollable -->
-      <section class="mw-entry-content">
+      <section class="mwth-entry-content">
         <!-- headword and pos -->
-		    {% include 'dicts/webster/headword.j2' %}
+		    {% include 'webster/headword.j2' %}
 
         <!-- definition -->
         <section class="mw-def-frame">
@@ -58,9 +58,10 @@
                   <strong>//</strong>
                   {{ eg }}
                 </p>
+              {% endfor %}
             </section>
 
-            {% include 'dicts/webster/th-syns.j2' %}
+            {% include 'webster/th-syns.j2' %}
           </section>
 
         <section>
