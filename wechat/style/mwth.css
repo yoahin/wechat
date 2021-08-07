@@ -8,6 +8,23 @@
   padding: 0;
 }
 
+.mwth-entry-content {
+  margin: 10px 0;
+}
+
+.mwth-sense-num {
+  margin: 0 .4rem 0 .2rem;
+  font-family: sans-serif;
+}
+
+.mwth-syn-block-header {
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #265667;
+  margin: 10px 0;
+}
+
 .mwth-header {
   font-family: serif;
   font-size: 24px;
@@ -23,10 +40,14 @@
   align-items: baseline;
 }
 
+.mwth-syns-block-frame {
+  margin-top: .5rem;
+}
+
 /*
 ** frame for def syns, related, anti
 */
-.mwth-syns-blocks-frame {
+.mwth-syns-block-frame {
   display: flex;
   flex-direction: column;
 }
@@ -41,4 +62,9 @@
 
 .mwth-syns-list li {
   display: inline;
+}
+
+/* usg or vrt label */
+.mwth-syns-label {
+  color: #303336;
 }
