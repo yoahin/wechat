@@ -1,55 +1,45 @@
 <!-- syns blocks templates -->
-{% if word['syns'] %}
+
+{% macro syns_section(word, stype='syn') %}
+  {% set syn_num = word[stype][stype+'-list']|length %}
   <section class="mwth-syns-block-frame">
-    <section class="mw-recent-example-header">
+    <section class="mwth-syn-block-header">
       <p>
-        Synonyms for <em>{{ word['entry'] }}</em>
+        {{ word[stype][stype+'-head']}}<em>{{ word['entry'] }}</em>
       </p>
     </section>
 
     <section class="mwth-syns-content">
-      <!-- figure out how to align list items on the same line -->
-      <ul class="mwth-syns-list">
-        {% for syn word['syns'] %}
-          <li>{{ syn }}</li>
-        {% endfor %}
-      </ul>
+     <!-- figure out how to align list items on the same line -->
+     <ul class="mwth-syns-list">
+       {% for i in range(syn_num) %}
+         {% if i < syn_num - 1 %}
+           <li>{{ word[stype][stype+'-list'][i] }}</li><span class="mwth-syns-label">,</span>
+         {% else %}
+           <li>{{ word[stype][stype+'-list'][i] }}</li>
+         {% endif %}
+       {% endfor %}
+     </ul>
     </section>
   </section>
+{% endmacro %}
+
+{% if word['syn'] %}
+  {{ syns_section(word, stype='syn') }}
 {% endif %}
 
-{% if word['rels'] %}
-  <section class="mwth-syns-block-frame">
-    <section class="mw-recent-example-header">
-      <p>
-        Words Realted to <em>{{ word['entry'] }}</em>
-      </p>
-    </section>
-
-    <section class="mwth-syns-content">
-      <ul class="mwth-syns-list">
-        {% for rel word['rels'] %}
-          <li>{{ rel }}</li>
-        {% endfor %}
-      </ul>
-    </section>
-  </section>
+{% if word['rel'] %}
+  {{ syns_section(word, stype='rel') }}
 {% endif %}
 
-{% if word['ants'] %}
-  <section class="mwth-syns-block-frame">
-    <section class="mw-recent-example-header">
-      <p>
-        Near Antonyms for <em>{{ word['entry'] }}</em>
-      </p>
-    </section>
+{% if word['ant'] %}
+  {{ syns_section(word, stype='ant') }}
+{% endif %}
 
-    <section class="mwth-syns-content">
-      <ul class="mwth-syns-list">
-        {% for ant word['ants'] %}
-          {{ ant }}
-        {% endfor %}
-      </ul>
-    </section>
-  </section>
+{% if word['near'] %}
+  {{ syns_section(word, stype='near') }}
+{% endif %}
+
+{% if word['phrase'] %}
+  {{ syns_section(word, stype='phrase') }}
 {% endif %}
