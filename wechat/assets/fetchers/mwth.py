@@ -121,19 +121,17 @@ def get_egs(node):
 
 
 def get_synonyms(node):
-    '''Get the list of syns or related words'''
+    '''Get the list of syns, related words, word phrases, (near) antonyms'''
 
     # get the list content header
     # for debugging purposes only
-    syns_hed = node.xpath('./div[@class="thes-list-header"]/p[@class="function-label"]/text()')[0] +\
-        node.xpath('./div[@class="thes-list-header"]/p[@class="function-label"]/em/text()')[0]
+    syns_hed = node.xpath('.//p[@class="function-label"]/text()')[0]
+        #node.xpath('./div[@class="thes-list-header"]/p[@class="function-label"]/em/text()')[0]
 
     # get the list
     syns_nds = node.xpath('./div[@class="thes-list-content synonyms_list"]/ul/li')
     syns_num = len(syns_nds)
     syns_lst = []    # list of synonyms
-    #syns_usg = {}    # word usage, e.g. slang, colloquial
-    #syns_vrt = {}    # variant: also YYY
 
     for ith in range(syns_num):
         # NOTE: current node now is a single <li> element!
