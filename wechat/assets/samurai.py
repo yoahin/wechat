@@ -26,7 +26,13 @@ if __name__ == '__main__':
     etree = html.fromstring(raw_content)
     syn_nodes = get_nodes(etree, sensenum)
 
-    entry = {'sense-num': f'{sensenum}'}
+    entry = {'sense-num': f'{sensenum}',
+             'syn': {},
+             'rel': {},
+             'ant': {},
+             'near': {},
+             'phrase': {},
+             }
     entry['entry'], entry['entry_nums'] = get_entry(etree)
 
     file_loader = FileSystemLoader(['templates/dicts', 'templates/icons'])
@@ -47,15 +53,20 @@ if __name__ == '__main__':
         else:
             hed, lst = get_synonyms(node)
             if 'Synonyms' in hed:
-                entry['syn'] = lst
+                entry['syn']['syn-head'] = hed
+                entry['syn']['syn-list'] = lst
             elif 'Related' in hed:
-                entry['rel'] = lst
+                entry['rel']['rel-head'] = hed
+                entry['rel']['rel-list'] = lst
             elif 'Near' in hed:
-                entry['near'] = lst
+                entry['near']['near-head'] = hed
+                entry['near']['near-list'] = lst
             elif 'Near' not in hed and 'Antonyms' in hed:
-                entry['ant'] = lst
+                entry['ant']['ant-head'] = hed
+                entry['ant']['ant-list'] = lst
             elif 'Phrases' in hed:
-                entry['phrase'] = lst
+                entry['phrase']['phrase-head'] = hed
+                entry['phrase']['phrase-list'] = lst
         # print(hed, lst, sep='\n')
     # print(word)
     if not output:
