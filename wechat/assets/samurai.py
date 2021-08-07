@@ -9,10 +9,11 @@ the needed word/synonyms templates.
 import requests
 from jinja2 import Environment, FileSystemLoader
 from lxml import html
-from os.path import join
-
+from os.path import exists, join
+from os import environ, mkdir
 # my own module
-from fetchers.mwth import get_target, get_entry, get_nodes, get_sense, get_egs, get_synonyms
+from fetchers.mwth import get_target, get_entry,\
+    get_nodes, get_sense, get_egs, get_synonyms
 
 if __name__ == '__main__':
     sensenum, url, raw_html, output = get_target()
@@ -22,28 +23,44 @@ if __name__ == '__main__':
 
     if raw_html:
         raw_content = raw_html
-
     etree = html.fromstring(raw_content)
     syn_nodes = get_nodes(etree, sensenum)
 
-    word = {'sense-num': f'{sensenum}'}
-    word['entry'], word['entry_nums'] = get_entry(etree)
-    # thes list keywords: 'syn', 'rel', 'phrase', 'near', 'ant'
+    entry = {'sense-num': f'{sensenum}'}
+    entry['entry'], entry['entry_nums'] = get_entry(etree)
+
+    file_loader = FileSystemLoader(['templates/dicts', 'templates/icons'])
+    env = Environment(loader=file_loader)
+    templates = env.list_templates(extensions=['j2'])
+    template = env.get_template('webster/th-base.j2')
+    ROOT_DIR = join(environ['HOME'], 'projects', 'posts', 'wechat', 'vocab')
+    if not exists(ROOT_DIR):
+        mkdir(ROOT_DIR)
+
+    # make each single node an key-value item in word
+    for ntype, node in syn_nodes.items():
+        if ntype == 'dt':
+            entry['def'] = get_sense(node)
+            entry['egs'] = get_egs(node)
+            print(entry)
+            continue
+        else:
+            hed, lst = get_synonyms(node)
+            if 'Synonyms' in hed:
+                entry['syn'] = lst
+            elif 'Related' in hed:
+                entry['rel'] = lst
+            elif 'Near' in hed:
+                entry['near'] = lst
+            elif 'Near' not in hed and 'Antonyms' in hed:
+                entry['ant'] = lst
+            elif 'Phrases' in hed:
+                entry['phrase'] = lst
+        # print(hed, lst, sep='\n')
+    # print(word)
     if not output:
-        for ntype, node in syn_nodes.items():
-            if ntype == 'dt':
-                word['def'] = get_sense(node)
-                word['egs'] = get_egs(node)
-                print(word)
-                continue
-            else:
-                hed, lst = get_synonyms(node)
-                #if usg:
-                #    for pst in usg.keys():
-                #        lst[pst - 1] = lst[pst - 1] +  usg[pst]
-                #if vrt:
-                #    for pst in vrt.keys():
-                #        lst[pst - 1] = lst[pst - 1] + vrt[pst]
-                print(hed, lst, sep='\n')
+        print(entry)
     if output:
-        pass
+        content = template.render(word=entry)
+        with open(join(ROOT_DIR, output+sensenum+'.html'), 'w', encoding='utf-8') as op:
+            op.write(content)
