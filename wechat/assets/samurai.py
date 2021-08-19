@@ -73,5 +73,6 @@ if __name__ == '__main__':
         print(entry)
     if output:
         content = template.render(word=entry)
-        with open(join(ROOT_DIR, output+sensenum+'.html'), 'w', encoding='utf-8') as op:
+        opt_temp = output + sensenum + '.html'
+        with open(join(ROOT_DIR, opt_temp), 'w', encoding='utf-8') as op:
             op.write(content)
