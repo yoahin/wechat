@@ -69,6 +69,8 @@ part_num = args.post_part[1]
 file_loader = FileSystemLoader(
         [
          'templates/base',
+         'templates/dicts',
+         'templates/icons',
          article_dir,
          ])
 env = Environment(loader=file_loader)
@@ -94,7 +96,7 @@ print(f'Found {len(templates)} templates in total.')
 # Both will be moved over to the new article's dir once they are done with
 # the current one.
 
-template = env.get_template('notes.j2')
+template = env.get_template('note.j2')
 
 output = template.render(
         title=f'{args.post_part[0]}-{part_num}',
