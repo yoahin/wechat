@@ -2,14 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
+    <link href="../../style/news.css" rel="stylesheet"/>
+    <link href="../../style/blbw.css" rel="stylesheet"/>
     <title>{{title}}</title>
   </head>
   <body>
-    <!-- Magazine Title -->
-    <section class="bl-top-bar">Bloomberg Businessweek</section>
-    <section class="bl-header">
-      <h1>Inside North Korea's Hacker Army</h1>
-      <h2>The regime in Pyongyang has sent hundreds of programmers to other countries. Their mission: Make money by any means necessary. Here's what their lives are like.</h2>
-    </section>
+    {% include 'header.j2' %}
+    {% block content %}{% endblock %}
   </body>
 </html>
