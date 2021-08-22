@@ -1,0 +1,66 @@
+/* Bloomberg BusinessWeek Style */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.blbw-top-bar {
+  font-family: sans-serif;
+  font-weight:  900;
+  font-size: 20px;
+}
+
+.blbw-top-bar p {
+  font-family: inherit;
+  margin: 6px auto;
+  padding-top: 4px;
+  text-align: center;
+}
+
+.blbw-header {
+  background: #000;
+}
+
+
+
+h1, h2 {
+  font-family:  sans-serif;
+  font-size:  30px;
+  color: #ddd;
+  text-align: center;
+  margin: 10px 3px;
+  padding: 5px 0;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+.blbw-header img {
+  width: 100%;
+}
+
+.blbw-header-cap {
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-size: 10px;
+  color: #ddd;
+  text-align: left;
+  padding-left: 2px;
+}
+
+.blbw-byline, .blbw-pubdate {
+  color: #ddd;
+  font-size: 12px;
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+.blbw-pubdate {
+  font-size: 10px;
+  margin: 0 auto;
+}
