@@ -26,23 +26,23 @@ word = {
   
     <!-- header, fixed position -->
     <section class="mw-header">
-      {% include 'dicts/webster/header.j2' %}
+      {% include 'webster/header.j2' %}
     </section>
 
     <!-- content; scrollable  -->
 	  <section class="mw-entry-content">
     
 		  <!-- headword and pos -->  
-		  {% include 'dicts/webster/headword.j2' %}
+		  {% include 'webster/headword.j2' %}
     
 		  <!-- pronounciation  -->
       <section class="mw-pro-frame">
-        {% include 'dicts/webster/pron.j2' %}
+        {% include 'webster/pron.j2' %}
       </section>
 
       {# morphs and their pronounciations #}
       {% if word['morphs'] %}
-        {% include 'dicts/webster/morphs.j2' %}
+        {% include 'webster/morphs.j2' %}
       {% endif %}
 
       <!-- webster definition -->
@@ -54,29 +54,30 @@ word = {
 
         <!-- grammar for the entry -->
         {% if word['grammar'] %}
-          {% include 'dicts/webster/grammar.j2' %}
+          {% include 'webster/grammar.j2' %}
         {% endif %}
 
         <!-- def block; details in template -->
-        {% include 'dicts/webster/def.j2' %} 
+        {% include 'webster/def.j2' %} 
       </section>
 
 		  <!-- example -->
 		  <section class="mw-example-frame">
-        {% include 'dicts/webster/examples.j2' %}
+        {% include 'webster/examples.j2' %}
       </section>
 
       <!-- did you know; optional -->
       {% if word['did-you-know'] %}
-        {% include 'dicts/webster/didyouknow.j2' %}
+        {% include 'webster/didyouknow.j2' %}
       {% endif %}
 
       <!-- history of word; optional -->
       {% if word['history'] %}
-        {% include 'dicts/webster/history.j2' %}
+        {% include 'webster/history.j2' %}
       {% endif %}
 
 		  <!-- first use -->
+      {% if word['1st-use'] %}
 		  <section class="mw-1st-use">
 			  <p class="mw-1st-use-header">
 				  First Known Use of <em>{{ word['entry'] }}</em>
@@ -85,10 +86,11 @@ word = {
 				  {{ word['1st-use'] }}
 			  </p>
 		  </section>
+      {% endif %}
 
 		  <!-- etymology; optional -->
       {% if word['etymology'] %}
-        {% include 'dicts/webster/etymology.j2' %}
+        {% include 'webster/etymology.j2' %}
       {% endif %}
       
     </section>
