@@ -17,7 +17,7 @@ mstch/
 .DS_Store
 
 # ignore {notes,current,vocab}.html file
-note.j2
+note?.j2
 vocab.j2
 
 # ignore deprecated folder
