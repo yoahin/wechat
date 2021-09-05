@@ -10,20 +10,20 @@
 ],
 #}
 <section class="mw-example-1s">
-  <p class="mw-1s-header">
-    Examples of <em>{{ word['entry'] }}</em> in a Sentence
-  </p>
-  {% for example in word['example-1s'] %}
-    <p class="mw-1s-content">
-      <strong>//</strong> {{ example }}
+    <p class="mw-1s-header">
+      Examples of <em>{{ word['entry'] }}</em> in a Sentence
     </p>
-  {% endfor %}
+    {% if word['example-1s'] %}
+      {% for example in word['example-1s'] %}
+        <p class="mw-1s-content">
+          <strong>//</strong> {{ example }}
+        </p>
+      {% endfor %}
+      <!-- separate two example sections -->
+      <section class="mw-example-hr"></section>
+    {% endif %}
 
   {% if word['recent'] %}
-    <!-- separate two example sections -->
-    <section class="mw-example-hr">
-    </section>
-
     <p class="mw-recent-example-header">
       Recent Examples on the Web
     </p>
