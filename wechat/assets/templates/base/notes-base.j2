@@ -14,7 +14,7 @@
       WikipediA
     </span>
   </section>
-  
+
   <section class="wiki-content">
     <p class="wiki-entry">{{ content['entry'] }}</p>
     {% for para in content['paras'] %}
@@ -27,6 +27,7 @@
 {% endmacro %}
 
 {# wiki with small-img #}
+{# contents should be a list [wk_1, wk_2, ...] #}
 {% macro wiki_small_img(contents) %}
 <section class="wiki">
   <section class="wiki-heading">
@@ -34,12 +35,12 @@
       WikipediA
     </span>
   </section>
-  
+
   <section class="wiki-content wiki-with-small-img">
     {% for content in contents %}
       <p class="wiki-entry">{{ content['entry'] }}</p>
       <figure class="wiki-small-img">
-        <img src="{{ content['img'][0] }}" alt="table1">
+        <img src="{{ content['img'][0] }}" alt="wiki-figure">
         <figcaption>{{ content['img'][1] }}</figcaption>
       </figure>
       {% for para in content['paras'] %}
@@ -62,7 +63,7 @@
     </span>
     <p class="wiki-entry">{{ content['entry'] }}</p>
   </section>
-  
+
   <section class="wiki-content wiki-with-large-img">
     {% for para in content['paras'] %}
     <p>
@@ -89,14 +90,14 @@
 
 {# note number marks #}
 {% set notemarks = {
-  '1': '❶', '2': '❷', 
+  '1': '❶', '2': '❷',
   '3': '❸', '4': '❹',
   '5': '❺', '6': '❻',
   '7': '❼', '8': '❽',
   '9': '❾', '0': '⓿',
   '10': '❿', '11': '⓫',
   '12': '⓬', '13': '⓭'
-  } 
+  }
 %}
 
 
