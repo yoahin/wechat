@@ -4,11 +4,11 @@
 'morphs-pro': {'mph-pro-1': '', 'mph-pro2': ''}
 #}
 <section class="mw-morphs-frame">
-  {% for morph in word['morphs'].keys() %}
+  {#% for morph in word['morphs'].keys() %#}
     <span class="mw-morph">
-      {{ word['morphs'][morph] }}
+      {{ word['morphs'].values() | join('<span style="font-weight: normal">;</span> ') }}
     </span>
-  {% endfor %}
+  {#% endfor %#}
 
   {% if word['morphs-pro'] %}
   <span class="mw-pro-first-slash">\</span>
@@ -17,11 +17,11 @@
   </span>
   
   <span class="mw-audio-icon">
-    {% include 'icons/mw-audio.html' %}
+    {% include 'mw-audio.html' %}
   </span>
  
     {% if word['morphs-pro']['pro2'] %}
-    <span class="mw-pro-punct">,</span>
+    <span class="mw-pro-punct">;</span>
     <span class="mw-pro">
       {{ word['morphs-pro']['pro2'] }}
     </span>
