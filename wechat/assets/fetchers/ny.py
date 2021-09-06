@@ -19,7 +19,8 @@ def cmd_arg_parser():
     # 1st arg: destination/directory
     parser.add_argument('-d', '--destination',
                         nargs='?', const='.', default='.',
-                        help='destination of the output file (default: cwd)')
+                        help='Destination of the output file. Use absolute path.\
+                        (default: $(cwd)')
 
     # 2nd arg: url
     parser.add_argument('url', help='url of online article to be scrpaed')
@@ -126,10 +127,12 @@ class Article():
 
         def get_caption(self):
             self.caption_text = '<h2 class="caption">'\
-                + self.tree.xpath('//span[contains(@class, "caption__text")]/text()')[0]\
+                + self.tree.xpath(
+                    '//span[contains(@class, "caption__text")]/text()')[0]\
                 + '</h2>'
             self.caption_credit = '<span class="credit">'\
-                + self.tree.xpath('//span[contains(@class, "caption__credit")]/text()')[0]\
+                + self.tree.xpath(
+                    '//span[contains(@class, "caption__credit")]/text()')[0]\
                 + '</span>'
             return self.caption_text, self.caption_credit
 
@@ -148,14 +151,15 @@ class Article():
             """
             self.first_paras_raw = self.tree.xpath(
                                     '//p[contains(@class, "has-dropcap")]')
-            self.paras_raw = self.first_paras_raw + self.tree.xpath('//p[@class="paywall"]')
-            self.para_num = len(self.paras_raw)
-            self.paras_text = {}
+            self.paras_raw = self.first_paras_raw \
+                + self.tree.xpath('//p[@class="paywall"]')
+            self.para_num = len(self.paras_raw)    # paragrah number
+            self.paras_text = {}                   # paragrah dict
             self.para_a_or_em = {}
             # self.para_ems = {}
 
             for i in range(self.para_num):
-                self.paras_text[str(i)] = self.paras_raw[i].xpath('./text()')
+                self.paras_text[(i)] = self.paras_raw[i].xpath('./text()')
                 _a_or_em_text = self.paras_raw[i].xpath(
                         './a[@class="external-link"]/text() | ./em/text()')
 
@@ -169,11 +173,14 @@ class Article():
                     # concatenate the a/em_text to the text before/after
                     # the breaking point so paras' number remains the same
                     for i in range(len(nodes)):
-                        self.paras_text[p_num][i] = self.paras_text[p_num][i] + nodes[i]
+                        self.paras_text[p_num][i] += nodes[i]
 
             # Mark up all the paragraphs
+            # Note: use key to loop through a dict as if it is a list of keys
             for p in self.paras_text:
-                self.paras_text[p] = '<p>' + ''.join(self.paras_text[p]) + '</p>'
+                self.paras_text[p] = '<p>' \
+                    + ''.join(self.paras_text[p]) \
+                    + '</p>'
 
             return self.paras_text
 
