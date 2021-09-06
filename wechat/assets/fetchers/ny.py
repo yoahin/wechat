@@ -230,4 +230,4 @@ if __name__ == '__main__':
         for p in paras:
             f.write(paras[p] + '\n')
 
-    print(paras)
+    print(f'Fetched {len(paras)} paragrahs in total.')
