@@ -149,10 +149,7 @@ class Article():
             Get all breaking points of the paragraphs.
             Such as a tags, em tags and so on.
             """
-            self.first_paras_raw = self.tree.xpath(
-                                    '//p[contains(@class, "has-dropcap")]')
-            self.paras_raw = self.first_paras_raw \
-                + self.tree.xpath('//p[@class="paywall"]')
+            self.paras_raw = self.tree.xpath('//p[contains(@class, "paywall")]')
             self.para_num = len(self.paras_raw)    # paragrah number
             self.paras_text = {}                   # paragrah dict
             self.para_a_or_em = {}
@@ -225,9 +222,11 @@ if __name__ == '__main__':
     # Get the body paras by creating a body instance
     body = article.Body(html_tree)
     paras = body.get_paras()
-
+    # sort the paras so that we do get them in order
+    paras_order = sorted(paras.keys())
+    print(paras_order)
     with open(join(dest, 'body.html'), 'w', encoding='utf-8') as f:
-        for p in paras:
+        for p in paras_order:
             f.write(paras[p] + '\n')
 
     print(f'Fetched {len(paras)} paragrahs in total.')
