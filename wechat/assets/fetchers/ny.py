@@ -69,9 +69,9 @@ class Article():
             Get the headline #1 text and mark it up accrodingly
             Headline #1 is the article title.
             """
-            self.h1 = self.tree.xpath('//h1[\
-                                    contains(@class, "content-header__row")\
-                                    ]/text()')[0]
+            self.h1 = self.tree.xpath(
+                '//h1[contains(@class, "content-header__row")]\
+                |//h1[@class="split-screen-content-header__hed"]/text()')[0]
             return '<h1>' + self.h1 + '</h1>'
 
         def get_h2(self):
