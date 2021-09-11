@@ -156,7 +156,7 @@ class Article():
             # self.para_ems = {}
 
             for i in range(self.para_num):
-                self.paras_text[(i)] = self.paras_raw[i].xpath('./text()')
+                self.paras_text[i] = self.paras_raw[i].xpath('./text()')
                 _a_or_em_text = self.paras_raw[i].xpath(
                         './a[@class="external-link"]/text() | ./em/text()')
 
