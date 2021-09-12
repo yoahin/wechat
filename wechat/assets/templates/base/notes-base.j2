@@ -147,10 +147,26 @@
 
 
 {# ================ CAPTION =========== #}
-{% macro illustration(img, caption) %}
+{% macro illustration(img, caption=None, credit=None, source=None, pub_date=None) %}
+{% set credit_styles = {
+    'ny': 'ny-illus-credit',
+    'bl': 'blbw-illus-credit'
+  } 
+%}
 <figure class="illus">
-  <img src="{{img}}" alt="">
-  <figcaption>{{caption}}</figcaption>
+  <img src="{{img}}" alt="illustration image">
+  {% if source == 'bl' %}
+    <span class="blbw-illus-issue-date">Featured in <em class="blbw-illus-magazine-name">Bloomberg Businessweek</em>, {{pub_date}}</span>
+  {% endif %}
+  {% if caption %}
+    <figcaption>{{caption}}</figcaption>
+  {% endif %}
+  {# credit style for new yorker #}
+  {% if source == 'bl' %}
+    <span class="blbw-illus-credit">{{credit}}</span>
+  {% elif source == 'ny' %}
+    <span class="ny-illus-credit">{{credit}}</span>
+  {% endif %}
 </figure>
 {% endmacro %}
 
