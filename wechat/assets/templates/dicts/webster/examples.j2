@@ -10,18 +10,21 @@
 ],
 #}
 <section class="mw-example-1s">
-    <p class="mw-1s-header">
-      Examples of <em>{{ word['entry'] }}</em> in a Sentence
-    </p>
-    {% if word['example-1s'] %}
-      {% for example in word['example-1s'] %}
-        <p class="mw-1s-content">
-          <strong>//</strong> {{ example }}
-        </p>
-      {% endfor %}
-      <!-- separate two example sections -->
-      <section class="mw-example-hr"></section>
-    {% endif %}
+  <p class="mw-1s-header">
+    Examples of <em>{{ word['entry'] }}</em> in a Sentence
+  </p>
+  {% if word['example-1s'] %}
+    {% for example in word['example-1s'] %}
+      <p class="mw-1s-content">
+        <strong>//</strong> {{ example }}
+      </p>
+    {% endfor %}
+  {% endif %}
+
+  {% if word['example-1s'] and word['recent'] %}
+    <!-- separate two example sections -->
+    <section class="mw-example-hr"></section>
+  {% endif %}
 
   {% if word['recent'] %}
     <p class="mw-recent-example-header">
