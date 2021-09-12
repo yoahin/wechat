@@ -1,32 +1,34 @@
 {# morphs and their pronounciations #}
 {#
 'morphs': {'1': 'morph-1;', '2', 'morph2', }
-'morphs-pro': {'mph-pro-1': '', 'mph-pro2': ''}
+'morphs-pro': {'mph-pro-1': '', 'mph-pro-2': ''}
 #}
 <section class="mw-morphs-frame">
   {#% for morph in word['morphs'].keys() %#}
     <span class="mw-morph">
-      {{ word['morphs'].values() | join('<span style="font-weight: normal">;</span> ') }}
+      {{ word['morphs'] | join('<span style="font-weight: normal">;</span> ') }}
     </span>
   {#% endfor %#}
 
   {% if word['morphs-pro'] %}
-  <span class="mw-pro-first-slash">\</span>
-  <span class="mw-morph-pro">
-    {{ word['morphs-pro']['pro1'] }}
-  </span>
-  
-  <span class="mw-audio-icon">
-    {% include 'mw-audio.html' %}
-  </span>
- 
-    {% if word['morphs-pro']['pro2'] %}
-    <span class="mw-pro-punct">;</span>
-    <span class="mw-pro">
-      {{ word['morphs-pro']['pro2'] }}
-    </span>
-    {% endif %}
-  
+
+    <span class="mw-pro-first-slash">\</span>
+    {% set pro_num = word['morphs-pro'] | length %}
+    {% for i in range(pro_num) %}
+      {% if i < pro_num - 1 %}
+        <span class="mw-morph-pro">
+          {{ word['morphs-pro'][i] }}
+        </span>
+        <span class="mw-audio-icon">
+          {% include 'mw-audio.html' %}
+        </span>
+      {% elif i == pro_num - 1 %}
+        <span class="mw-morph-pro">
+          {{ word['morphs-pro'][i] }}
+        </span>
+        <span class="mw-pro-last-slash">\</span>
+      {% endif %}
+    {% endfor %}
   {% endif %}
-  <span class="mw-pro-last-slash">\</span>
+  
 </section>
