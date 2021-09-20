@@ -7,20 +7,27 @@
 {% endset %}
 
 {# wiki with pure text #}
-{% macro wiki_text(content) %}
+{# contents should be a list [wk_1, wk_2, ...] #}
+{% macro wiki_text(contents) %}
 <section class="wiki">
   <section class="wiki-heading">
     ❉<span class="wiki-title">
       WikipediA
     </span>
   </section>
-
+  {% set item_num = contents | length %}
+  {% if item_num > 1 %}
   <section class="wiki-content">
-    <p class="wiki-entry">{{ content['entry'] }}</p>
-    {% for para in content['paras'] %}
-    <p>
-      {{ para }}
-    </p>
+  {% else %}
+  <section class="wiki-content wiki-txt">
+  {% endif %}
+    {% for content in contents %}
+      <p class="wiki-entry">{{ content['entry'] }}</p>
+      {% for para in content['paras'] %}
+        <p>
+          {{ para }}
+        </p>
+      {% endfor %}
     {% endfor %}
   </section>
 </section>

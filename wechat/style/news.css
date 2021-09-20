@@ -134,6 +134,10 @@ u {
   scrollbar-width: thin;    
 }
 
+.wiki-txt {
+  height: 200px;
+}
+
 .wiki-content>p {
   margin-top: .3rem;
 }
